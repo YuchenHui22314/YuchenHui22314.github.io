@@ -81,12 +81,12 @@ analytics:
 # Site Author
 author:
   name             : "Yuchen Hui"
-  avatar           : "gfs_T2m_ea_65.png"
+  avatar           : "huaji.png"
   bio              : "An undergraduate student in Computer Science at the University of Montréal"
   location         : "Montréal, QC, Canada"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    : "http://yourfullgooglescholarurl.com"
+  googlescholar    : "https://scholar.google.com/citations?user=_fiTdwUAAAAJ&hl=en"
   email            : yuchen.hui arobase umontreal.ca
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
