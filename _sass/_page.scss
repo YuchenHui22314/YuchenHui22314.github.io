@@ -3,7 +3,6 @@
    ========================================================================== */
 
 #main {
-  font-family:"Times New Roman", Times, serif;
   @include container;
   @include clearfix;
   margin-top: 2em;
@@ -47,7 +46,6 @@
 }
 
 .page__lead {
-  font-family:"Times New Roman", Times, serif;
   font-size: $type-size-4;
 }
 
