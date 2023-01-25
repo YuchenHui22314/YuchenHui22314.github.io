@@ -3,6 +3,7 @@
    ========================================================================== */
 
 #main {
+  font-family:"Times New Roman", Times, serif;
   @include container;
   @include clearfix;
   margin-top: 2em;
@@ -25,6 +26,7 @@
 
   .page__inner-wrap {
     @include full();
+    width:130%;
 
     .page__content,
     .page__meta,
@@ -35,6 +37,7 @@
 }
 
 .page__title {
+  font-family:"Times New Roman", Times, serif;
   margin-top: 0;
   line-height: 1;
 
@@ -44,19 +47,21 @@
 }
 
 .page__lead {
-  font-family: $global-font-family;
+  font-family:"Times New Roman", Times, serif;
   font-size: $type-size-4;
 }
 
 .page__content {
 
   h2 {
+    font-family: "Times New Roman", Times, serif;
     padding-bottom: 0.5em;
     border-bottom: 1px solid $border-color;
   }
 
   p, li, dl {
-    font-size: 1em;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 0.875em;
   }
 
   /* paragraph indents */

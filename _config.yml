@@ -81,7 +81,7 @@ analytics:
 # Site Author
 author:
   name             : "Yuchen Hui"
-  avatar           : "huaji.png"
+  avatar           : "skipper.jpeg"
   bio              : "An undergraduate student in Computer Science at the University of Montréal"
   location         : "Montréal, QC, Canada"
   employer         :
@@ -210,7 +210,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _teaching
+  _teaching
   - scope:
       path: ""
       type: teaching
@@ -219,7 +219,7 @@ defaults:
       author_profile: true
       share: true
       comments: true
-  # _publications
+  _publications
   - scope:
       path: ""
       type: publications
