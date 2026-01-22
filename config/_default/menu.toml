@@ -1,11 +1,12 @@
 # Configure main menu and social menu
-#[[main]]
-#identifier = "home"
-#name = "Home"
-#url = "/"
-#[main.params]
-#icon = "home"
-#newtab = true
+
+# [[main]]
+# identifier = "home"
+# name = "Home"
+# url = "/"
+# [main.params]
+# icon = "home"
+# newtab = false
 
 [[social]]
 identifier = "github"
@@ -29,4 +30,20 @@ name = "Google Scholar"
 url = "https://scholar.google.ca/citations?user=_fiTdwUAAAAJ&hl=en"
 
 [social.params]
-icon = "brand-twitter"
+icon = "Google_Scholar_logo"
+
+[[social]]
+identifier = "email_address"
+name = "email_address"
+url = "mailto:yuchen.hui@umontreal.ca"
+
+[social.params]
+icon = "mail_icon"    
+
+[[social]]
+identifier = "linkedin"
+name = "linkedin"
+url = "https://www.linkedin.com/in/yuchen-hui-179303251/"
+
+[social.params]
+icon = "linkedin"    
