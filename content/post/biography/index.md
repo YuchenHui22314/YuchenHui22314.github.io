@@ -12,7 +12,6 @@ weight: 1       # You can add weight to some posts to override the default sorti
 comments: false
 ---
 
-# Who am I?
 I am 惠语辰, a Ph.D. student in Computer Science at the [University of Montreal](https://www.umontreal.ca/en/). I am a member of the UdeM NLP (Natural Language Processing) Lab [RALI](http://rali.iro.umontreal.ca/rali/?q=en/accueil) (Recherche Appliquée en Linguistique Informatique). I am fortunate to be advised by Professor [Jian-Yun Nie](https://recherche.umontreal.ca/english/our-researchers/professors-directory/researcher/is/in14444/). My doctoral research focuses on enhancing the generalization capability of neural retrieval models. 
 
 Before beginning my doctoral studies, I obtained both my Bachelor’s and Master’s degrees from l'Université de Montréal, majoring in Computer Science and Artificial Intelligence. My [Master’s thesis](https://umontreal.scholaris.ca/items/0f1f66df-09fe-46b2-b45f-b8f53015e29f) focused on adaptive personalization in conversational search systems.
@@ -27,7 +26,3 @@ I am also a weather enthusiast and often find myself excited by the occurrence o
 
 > Do you know how to pronounce my name correctly? ; )
 
-
-
-# Research Interests
-The final goal of my research is to advance My broader research interests lies in include (interactive) Information Retrieval, Retrieval Augemented Generation (RAG), Multi-modal Learning, as well as some more general topics in NLP, Deep Learning, and Artificiall Intelligence.
