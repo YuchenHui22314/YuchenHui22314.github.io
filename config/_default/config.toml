@@ -24,7 +24,6 @@ pagerSize = 5
 [sitemap]
   changefreq = 'weekly'
   filename = 'sitemap.xml'
-  disable = true
   priority = 0.8
 
 enableRobotsTXT = true
