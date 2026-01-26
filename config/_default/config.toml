@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "https://yuchenhui22314.github.io/hugo-stack-test/"
+baseurl = "xiyuchen.com"
 languageCode = "en-us"
 title = "Yuchen Hui (Xi)"
 
@@ -20,3 +20,11 @@ pagerSize = 5
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+[sitemap]
+  changefreq = 'weekly'
+  filename = 'sitemap.xml'
+  disable = true
+  priority = 0.8
+
+enableRobotsTXT = true
