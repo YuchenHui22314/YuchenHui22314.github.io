@@ -8,7 +8,7 @@ categories:
 tags:
     - notes
     - emotion
-weight: 8       # You can add weight to some posts to override the default sorting (date descending)
+weight: 10000       # You can add weight to some posts to override the default sorting (date descending)
 image: ice.jpg
 comments: false
 ---
