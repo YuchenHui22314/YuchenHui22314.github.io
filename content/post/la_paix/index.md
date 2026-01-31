@@ -13,7 +13,7 @@ weight: 4       # You can add weight to some posts to override the default sorti
 image: walking.jpg
 comments: false
 ---
-`本文完稿于2023年秋冬`
+`写于2023年秋冬`
 
 有时
 
