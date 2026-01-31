@@ -1,6 +1,6 @@
 ---
-title: La paix | 和解
-description: To 
+title: La paix | 和解 
+description: 
 slug: la-paix    
 date: 2026-01-02
 categories:
@@ -8,11 +8,11 @@ categories:
 tags:
     - notes
     - emotion
-weight: 5       # You can add weight to some posts to override the default sorting (date descending)
+weight: 3       # You can add weight to some posts to override the default sorting (date descending)
 image: walking.jpg
 comments: false
 ---
-`本文完稿于2023年`
+`本文完稿于2023年秋冬`
 
 有时
 
@@ -36,9 +36,8 @@ comments: false
 
 偶尔想起以前的人和事儿，或是怀念，或是不堪回首，下一秒又是自嘲地笑笑
 
-时而和解，有时顶牛（加密了），没有人能够每时每刻 100%状态在线
+时而和解，有时顶牛，没有人能够每时每刻 100% 状态在线
 
 也许这就是，最平淡却也最美好的
 
 人生
-
