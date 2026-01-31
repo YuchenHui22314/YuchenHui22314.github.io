@@ -1,6 +1,6 @@
 ---
 title: La paix | 和解 
-description: 
+description: Peace is all you need
 slug: la-paix    
 date: 2026-01-02
 categories:

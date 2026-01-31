@@ -1,6 +1,6 @@
 ---
 title: Pas d'un | 乍暖还寒
-description: To 
+description: 心灵的成长需要寒冷的淬炼 
 slug: pas-de-un    
 date: 2026-01-02
 categories:
