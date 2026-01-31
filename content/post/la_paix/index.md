@@ -8,7 +8,8 @@ categories:
 tags:
     - notes
     - emotion
-weight: 3       # You can add weight to some posts to override the default sorting (date descending)
+    - ballet
+weight: 4       # You can add weight to some posts to override the default sorting (date descending)
 image: walking.jpg
 comments: false
 ---
@@ -41,3 +42,7 @@ comments: false
 也许这就是，最平淡却也最美好的
 
 人生
+
+> La paix 其实是一段舒缓优美的音乐片段，出处是 Coppelia 的 1:40:00 处的双人舞，男女主 和解。
+
+{{< bilibili "BV1Uz4y1E7PN" >}}

@@ -7,7 +7,8 @@ categories:
     - notes
 tags:
     - notes
-    - ballet music
+    - emotion
+    - ballet
 weight: 5       # You can add weight to some posts to override the default sorting (date descending)
 image: nutcracker.jpg
 comments: false
