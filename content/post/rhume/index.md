@@ -1,5 +1,5 @@
 ---
-title: La rhume 
+title: Le rhume 
 description: 中国的高中真是太卷了 
 slug: 感冒   
 date: 2026-01-02
