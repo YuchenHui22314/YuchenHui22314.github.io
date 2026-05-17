@@ -3,7 +3,7 @@ title: Biography
 description: About me - academic background, hobbies, and more.
 slug: biography
 date: 2026-01-02
-image: fall.jpg
+image: water_walk.jpg
 categories:
     - academic
 tags:
