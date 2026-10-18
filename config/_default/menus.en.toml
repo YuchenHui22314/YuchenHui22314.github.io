@@ -1,0 +1,106 @@
+[[main]]
+identifier = "home"
+name = "Home"
+pageRef = "/"
+weight = 1
+[main.params]
+icon = "home"
+
+[[main]]
+identifier = "research"
+name = "Research"
+pageRef = "/research"
+weight = 2
+[main.params]
+icon = "question_mark"
+
+[[main]]
+identifier = "publications"
+name = "Publications"
+pageRef = "/publications"
+weight = 3
+[main.params]
+icon = "Google_Scholar_logo"
+
+[[main]]
+identifier = "essays"
+name = "Essays"
+pageRef = "/essays"
+weight = 4
+[main.params]
+icon = "categories"
+
+[[main]]
+identifier = "dreams"
+name = "Dream Journal"
+pageRef = "/dreams"
+weight = 5
+[main.params]
+icon = "infinity"
+
+[[main]]
+identifier = "recipes"
+name = "Recipes"
+pageRef = "/recipes"
+weight = 6
+[main.params]
+icon = "tag"
+
+[[main]]
+identifier = "ask"
+name = "Ask Me"
+pageRef = "/ask"
+weight = 7
+[main.params]
+icon = "messages"
+
+[[main]]
+identifier = "search"
+name = "Search"
+pageRef = "/search"
+weight = 8
+[main.params]
+icon = "search"
+
+[[main]]
+identifier = "archives"
+name = "Archives"
+pageRef = "/archives"
+weight = 9
+[main.params]
+icon = "archives"
+
+[[social]]
+identifier = "github"
+name = "GitHub"
+url = "https://github.com/YuchenHui22314"
+[social.params]
+icon = "brand-github"
+
+[[social]]
+identifier = "twitter"
+name = "Twitter"
+url = "https://x.com/yuchen_xier"
+[social.params]
+icon = "brand-twitter"
+
+[[social]]
+identifier = "scholar"
+name = "Google Scholar"
+url = "https://scholar.google.ca/citations?user=_fiTdwUAAAAJ&hl=en"
+[social.params]
+icon = "Google_Scholar_logo"
+
+[[social]]
+identifier = "email"
+name = "Email"
+url = "mailto:yuchen.hui@umontreal.ca"
+[social.params]
+icon = "mail_icon"
+
+[[social]]
+identifier = "linkedin"
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/yuchen-hui-179303251/"
+[social.params]
+icon = "linkedin"

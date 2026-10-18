@@ -1,0 +1,137 @@
+/* Q&A box. Colors come from the theme's variables when present, with neutral fallbacks. */
+.askbox {
+  --ab-bg: var(--card-background, #fff);
+  --ab-fg: var(--card-text-color-main, #1f2328);
+  --ab-muted: var(--card-text-color-secondary, #6b7280);
+  --ab-accent: var(--accent-color, #2f6fde);
+  --ab-accent-fg: var(--accent-color-text, #fff);
+  --ab-border: var(--card-separator-color, rgba(0, 0, 0, 0.12));
+  --ab-soft: color-mix(in srgb, var(--ab-accent) 8%, var(--ab-bg));
+  --ab-radius: 12px;
+  display: grid;
+  gap: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--ab-fg);
+}
+
+.askbox [hidden] { display: none !important; }
+.askbox-section { display: grid; gap: 1rem; }
+.askbox-heading { margin: 0; font-size: 1.15em; display: flex; align-items: baseline; gap: 0.6em; }
+.askbox-count, .askbox-muted { color: var(--ab-muted); font-size: 0.85em; font-weight: normal; }
+.askbox-muted { margin: 0; }
+
+.askbox-form { display: grid; gap: 0.6rem; }
+.askbox-input,
+.askbox-link {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8em 1em;
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius);
+  background: var(--ab-bg);
+  color: var(--ab-fg);
+  font: inherit;
+  line-height: 1.6;
+}
+.askbox-input { resize: vertical; min-height: 3.5em; }
+.askbox-input:focus,
+.askbox-link:focus { outline: 2px solid var(--ab-accent); outline-offset: 1px; }
+.askbox-form-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.askbox-counter { color: var(--ab-muted); font-size: 0.8em; }
+.askbox-counter.is-error { color: #c0392b; }
+.askbox-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+.askbox-button {
+  padding: 0.55em 1.4em;
+  border: 1px solid var(--ab-accent);
+  border-radius: 999px;
+  background: var(--ab-accent);
+  color: var(--ab-accent-fg);
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.askbox-button:disabled { opacity: 0.55; cursor: default; }
+.askbox-button--ghost { background: transparent; color: var(--ab-accent); }
+.askbox-linkbtn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ab-accent);
+  font: inherit;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+.askbox-linkbtn:hover { text-decoration: underline; }
+
+.askbox-status { margin: 0; min-height: 1.2em; font-size: 0.85em; color: var(--ab-muted); }
+.askbox-status.is-error { color: #c0392b; }
+
+.askbox-notice {
+  padding: 1rem 1.2rem;
+  border-radius: var(--ab-radius);
+  background: var(--ab-soft);
+  display: grid;
+  gap: 0.5rem;
+}
+.askbox-notice p { margin: 0; }
+.askbox-notice-title { font-weight: 600; }
+.askbox-link-row { display: flex; gap: 0.6rem; }
+.askbox-link { font-size: 0.85em; padding: 0.5em 0.8em; }
+
+.askbox-list { display: grid; gap: 1rem; }
+.askbox-thread {
+  padding: 1.1rem 1.3rem;
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius);
+  background: var(--ab-bg);
+  display: grid;
+  gap: 0.8rem;
+  scroll-margin-top: 6rem;
+}
+.askbox-thread.is-highlighted { outline: 2px solid var(--ab-accent); }
+.askbox-thread-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6em; color: var(--ab-muted); font-size: 0.8em; }
+.askbox-badge { padding: 0.1em 0.7em; border-radius: 999px; background: var(--ab-soft); color: var(--ab-accent); }
+.askbox-badge.is-warn { background: #fff4e0; color: #a35a00; }
+.askbox-badge.is-ok { background: #e6f6ec; color: #1c7a43; }
+
+.askbox-messages { display: grid; gap: 0.7rem; }
+.askbox-msg { padding: 0.7rem 1rem; border-radius: var(--ab-radius); }
+.askbox-msg--asker { background: var(--ab-soft); }
+.askbox-msg--owner { border-left: 3px solid var(--ab-accent); border-radius: 0 var(--ab-radius) var(--ab-radius) 0; }
+.askbox-msg-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; margin-bottom: 0.3em; font-size: 0.8em; color: var(--ab-muted); }
+.askbox-msg-who { font-weight: 600; color: var(--ab-fg); }
+.askbox-msg--owner .askbox-msg-who { color: var(--ab-accent); }
+.askbox-msg-tools { margin-left: auto; display: inline-flex; gap: 0.8em; }
+.askbox-msg-body { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.7; }
+
+.askbox-toggle {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ab-accent);
+  font: inherit;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+.askbox-more { display: flex; justify-content: center; }
+
+.askbox-admin-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.askbox-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.askbox-tab {
+  padding: 0.35em 1em;
+  border: 1px solid var(--ab-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ab-fg);
+  font: inherit;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+.askbox-tab.is-active { border-color: var(--ab-accent); background: var(--ab-accent); color: var(--ab-accent-fg); }
+.askbox-actions { display: flex; flex-wrap: wrap; gap: 1.2em; padding-top: 0.4rem; border-top: 1px dashed var(--ab-border); }
+
+@media (max-width: 600px) {
+  .askbox-link-row { flex-direction: column; }
+}

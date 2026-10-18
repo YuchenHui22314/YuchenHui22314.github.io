@@ -1,0 +1,41 @@
+[en]
+languageCode = "en-US"
+languageName = "English"
+languageDirection = "ltr"
+title = "Yuchen Hui"
+weight = 1
+
+[en.params.sidebar]
+subtitle = "CS Ph.D. Student at Université de Montréal, focusing on IR, NLP, and AI"
+
+[en.params.dateFormat]
+published = "Jan 2, 2006"
+lastUpdated = "Jan 2, 2006 15:04 MST"
+
+[zh]
+languageCode = "zh-CN"
+languageName = "中文"
+languageDirection = "ltr"
+title = "惠语辰"
+weight = 2
+
+[zh.params.sidebar]
+subtitle = "蒙特利尔大学计算机科学博士生，研究信息检索、自然语言处理与人工智能"
+
+[zh.params.dateFormat]
+published = "2006年1月2日"
+lastUpdated = "2006年1月2日 15:04 MST"
+
+[fr]
+languageCode = "fr-CA"
+languageName = "Français"
+languageDirection = "ltr"
+title = "Yuchen Hui"
+weight = 3
+
+[fr.params.sidebar]
+subtitle = "Doctorant en informatique à l'Université de Montréal : recherche d'information, TALN et IA"
+
+[fr.params.dateFormat]
+published = "2 January 2006"
+lastUpdated = "2 January 2006 15:04 MST"

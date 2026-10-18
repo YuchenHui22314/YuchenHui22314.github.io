@@ -1,0 +1,25 @@
+# Publications, newest first: the source for the Publications page and the home page's selected papers.
+# Fields (all optional except title/authors/year):
+#   title, authors (list; your own name is highlighted when it matches profile.yaml `name.en`),
+#   venue, year, type (conference | journal | preprint | thesis | workshop),
+#   links: { pdf, doi, code, url, slides, bibtex }, selected: true (also shown on the home page),
+#   note: { en, zh, fr } short remark such as "Best paper award".
+- title: "Towards Adaptive Personalization in Conversational Search"
+  authors: ["Yuchen Hui"]
+  venue: "Master's thesis, Université de Montréal"
+  year: 2025
+  type: thesis
+  links:
+    url: "https://hdl.handle.net/1866/43904"
+    pdf: "https://umontreal.scholaris.ca/bitstreams/8602e77e-1d4f-460d-af1c-bf6fa952a81a/download"
+    doi: "https://doi.org/10.71781/33967"
+  selected: true
+
+# Add papers from Google Scholar (https://scholar.google.ca/citations?user=_fiTdwUAAAAJ) here, e.g.:
+# - title: "Paper title"
+#   authors: ["Yuchen Hui", "Jian-Yun Nie"]
+#   venue: "SIGIR"
+#   year: 2026
+#   type: conference
+#   links: { pdf: "https://arxiv.org/abs/...", code: "https://github.com/..." }
+#   selected: true

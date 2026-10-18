@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /ask/admin/
+
+Sitemap: {{ "sitemap.xml" | absURL }}

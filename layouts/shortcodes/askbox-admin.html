@@ -1,0 +1,11 @@
+{{- /* Admin page for the Q&A box. Usage: {{< askbox-admin >}} on a noindex page. */ -}}
+{{- $config := dict "api" (site.Params.askbox.api | default "") -}}
+<div class="askbox" data-askbox-admin data-config="{{ $config | jsonify }}">
+  <noscript><p>需要开启 JavaScript。</p></noscript>
+</div>
+{{- with resources.Get "css/askbox.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{- end }}
+{{- with resources.Get "js/askbox-admin.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+{{- end }}

@@ -1,5 +1,5 @@
 # Pages placed under these sections will be shown on homepage and archive page.
-mainSections = ["post"]
+mainSections = ["essays", "dreams", "recipes"]
 # Output page's full content in RSS.
 rssFullContent = true
 favicon = "water_king_without_background.png"
@@ -8,13 +8,17 @@ favicon = "water_king_without_background.png"
 since = 2026
 customText = ""
 
-[dateFormat]
-published = "Jan 21, 2026"
-lastUpdated = "Jan 21, 2026 21:59 EST"
+# Date formats and the sidebar subtitle are set per language in languages.toml.
+
+# Q&A box (提问箱). The API lives in ask-api/; see ask-api/README.md for deployment.
+# Leave `api` empty until the Worker is deployed: the page then says the box is not open yet.
+# config/development/params.toml points it at the local Worker for `hugo server`.
+[askbox]
+api = ""
+turnstileSiteKey = ""
 
 [sidebar]
 emoji = "♟"
-subtitle = "CS Ph.D. Student at Université de Montréal, focusing on IR, NLP, and AI"
 
 [sidebar.avatar]
 enabled = true
@@ -39,12 +43,6 @@ type = "archives"
 
 [widgets.homepage.params]
 limit = 5
-
-[[widgets.homepage]]
-type = "categories"
-
-[widgets.homepage.params]
-limit = 10
 
 [[widgets.homepage]]
 type = "tag-cloud"

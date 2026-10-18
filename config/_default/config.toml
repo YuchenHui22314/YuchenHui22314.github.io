@@ -1,18 +1,16 @@
-# Change baseurl before deploy
-baseurl = "xiyuchen.com"
-languageCode = "en-us"
-title = "Yuchen Hui"
+baseURL = "https://xiyuchen.com/"
 
-# Theme i18n support
-# Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
+# English lives at the site root, Chinese under /zh/, French under /fr/.
 defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 
-# Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
-# This will make .Summary and .WordCount behave correctly for CJK languages.
+# Makes .Summary and .WordCount behave correctly for Chinese text.
 hasCJKLanguage = true
 
-# Change it to your Disqus shortname before using
 disqusShortname = "none"
+enableRobotsTXT = true
+
+# Top-level keys must stay above this line: in TOML, everything after a [table] header belongs to that table.
 
 [pagination]
 pagerSize = 5
@@ -26,4 +24,5 @@ pagerSize = 5
   filename = 'sitemap.xml'
   priority = 0.8
 
-enableRobotsTXT = true
+[taxonomies]
+tag = "tags"

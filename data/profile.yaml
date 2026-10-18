@@ -1,0 +1,70 @@
+# Facts about you that the home page header uses. Localized fields take { en, zh, fr }.
+name:
+  en: Yuchen Hui
+  zh: 惠语辰
+  fr: Yuchen Hui
+position:
+  en: Ph.D. Student in Computer Science
+  zh: 计算机科学博士生
+  fr: Doctorant en informatique
+affiliation:
+  en: RALI Lab, Université de Montréal
+  zh: 蒙特利尔大学 RALI 实验室
+  fr: Laboratoire RALI, Université de Montréal
+advisor:
+  name:
+    en: Prof. Jian-Yun Nie
+    zh: 聂建云教授
+    fr: Pr Jian-Yun Nie
+  url: https://recherche.umontreal.ca/english/our-researchers/professors-directory/researcher/is/in14444/
+avatar: img/headshot.jpg
+# Written out by the page script so that the address is not in the HTML as plain text.
+email:
+  user: yuchen.hui
+  domain: umontreal.ca
+interests:
+  - en: Information retrieval
+    zh: 信息检索
+    fr: Recherche d'information
+  - en: Generalization of neural retrievers
+    zh: 神经检索模型的泛化
+    fr: Généralisation des modèles de recherche neuronaux
+  - en: Conversational & personalized search
+    zh: 对话式与个性化搜索
+    fr: Recherche conversationnelle et personnalisée
+  - en: Multimodal retrieval
+    zh: 多模态检索
+    fr: Recherche multimodale
+education:
+  - degree:
+      en: Ph.D. in Computer Science
+      zh: 计算机科学博士
+      fr: Doctorat en informatique
+    school: Université de Montréal
+  - degree:
+      en: M.Sc. in Computer Science
+      zh: 计算机科学硕士
+      fr: Maîtrise en informatique
+    school: Université de Montréal
+    year: 2025
+  - degree:
+      en: B.Sc. in Computer Science and Artificial Intelligence
+      zh: 计算机科学与人工智能学士
+      fr: Baccalauréat en informatique et intelligence artificielle
+    school: Université de Montréal
+links:
+  - name: Google Scholar
+    url: https://scholar.google.ca/citations?user=_fiTdwUAAAAJ&hl=en
+    icon: scholar
+  - name: GitHub
+    url: https://github.com/YuchenHui22314
+    icon: github
+  - name: X (Twitter)
+    url: https://x.com/yuchen_xier
+    icon: x
+  - name: LinkedIn
+    url: https://www.linkedin.com/in/yuchen-hui-179303251/
+    icon: linkedin
+  - name: Badminton Canada
+    url: https://badmintoncanada.tournamentsoftware.com/player-profile/55194fbb-9349-4acd-adad-ff52aee21339
+    icon: badminton

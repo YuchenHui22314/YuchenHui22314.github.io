@@ -1,0 +1,19 @@
+name = "ask-api"
+main = "src/index.js"
+compatibility_date = "2026-04-01"
+
+# Uncomment after xiyuchen.com's DNS is on Cloudflare (see README), so readers in
+# mainland China can reach the API (*.workers.dev is blocked there).
+# routes = [{ pattern = "ask.xiyuchen.com", custom_domain = true }]
+
+[vars]
+ALLOWED_ORIGINS = "https://xiyuchen.com,https://www.xiyuchen.com,http://localhost:1313,http://127.0.0.1:1313"
+# Optional, used as the click-through link in owner notifications.
+ADMIN_PAGE_URL = "https://xiyuchen.com/ask/admin/"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "askbox"
+# Replace with the id printed by `npx wrangler d1 create askbox`. Local dev works without it.
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"

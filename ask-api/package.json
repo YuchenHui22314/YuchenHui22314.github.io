@@ -1,0 +1,14 @@
+{
+  "name": "ask-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler d1 migrations apply askbox --local && wrangler dev --local --ip 127.0.0.1 --port 8787",
+    "test": "node --test test/",
+    "migrate:remote": "wrangler d1 migrations apply askbox --remote",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.86.0"
+  }
+}

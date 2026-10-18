@@ -1,0 +1,6 @@
+# Copy to .dev.vars for local development (`npm run dev`). Never commit .dev.vars.
+ADMIN_TOKEN=change-me-to-a-long-random-string
+IP_SALT=change-me-too
+# Optional:
+# TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+# NOTIFY_URL=https://ntfy.sh/your-secret-topic
