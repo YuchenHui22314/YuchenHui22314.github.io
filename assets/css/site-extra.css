@@ -17,6 +17,9 @@
 :root[data-palette="brown"] .fig-set[data-for="brown"],
 :root[data-palette="blue"] .fig-set[data-for="blue"]{display:contents}
 .fig.center{left:var(--cx,56%);top:var(--cy,13%);height:var(--ch,60%)}
+/* The drawing's own frame cuts Kid and Conan off on the right and at the bottom; fade those edges into the card. */
+.fig.center{-webkit-mask-image:linear-gradient(to right,#000 82%,transparent),linear-gradient(to bottom,#000 80%,transparent);
+  -webkit-mask-composite:source-in;mask-image:linear-gradient(to right,#000 82%,transparent),linear-gradient(to bottom,#000 80%,transparent);mask-composite:intersect}
 .fig img{height:100%}
 .coord .credit{text-decoration:none;border-bottom:1px solid color-mix(in srgb,currentColor 35%,transparent)}
 :root[data-palette="blue"] .card.home .hero-note{left:65%;width:30.5%}

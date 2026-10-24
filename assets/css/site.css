@@ -63,24 +63,24 @@
   --paper:#1d1612; --paper-2:#2a2019; --paper-ink:#eadbc0; --muted:#a8957b; --rule:rgba(234,219,192,.15);
   --accent:#dcbf94; --gold:#d2a658; --ridge-1:#2a2019; --ridge-2:#33271e; --tree:#120d0a}
 
-/* Colorway 3: blue-and-white porcelain. Conan (blue suit) on white (left), Kaito Kid (white suit) on cobalt (right). */
+/* Colorway 3: blue-and-white porcelain. Conan (blue suit) on cobalt (left), Kaito Kid (white suit) on white (right). */
 :root[data-palette="blue"]{
   --desk:#142030; --desk-hi:#1c2b3e; --desk-ink:#c8cfd4;
-  --L-bg:#eceee7; --L-ink:#1b2a3a; --L-soft:#5a6672;
-  --R-bg:#2e4f78; --R-ink:#eef1ea; --R-soft:#b3c3d4;
+  --L-bg:#2e4f78; --L-ink:#eef1ea; --L-soft:#b3c3d4;
+  --R-bg:#eceee7; --R-ink:#1b2a3a; --R-soft:#5a6672;
   --paper:#f2f2eb; --paper-2:#e1e5dd; --paper-ink:#1f2c39; --muted:#5f6a73; --rule:rgba(31,44,57,.17);
   --accent:#2e4f78; --gold:#9c7d36; --tree:#2e4f78; --ridge-1:#cfd8de; --ridge-2:#9fb0c0;
   --n-sky:#1a2533; --n-deep:#0f1823; --n-ink:#e4e8e1; --n-soft:#97a3ad; --n-paper:#141d27; --n-paper2:#1d2834; --n-rule:rgba(228,232,225,.15); --n-accent:#a9c2dc}
 @media (prefers-color-scheme: dark){:root[data-palette="blue"]:not([data-theme="light"]){
   --desk:#0a1018; --desk-hi:#121c28; --desk-ink:#b9c2c9;
-  --L-bg:#1a2533; --L-ink:#e4e8e1; --L-soft:#97a3ad;
-  --R-bg:#14243a; --R-ink:#e4e8e1; --R-soft:#8fa3ba;
+  --L-bg:#14243a; --L-ink:#e4e8e1; --L-soft:#8fa3ba;
+  --R-bg:#1a2533; --R-ink:#e4e8e1; --R-soft:#97a3ad;
   --paper:#141d27; --paper-2:#1d2834; --paper-ink:#e2e6df; --muted:#95a0a8; --rule:rgba(226,230,223,.15);
   --accent:#a9c2dc; --gold:#cfae60; --ridge-1:#1d2834; --ridge-2:#24324a; --tree:#0b121b}}
 :root[data-palette="blue"][data-theme="dark"]{
   --desk:#0a1018; --desk-hi:#121c28; --desk-ink:#b9c2c9;
-  --L-bg:#1a2533; --L-ink:#e4e8e1; --L-soft:#97a3ad;
-  --R-bg:#14243a; --R-ink:#e4e8e1; --R-soft:#8fa3ba;
+  --L-bg:#14243a; --L-ink:#e4e8e1; --L-soft:#8fa3ba;
+  --R-bg:#1a2533; --R-ink:#e4e8e1; --R-soft:#97a3ad;
   --paper:#141d27; --paper-2:#1d2834; --paper-ink:#e2e6df; --muted:#95a0a8; --rule:rgba(226,230,223,.15);
   --accent:#a9c2dc; --gold:#cfae60; --ridge-1:#1d2834; --ridge-2:#24324a; --tree:#0b121b}
 
