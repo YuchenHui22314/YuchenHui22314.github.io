@@ -3,14 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ .Params.seoTitle | default site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Home.Description }}{{ end }}">
 {{- with .Params.robots }}
 <meta name="robots" content="{{ . }}">
 {{- end }}
-{{- range .AllTranslations }}
-<link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}">
-{{- end }}
+{{ partial "seo.html" . }}
 {{- /* The little blue girl with star glasses; cut from assets/img/favicon-source.png. */}}
 <link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="48x48">
 <link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/png" sizes="32x32">

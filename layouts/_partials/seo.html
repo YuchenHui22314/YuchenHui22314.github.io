@@ -1,0 +1,53 @@
+{{- /* What search engines and link previews read: canonical address, language versions,
+       sharing card, and on the home page a description of the person behind the site
+       (schema.org Person), tying this site to the same person's other profiles. */ -}}
+{{- $pr := site.Data.profile -}}
+{{- $lang := site.Language.Lang -}}
+{{- $title := cond .IsHome (.Params.seoTitle | default site.Title) (printf "%s · %s" .Title site.Title) -}}
+{{- $desc := .Description | default site.Home.Description -}}
+<link rel="canonical" href="{{ .Permalink }}">
+{{- range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}">
+{{- if eq .Language.Lang "en" }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- end }}
+{{- end }}
+{{- $img := "" }}
+{{- with resources.Get $pr.avatar }}{{ $img = (.Fill "600x600 jpg q85").Permalink }}{{ end }}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="{{ replace site.Language.LanguageCode "-" "_" }}">
+{{- with $img }}
+<meta property="og:image" content="{{ . }}">
+{{- end }}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@yuchen_xier">
+{{- if .IsHome }}
+{{- $same := slice }}
+{{- range $pr.links }}{{ $same = $same | append .url }}{{ end }}
+{{- $person := dict
+    "@type" "Person"
+    "@id" (printf "%s#me" site.Home.Permalink)
+    "name" (index $pr.name "en")
+    "alternateName" (slice (index $pr.name "zh") "Hui Yuchen" "Xi Yuchen")
+    "url" site.Home.Permalink
+    "jobTitle" (index $pr.position $lang)
+    "affiliation" (dict "@type" "CollegeOrUniversity" "name" "Université de Montréal" "url" "https://www.umontreal.ca/")
+    "alumniOf" (dict "@type" "CollegeOrUniversity" "name" "Université de Montréal")
+    "knowsAbout" (slice "Information retrieval" "Natural language processing" "Neural retrieval models")
+    "knowsLanguage" (slice "zh" "en" "fr")
+    "sameAs" $same }}
+{{- with $img }}{{ $person = merge $person (dict "image" .) }}{{ end }}
+{{- $site := dict
+    "@type" "WebSite"
+    "@id" (printf "%s#site" site.Home.Permalink)
+    "name" (index $pr.name "en")
+    "alternateName" (slice (index $pr.name "zh") "xiyuchen.com")
+    "url" site.Home.Permalink
+    "inLanguage" site.Language.LanguageCode
+    "publisher" (dict "@id" (printf "%s#me" site.Home.Permalink)) }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $person $site) | jsonify | safeJS }}</script>
+{{- end }}

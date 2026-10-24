@@ -1,6 +1,8 @@
 ---
 title: "About"
 type: "about"
+aliases:
+  - "/p/biography/"
 description: "Who I am, where I studied, and what I’m up to."
 ---
 I am 惠语辰, a Ph.D. student in Computer Science at the [University of Montreal](https://www.umontreal.ca/en/). I am a member of the UdeM NLP (Natural Language Processing) Lab [RALI](http://rali.iro.umontreal.ca/rali/?q=en/accueil) (Recherche Appliquée en Linguistique Informatique). I am fortunate to be advised by Professor [Jian-Yun Nie](https://scholar.google.com/citations?user=W7uYg0UAAAAJ). My doctoral research focuses on enhancing the generalization capability of neural retrieval models.

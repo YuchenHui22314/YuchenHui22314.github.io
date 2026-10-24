@@ -1,6 +1,8 @@
 ---
 title: "Research"
 type: "research"
+aliases:
+  - "/publications/"
 description: "What I work on, and why."
 ---
 ## Research Interests
