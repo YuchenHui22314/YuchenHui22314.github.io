@@ -4,7 +4,7 @@
   {{ partial "band.html" (dict
       "page" . "key" $key "glyph" $key "title" .Title "moon" (eq $key "dreams")
       "eyebrow" (T (printf "other_%s" $key)) "desc" .Description
-      "meta" (T (printf "meta_%s" $key) (len .RegularPages))) }}
+      "meta" (T (printf "meta_%s" $key) (cond (eq $key "album") (len site.Data.album.photos) (len .RegularPages)))) }}
   <div class="sheet">
     {{- with .Description }}<p class="sheet-desc">{{ . }}</p>{{ end }}
     {{ partial (printf "sections/%s.html" $key) . }}

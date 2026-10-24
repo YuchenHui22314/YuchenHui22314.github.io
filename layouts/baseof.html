@@ -11,24 +11,22 @@
 {{- range .AllTranslations }}
 <link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}">
 {{- end }}
-<link rel="icon" href="{{ "water_king_without_background.png" | relURL }}">
+{{- /* The little blue girl with star glasses; cut from assets/img/favicon-source.png. */}}
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="48x48">
+<link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
 {{- with .OutputFormats.Get "rss" }}
 <link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">
 {{- end }}
-<meta name="theme-color" content="#1b2a24">
-{{- /* Pick the colourway before anything paints: one per visit (browser tab), in turn. */}}
+<meta name="theme-color" content="#261b15">
+{{- /* Pick the colourway before anything paints: the one the visitor last chose with the
+       switch in the navigation, otherwise the first in params.palettes. */}}
 <script>
 (function (d) {
   var P = {{ site.Params.palettes }}, r = d.documentElement, p;
   try {
     p = new URLSearchParams(location.search).get('palette');
-    if (P.indexOf(p) < 0) p = sessionStorage.getItem('yh:palette');
-    if (P.indexOf(p) < 0) {
-      var n = parseInt(localStorage.getItem('yh:visits') || '0', 10) || 0;
-      p = P[n % P.length];
-      localStorage.setItem('yh:visits', String(n + 1));
-    }
-    sessionStorage.setItem('yh:palette', p);
+    if (P.indexOf(p) < 0) p = localStorage.getItem('yh:palette');
     if (sessionStorage.getItem('yh:seen')) r.dataset.seen = '1'; else sessionStorage.setItem('yh:seen', '1');
     var t = localStorage.getItem('yh:theme');
     if (t === 'dark' || t === 'light') r.dataset.theme = t;
@@ -57,6 +55,7 @@
 {{- $js := resources.Get "js/site.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer
   data-search="{{ "search.json" | relLangURL }}"
-  data-strings="{{ dict "noResult" (T "no_result") "copied" (T "copied") "scrollOpen" (T "scroll_open") "scrollClose" (T "scroll_close") | jsonify }}"></script>
+  data-palettes="{{ site.Params.palettes | jsonify }}"
+  data-strings="{{ dict "noResult" (T "no_result") "copied" (T "copied") "scrollOpen" (T "scroll_open") "scrollClose" (T "scroll_close") "close" (T "close") | jsonify }}"></script>
 </body>
 </html>

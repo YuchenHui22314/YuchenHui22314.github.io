@@ -11,12 +11,12 @@
     <h1><span class="nm">{{ $name }}</span><span class="seal" aria-hidden="true">语辰</span></h1>
     <p class="alt">{{ $alt }}</p>
     <div class="sub">
-      <b><i class="udem" aria-hidden="true"></i>{{ T "hero_sub1" }}</b>
-      <span>{{ partial "icon.html" "star" }}{{ T "hero_sub2" }}</span>
+      <b><i class="udem" aria-hidden="true"></i>{{ T "hero_sub1" | safeHTML }}</b>
+      <span>{{ partial "icon.html" "star" }}<span>{{ T "hero_sub2" | safeHTML }}</span></span>
     </div>
     <p class="line">{{ T "hero_line" }}</p>
     <div class="ctas">
-      {{- with site.GetPage "/research" }}<a class="pill" href="{{ .RelPermalink }}">{{ T "hero_cta" }} {{ partial "icon.html" "arrow" }}</a>{{ end }}
+      {{- with site.GetPage "/about" }}<a class="pill" href="{{ .RelPermalink }}">{{ T "hero_cta" }} {{ partial "icon.html" "arrow" }}</a>{{ end }}
       {{- with site.GetPage "/ask" }}<a class="textlink" href="{{ .RelPermalink }}">{{ T "hero_ask" }}</a>{{ end }}
     </div>
     <figure class="hero-map" id="hero-map">
@@ -24,13 +24,13 @@
       <svg class="map-arc" viewBox="0 0 874 474" preserveAspectRatio="none" aria-hidden="true"><path d="M410 168C520 20 690 0 795 98"/></svg>
       <span class="pin" style="left:46.9%;top:35.4%"><span>{{ T "pin_nanjing" }}</span></span>
       <span class="pin r" style="left:91%;top:20.7%"><span>{{ T "pin_montreal" }}</span></span>
-      <figcaption>{{ T "map_caption" }}</figcaption>
+      <figcaption class="map-note"><svg viewBox="0 0 64 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3c7 1.5 13 5.5 18 11.5 5.2 6.3 10.8 13.6 22.6 18.3 4.1 1.6 8.4 2.4 13.4 2.6"/><path d="M48.5 29.8c3.3 1.7 5.6 3.5 7.6 5.5-2.9 1.4-5.6 2.7-8.6 4.9"/></svg><span>{{ T "map_caption" }}</span></figcaption>
     </figure>
   </div>
   {{ partial "figures.html" . }}
   <aside class="hero-note">
     <div class="lbl">{{ T "now_h" }}</div>
-    <p>{{ T "now_text" }}</p>
+    <p>{{ T "now_text" | safeHTML }}</p>
     {{- with first 1 (sort (where site.RegularPages "Section" "essays") "Date" "desc") }}{{ range . }}
     <a class="row" href="{{ .RelPermalink }}"><span class="k">{{ T "row_essay" }}</span><span class="t">{{ .Title }}</span><span class="d">{{ partial "written.html" . }}</span></a>
     {{- end }}{{ end }}
@@ -38,7 +38,8 @@
     <a class="row" href="{{ .RelPermalink }}"><span class="k">{{ T "row_dream" }}</span><span class="t">{{ .Title }}</span><span class="d">{{ .Date.Format "2006.01" }}</span></a>
     {{- end }}{{ end }}
     {{- with site.GetPage "/ask" }}
-    <a class="row" href="{{ .RelPermalink }}"><span class="k">{{ T "row_ask" }}</span><span class="t">{{ T "row_ask_text" }}</span><span class="d"></span></a>
+    {{- /* site.js swaps in the latest answered question when the Q&A box is open. */}}
+    <a class="row" href="{{ .RelPermalink }}" data-ask-latest="{{ site.Params.askbox.api }}" data-label="{{ T "row_ask_latest" }}"><span class="k">{{ T "row_ask" }}</span><span class="t">{{ T "row_ask_text" }}</span><span class="d"></span></a>
     {{- end }}
   </aside>
   <div class="hero-foot">

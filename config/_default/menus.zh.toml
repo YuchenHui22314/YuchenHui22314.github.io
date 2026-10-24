@@ -1,36 +1,50 @@
+# "Publications" goes straight to Google Scholar, which stays up to date on its own.
+[[main]]
+identifier = "about"
+name = "关于我"
+pageRef = "/about"
+weight = 1
+
 [[main]]
 identifier = "research"
 name = "研究"
 pageRef = "/research"
-weight = 1
+weight = 2
 
 [[main]]
 identifier = "publications"
 name = "论文"
-pageRef = "/publications"
-weight = 2
+url = "https://scholar.google.ca/citations?user=_fiTdwUAAAAJ&hl=zh-CN"
+weight = 3
+[main.params]
+external = true
 
 [[main]]
 identifier = "essays"
 name = "随笔"
 pageRef = "/essays"
-weight = 3
+weight = 4
 
 [[main]]
 identifier = "dreams"
 name = "梦境"
 pageRef = "/dreams"
-weight = 4
+weight = 5
 
 [[main]]
 identifier = "recipes"
 name = "菜谱"
 pageRef = "/recipes"
-weight = 5
+weight = 6
+
+[[main]]
+identifier = "album"
+name = "相册"
+pageRef = "/album"
+weight = 7
 
 [[main]]
 identifier = "ask"
 name = "提问箱"
 pageRef = "/ask"
-weight = 6
-
+weight = 8

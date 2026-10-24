@@ -102,7 +102,7 @@ function chartFrame() {
 }
 
 // Page keys and seeds follow the mock-up so the pictures match what was approved.
-const PAGES = ['home', 'research', 'publications', 'essays', 'essay', 'dreams', 'dream', 'recipes', 'recipe', 'portfolio', 'ask', 'notes'];
+const PAGES = ['home', 'research', 'publications', 'essays', 'essay', 'dreams', 'dream', 'recipes', 'recipe', 'album', 'ask', 'notes', 'about'];
 const write = (name, svg) => writeFileSync(join(OUT, `${name}.html`), svg + '\n');
 
 write('compass', compass());
@@ -110,7 +110,7 @@ write('chart-frame', chartFrame());
 write('scape', scape(77));
 write('contours-home', contours(11));
 write('stars-home', stars(12, 150));
-for (const key of ['research', 'publications', 'essays', 'dreams', 'recipes', 'ask']) {
+for (const key of ['about', 'research', 'essays', 'dreams', 'recipes', 'album', 'ask']) {
   const i = PAGES.indexOf(key);
   write(`contours-${key}`, contours(i * 7 + 3));
   write(`stars-${key}`, stars(i * 7 + 4, 150));

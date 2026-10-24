@@ -1,8 +1,8 @@
 ---
 title: "Ask Me"
-description: "Ask me anything, anonymously. I answer in public."
+description: "Ask anonymously, answered in public."
 type: "ask"
 ---
-Curious about research, life in Montreal, badminton, ballet, or anything else? Ask away. You stay anonymous, and once I reply you can keep the conversation going under the same question.
+Ask me anything! Life in Montreal, my hobbies, what I think about something, and so on. You stay anonymous, and once I reply you can keep the conversation going under the same question.
 
 {{< askbox >}}

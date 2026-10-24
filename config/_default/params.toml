@@ -1,6 +1,7 @@
-# Three colourways, each with a day and a night version. A visitor gets the next one
-# on each new visit (browser tab); ?palette=green|brown|blue forces one.
-palettes = ["green", "brown", "blue"]
+# Three colourways, each with a day and a night version. The first is the default; the
+# switch in the navigation steps through them in this order and the browser remembers
+# the choice. ?palette=green|brown|blue forces one.
+palettes = ["brown", "green", "blue"]
 
 # Montréal, shown in the corner of the home page.
 coordinates = { lat = "45°30′", lon = "73°34′" }

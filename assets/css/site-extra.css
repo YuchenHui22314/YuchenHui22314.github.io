@@ -51,9 +51,10 @@
 .article .obj-bg,.article .cmp{display:none}
 .article[data-paper="parch"] .obj-bg{display:block;position:absolute;inset:0;z-index:-1}
 .article[data-paper="parch"] .cmp{display:block}
-.article .body>p:first-child{font-size:20px;line-height:1.65}
+/* One text size for the whole essay: the size the opening paragraph used to have. */
+.article{font-size:20px;line-height:1.65}
+:root[lang^="zh"] .article{font-size:18px;line-height:2}
 .article .body>p:first-child::first-letter{float:left;font:400 4.1em/.8 var(--f-display);margin:.06em .12em 0 0;color:var(--accent)}
-:root[lang^="zh"] .article .body>p:first-child{font-size:18px;line-height:2}
 :root[lang^="zh"] .article .body>p:first-child::first-letter{font:400 3.1em/1 var(--f-cn);margin:.08em .12em 0 0}
 .article[data-paper="parch"] .body>p:first-child::first-letter{color:var(--parch-edge)}
 .article blockquote{margin:1.6em 0;padding:2px 0 2px 22px;border-left:2px solid var(--gold);color:var(--muted)}
@@ -72,17 +73,6 @@
 :root[lang^="zh"] .fig-inline .cap{font:400 13.5px/1.7 var(--f-kai)}
 .read-main{min-width:0}
 
-/* Vertical letter paper (Chinese only) */
-.article[data-paper="vert"]{writing-mode:vertical-rl;height:640px;overflow-x:auto;overflow-y:hidden;padding:40px 36px;background:var(--jian);color:var(--jian-ink);
-  box-shadow:inset 0 0 0 12px var(--jian),inset 0 0 0 13.5px var(--jian-rule),0 22px 40px -22px rgba(0,0,0,.5);font:400 20px/44px var(--f-kai);letter-spacing:.08em;filter:brightness(var(--obj-dim))}
-.article[data-paper="vert"] .body{min-height:100%;background:repeating-linear-gradient(to left,transparent 0 43px,var(--jian-rule) 43px 44px);border-right:1px solid var(--jian-rule)}
-.article[data-paper="vert"] figure,.article[data-paper="vert"] .fig-inline,.article[data-paper="vert"] .dateline,.article[data-paper="vert"] iframe{display:none}
-.article[data-paper="vert"] h2,.article[data-paper="vert"] h3{margin:0;font:400 26px/44px var(--f-brush);letter-spacing:.2em}
-.article[data-paper="vert"] p,.article[data-paper="vert"] .body>p:first-child{margin:0;text-indent:2em;font-size:inherit;line-height:inherit}
-.article[data-paper="vert"] .body>p:first-child::first-letter{float:none;font:inherit;margin:0;color:inherit}
-.article[data-paper="vert"] blockquote{border:0;padding:0;margin:0;color:var(--seal)}
-.article[data-paper="vert"] ul,.article[data-paper="vert"] ol{margin:0}
-
 /* Route: the essay's headings as stops along the way */
 .route ul{list-style:none;margin:0;padding:0}
 .route a{text-decoration:none}
@@ -95,9 +85,6 @@
 :root[lang^="zh"] .res .prose h2{font:600 21px/1.4 var(--f-cn);letter-spacing:.1em}
 .res .prose blockquote{margin:0 0 1em;color:var(--muted)}
 .res .prose a{color:var(--accent);text-underline-offset:3px}
-
-/* Publications */
-.bib[hidden]{display:none}
 
 /* Recipes */
 .sec-intro{max-width:66ch;margin:0 0 34px;font-size:16.5px;color:var(--muted)}
@@ -165,3 +152,68 @@
 :root[lang^="zh"] .band-title.is-mid h1{font-size:44px}
 :root[lang^="zh"] .band-title.is-long h1{font-size:36px;letter-spacing:.06em}
 @container (max-width:740px){.band-title.is-mid h1,.band-title.is-long h1{font-size:34px}}
+
+/* ---------- Colourway switch: a little card cut by the same diagonal, in the next colourway ---------- */
+.pal-btn i{width:17px;height:17px;border-radius:50%;background:linear-gradient(to bottom right,var(--sw-l) 50%,var(--sw-r) 50%);box-shadow:0 0 0 1.5px color-mix(in srgb,currentColor 70%,transparent)}
+:root[data-palette="brown"] .pal-btn i{--sw-l:#ecdcb6;--sw-r:#3c584f}
+:root[data-palette="green"] .pal-btn i{--sw-l:#2e4f78;--sw-r:#eceee7}
+:root[data-palette="blue"] .pal-btn i{--sw-l:#6a4a35;--sw-r:#f0e3c4}
+
+/* External links in the navigation (Publications → Google Scholar) */
+.links a .ext{margin-left:4px;vertical-align:1px;opacity:.6}
+.drawer .ext{opacity:.6}
+
+/* ---------- Home ---------- */
+/* Links inside the title lines stay quiet: same colour, a thin underline. */
+.hero-name .sub span span{display:inline}
+.hero-note p a{white-space:nowrap}
+.hero-name .sub a,.hero-note p a{color:inherit;text-decoration:none;border-bottom:1px solid color-mix(in srgb,currentColor 40%,transparent);transition:border-color .2s}
+.hero-name .sub a:hover,.hero-note p a:hover{border-bottom-color:currentColor}
+/* "Drawn by hand!" sits beside the map, with a hand-drawn arrow from the map to it. */
+.hero-map figcaption.map-note{left:calc(100% - 22px);top:60%;right:auto;bottom:auto;transform:none;display:flex;align-items:flex-end;gap:4px;font:500 19px/1 var(--f-hand);color:var(--L-soft);pointer-events:none}
+.map-note svg{width:64px;height:44px;flex:none;overflow:visible;color:var(--gold)}
+.map-note span{transform:translateY(16px) rotate(-5deg);white-space:nowrap}
+:root[lang^="zh"] .map-note span{font-size:18px}
+/* The latest answered question, on one line. */
+.hero-note a.row[data-ask-latest] .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- Research: the text, with the keywords beside it ---------- */
+.res.res-research{grid-template-columns:minmax(0,66ch) 250px;gap:80px}
+:root[lang^="zh"] .res.res-research{grid-template-columns:minmax(0,36em) 250px}
+.res-research aside{padding-top:6px}
+.res-research .legend{grid-template-columns:minmax(0,1fr);margin-bottom:30px}
+.scholar-link{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+:root[lang^="zh"] .scholar-link{letter-spacing:.06em}
+.scholar-link svg:first-child{width:17px;height:17px}
+
+/* ---------- Album ---------- */
+.album{columns:3 240px;column-gap:28px}
+.mount{break-inside:avoid;margin:0 0 30px;background:var(--paper-2);padding:14px 14px 12px;border-radius:2px;box-shadow:0 10px 22px -16px rgba(0,0,0,.45);display:block;width:100%;text-align:left;color:var(--paper-ink);filter:brightness(var(--obj-dim));transition:transform .3s}
+.mount:hover{transform:translateY(-3px)}
+.mount[hidden]{display:none}
+.mount .win{position:relative;display:block}
+.mount .win img{display:block;width:100%;height:auto}
+/* Paper photo corners */
+.mount .win i{position:absolute;width:22px;height:22px;background:var(--paper-ink);opacity:.75}
+.mount .win i:nth-of-type(1){left:-4px;top:-4px;clip-path:polygon(0 0,100% 0,0 100%)}
+.mount .win i:nth-of-type(2){right:-4px;top:-4px;clip-path:polygon(0 0,100% 0,100% 100%)}
+.mount .win i:nth-of-type(3){left:-4px;bottom:-4px;clip-path:polygon(0 0,0 100%,100% 100%)}
+.mount .win i:nth-of-type(4){right:-4px;bottom:-4px;clip-path:polygon(100% 0,0 100%,100% 100%)}
+.mount .cap{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-top:10px}
+.mount .cap b{font:500 21px/1.15 var(--f-hand)}
+:root[lang^="zh"] .mount .cap b{font:400 17px/1.4 var(--f-kai)}
+.mount .cap small{flex:none;font:500 12.5px/1 var(--f-ui);letter-spacing:.1em;color:var(--muted)}
+.lightbox{position:fixed;inset:0;z-index:60;background:rgba(10,14,12,.82);display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+.lightbox .mount{width:auto;max-width:min(1100px,100%);margin:0;cursor:default}
+.lightbox .mount:hover{transform:none}
+.lightbox .win img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 140px);object-fit:contain}
+.lightbox .cap .chip{cursor:pointer}
+
+@container (max-width:1000px){.res.res-research,:root[lang^="zh"] .res.res-research{grid-template-columns:minmax(0,1fr);gap:40px}}
+@container (max-width:740px){
+  /* On a phone the label goes under the map, on the left, clear of Conan's hat. */
+  .hero-map figcaption.map-note{left:4px;top:calc(100% + 6px)}
+  .map-note svg{display:none}
+  .map-note span{transform:rotate(-4deg)}
+  .album{columns:1}
+}

@@ -1,0 +1,39 @@
+{{- /* Photos mounted with paper corners, filtered by category; a click opens the large version.
+       The list lives in data/album.yaml. */ -}}
+{{- $lang := site.Language.Lang -}}
+{{- $a := site.Data.album -}}
+{{- $mounts := slice -}}
+{{- $used := dict -}}
+{{- range $a.photos }}
+  {{- $ph := . }}
+  {{- $img := false }}
+  {{- with .page }}{{ with site.GetPage . }}{{ $img = .Resources.Get $ph.file }}{{ end }}{{ else }}{{ $img = resources.Get (printf "album/%s" .file) }}{{ end }}
+  {{- with $img }}
+    {{- $img = $img.Filter images.AutoOrient }}
+    {{- $mounts = $mounts | append (dict "ph" $ph "th" ($img.Resize "720x webp q80") "big" ($img.Fit "1800x1800 webp q82")) }}
+    {{- $used = merge $used (dict $ph.cat true) }}
+  {{- else }}
+    {{- warnf "album: photo %q not found" $ph.file }}
+  {{- end }}
+{{- end }}
+{{- if $mounts }}
+<div class="read-ctl">
+  <div class="seg tabs" role="group" aria-label="{{ .Title }}">
+    <button type="button" data-cat="all" aria-pressed="true">{{ T "album_all" }}</button>
+    {{- range $a.categories }}{{ if index $used .id }}
+    <button type="button" data-cat="{{ .id }}" aria-pressed="false">{{ index .name $lang }}</button>
+    {{- end }}{{ end }}
+  </div>
+</div>
+<div class="album" id="album">
+  {{- range $mounts }}
+  {{- $place := index .ph.place $lang }}
+  <button type="button" class="mount" data-act="lightbox" data-cat="{{ .ph.cat }}" data-big="{{ .big.RelPermalink }}" data-w="{{ .big.Width }}" data-h="{{ .big.Height }}">
+    <span class="win"><img src="{{ .th.RelPermalink }}" width="{{ .th.Width }}" height="{{ .th.Height }}" alt="{{ $place }}" loading="lazy"><i></i><i></i><i></i><i></i></span>
+    <span class="cap"><b>{{ $place }}</b><small>{{ .ph.date }}</small></span>
+  </button>
+  {{- end }}
+</div>
+{{- else }}
+<p class="muted">{{ T "album_empty" }}</p>
+{{- end }}

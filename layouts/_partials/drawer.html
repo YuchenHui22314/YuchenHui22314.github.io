@@ -3,9 +3,9 @@
   <div class="drawer">
     <div class="panel" role="dialog" aria-modal="true" aria-label="{{ T "menu" }}">
       <div class="head"><span class="seal-mark" aria-hidden="true">惠</span><button type="button" class="icon-btn" data-close aria-label="{{ T "close" }}">✕</button></div>
-      <a class="it" href="{{ site.Home.RelPermalink }}"><b>{{ T "home" }}</b><span>{{ T "hero_sub1" }}</span></a>
+      <a class="it" href="{{ site.Home.RelPermalink }}"><b>{{ T "home" }}</b><span>{{ T "hero_sub1" | plainify }}</span></a>
       {{- range site.Menus.main }}
-      <a class="it" href="{{ .URL }}"><b>{{ with .Page }}{{ .Title }}{{ else }}{{ .Name }}{{ end }}</b>{{ with .Page }}{{ with .Description }}<span>{{ . }}</span>{{ end }}{{ end }}</a>
+      <a class="it" href="{{ .URL }}"{{ if .Params.external }} target="_blank" rel="noopener"{{ end }}><b>{{ with .Page }}{{ .Title }}{{ else }}{{ .Name }}{{ end }}{{ if .Params.external }} {{ partial "icon.html" "external" }}{{ end }}</b>{{ with .Page }}{{ with .Description }}<span>{{ . }}</span>{{ end }}{{ else }}{{ if .Params.external }}<span>Google Scholar</span>{{ end }}{{ end }}</a>
       {{- end }}
       {{ partial "deco/compass.html" (dict "class" "" "style" "width:120px;margin:26px auto 0;color:var(--muted);opacity:.4") }}
     </div>

@@ -8,20 +8,18 @@
   <div class="read-ctl">
     <a class="textlink" href="{{ $sec.RelPermalink }}">← {{ T "back_essays" }}</a>
     <div class="seg" role="group" aria-label="{{ T "paper" }}">
-      <button type="button" data-paper="plain" aria-pressed="true">{{ T "paper_plain" }}</button>
-      <button type="button" data-paper="parch" aria-pressed="false">{{ T "paper_parch" }}</button>
-      {{- if eq site.Language.Lang "zh" }}<button type="button" data-paper="vert" aria-pressed="false">{{ T "paper_vert" }}</button>{{ end }}
+      <button type="button" data-paper="parch" aria-pressed="true">{{ T "paper_parch" }}</button>
+      <button type="button" data-paper="plain" aria-pressed="false">{{ T "paper_plain" }}</button>
     </div>
   </div>
   <div class="read">
     <div class="read-main">
-      <article class="article" id="article" data-paper="plain">
+      <article class="article" id="article" data-paper="parch">
         <span class="obj-bg"></span>
         {{ partial "deco/compass.html" (dict "class" "cmp") }}
         <div class="body">{{ $p.Content }}</div>
         {{- with $p.Params.dateline }}<div class="dateline">{{ partial "icon.html" "clock" }}{{ . }}</div>{{ end }}
       </article>
-      <p class="vnote" hidden>{{ T "vert_note" }}</p>
     </div>
     <aside class="aside">
       {{- $toc := $p.Fragments.ToHTML 2 2 false }}

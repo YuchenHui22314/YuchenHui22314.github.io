@@ -1,5 +1,5 @@
 // Site behaviour: navigation that folds before it crosses the diagonal, search, day/night,
-// essay paper modes, and the small interactive bits. Pages work without it.
+// essay paper, colourway switch, and the small interactive bits. Pages work without it.
 
 const root = document.documentElement;
 const script = document.currentScript || document.querySelector('script[data-search]');
@@ -117,25 +117,64 @@ function toast(msg) {
   toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
 }
 
-/* ---------- Essay paper: plain / parchment / vertical ---------- */
+/* ---------- Essay paper: parchment (default) / plain ---------- */
 const article = document.getElementById('article');
 function setPaper(mode) {
   if (!article) return;
   const btn = document.querySelector(`[data-paper="${mode}"]`);
-  if (!btn) mode = 'plain';
+  if (!btn) mode = 'parch';
   article.dataset.paper = mode;
   document.querySelectorAll('[data-paper]').forEach((b) => b !== article && b.setAttribute('aria-pressed', String(b.dataset.paper === mode)));
-  const note = document.querySelector('.vnote');
-  if (note) note.hidden = mode !== 'vert';
 }
-if (article) setPaper(store.get('paper', 'plain'));
+if (article) setPaper(store.get('paper', 'parch'));
+
+/* ---------- Album: category tabs and the large photo ---------- */
+function filterAlbum(cat) {
+  document.querySelectorAll('.tabs [data-cat]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === cat)));
+  document.querySelectorAll('#album .mount').forEach((m) => { m.hidden = cat !== 'all' && m.dataset.cat !== cat; });
+}
+function lightbox(btn) {
+  const d = document.createElement('div');
+  d.className = 'lightbox';
+  const box = document.createElement('div');
+  box.className = 'mount';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  const img = new Image(+btn.dataset.w, +btn.dataset.h);
+  img.src = btn.dataset.big;
+  img.alt = btn.querySelector('img').alt;
+  const win = document.createElement('span');
+  win.className = 'win';
+  win.append(img);
+  const cap = btn.querySelector('.cap').cloneNode(true);
+  const close = document.createElement('button');
+  close.type = 'button'; close.className = 'chip'; close.dataset.close = ''; close.textContent = S.close || '×';
+  cap.append(close);
+  box.append(win, cap);
+  d.append(box);
+  d.addEventListener('click', (e) => { if (e.target === d || e.target.closest('[data-close]')) { d.remove(); btn.focus(); } });
+  document.body.append(d);
+  close.focus();
+}
 
 /* ---------- Clicks ---------- */
 document.addEventListener('click', async (e) => {
-  const el = e.target.closest('[data-act],[data-paper]');
+  const el = e.target.closest('[data-act],[data-paper],[data-cat]');
   if (!el || el === article) return;
   if (el.dataset.paper) { setPaper(el.dataset.paper); store.set('paper', el.dataset.paper); return; }
+  if (!el.dataset.act) { filterAlbum(el.dataset.cat); return; }
   switch (el.dataset.act) {
+    case 'palette': {
+      // Step to the next colourway; the page script restores it on the next visit.
+      const P = JSON.parse(script?.dataset.palettes || '[]');
+      const next = P[(P.indexOf(root.dataset.palette) + 1) % P.length];
+      if (!next) break;
+      root.dataset.palette = next;
+      store.set('palette', next);
+      layout();
+      break;
+    }
+    case 'lightbox': lightbox(el); break;
     case 'night': {
       const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
       root.dataset.theme = dark ? 'light' : 'dark';
@@ -152,12 +191,6 @@ document.addEventListener('click', async (e) => {
       e.preventDefault();
       const addr = `${el.dataset.user}@${el.dataset.domain}`;
       try { await navigator.clipboard.writeText(addr); toast(S.copied || addr); } catch { toast(addr); }
-      break;
-    }
-    case 'bib': {
-      const pre = el.closest('.icard').querySelector('.bib');
-      pre.hidden = !pre.hidden;
-      el.setAttribute('aria-expanded', String(!pre.hidden));
       break;
     }
     case 'scroll': {
@@ -182,7 +215,7 @@ document.addEventListener('keydown', (e) => {
     if (q) { e.preventDefault(); document.getElementById('nav').classList.add('search-open'); q.focus(); }
   }
   if (e.key === 'Escape') {
-    document.querySelectorAll('.drawer').forEach((d) => d.remove());
+    document.querySelectorAll('.drawer,.lightbox').forEach((d) => d.remove());
     const r = document.getElementById('results'); if (r) r.hidden = true;
   }
   if (e.key === 'Enter' && e.target.id === 'q') {
@@ -190,6 +223,27 @@ document.addEventListener('keydown', (e) => {
     if (a) location.href = a.href;
   }
 });
+
+/* ---------- Home: the latest answered question in the Q&A row ---------- */
+const latest = document.querySelector('[data-ask-latest]');
+if (latest && latest.dataset.askLatest) {
+  fetch(latest.dataset.askLatest.replace(/\/+$/, '') + '/api/threads?limit=1')
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      const t = d?.threads?.[0];
+      const q = t?.messages.find((m) => m.author === 'asker');
+      if (!q) return;
+      const body = q.body.replace(/\s+/g, ' ').trim();
+      latest.href += '#q-' + t.id;
+      latest.querySelector('.k').textContent = latest.dataset.label;
+      const text = latest.querySelector('.t');
+      text.textContent = body;
+      text.title = body;
+      const at = new Date(t.publishedAt);
+      latest.querySelector('.d').textContent = `${at.getFullYear()}.${String(at.getMonth() + 1).padStart(2, '0')}`;
+    })
+    .catch(() => {});
+}
 
 /* ---------- Recipe: tick ingredients off while cooking ---------- */
 const letter = document.querySelector('.letter[data-recipe]');

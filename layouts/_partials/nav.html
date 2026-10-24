@@ -3,7 +3,11 @@
   <a class="seal-mark" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">惠</a>
   <nav class="links" aria-label="{{ T "menu" }}">
     {{- range site.Menus.main }}
+    {{- if .Params.external }}
+    <a href="{{ .URL }}" target="_blank" rel="noopener">{{ .Name }}{{ partial "icon.html" "external" }}</a>
+    {{- else }}
     <a href="{{ .URL }}"{{ if or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{- end }}
     {{- end }}
   </nav>
   <div class="tools">
@@ -20,6 +24,7 @@
         {{- end }}{{ end }}
       {{- end }}
     </div>
+    <button type="button" class="icon-btn pal-btn" data-act="palette" aria-label="{{ T "palette" }}" title="{{ T "palette" }}"><i aria-hidden="true"></i></button>
     <button type="button" class="icon-btn" data-act="night" aria-label="{{ T "night" }}">{{ partial "icon.html" "moon" }}</button>
     <button type="button" class="menu-btn" data-act="menu" aria-label="{{ T "menu" }}">{{ partial "icon.html" "menu" }}<span>{{ T "menu" }}</span></button>
   </div>

@@ -1,0 +1,47 @@
+# 相册 (Album). Newest photos first; the page shows them in this order.
+#
+# Each photo needs `file`. Put new photos in assets/album/ and give just the file name.
+# To reuse a photo that already sits next to an essay, add `page` (the essay's path) and give
+# the file's path inside that essay's folder; nothing is copied.
+# `cat` is one of the category ids below; `place` is the handwritten caption; `date` is free text.
+categories:
+  - id: land
+    name: { zh: 山河, en: Landscapes, fr: Paysages }
+  - id: city
+    name: { zh: 城市, en: Cities, fr: Villes }
+  - id: sky
+    name: { zh: 天空, en: Skies, fr: Ciels }
+  - id: badminton
+    name: { zh: 羽毛球, en: Badminton, fr: Badminton }
+
+photos:
+  - file: hebei_assets/media/image5.jpeg
+    page: /essays/hebei-journey
+    cat: land
+    place: { zh: 太行山区, en: Taihang Mountains, fr: Monts Taihang }
+    date: "2025.07"
+  - file: hebei_assets/media/image9.jpeg
+    page: /essays/hebei-journey
+    cat: land
+    place: { zh: 野狐岭远眺, en: "From Yehuling Pass", fr: "Depuis le col de Yehuling" }
+    date: "2025.07"
+  - file: hebei_assets/media/image10.jpeg
+    page: /essays/hebei-journey
+    cat: land
+    place: { zh: 草原上的火山遗迹, en: Volcanic rock on the grassland, fr: Roches volcaniques dans la prairie }
+    date: "2025.07"
+  - file: hebei_assets/media/image13.jpeg
+    page: /essays/hebei-journey
+    cat: city
+    place: { zh: 济南解放阁, en: "Jiefang Pavilion, Jinan", fr: "Pavillon Jiefang, Jinan" }
+    date: "2025.07"
+  - file: mil_campus.jpg
+    page: /essays/ce-train-qui-sen-va
+    cat: city
+    place: { zh: 蒙大 MIL 校区, en: UdeM MIL campus, fr: Campus MIL de l’UdeM }
+    date: "2023"
+  - file: sun_set.png
+    page: /essays/pas-de-un
+    cat: sky
+    place: { zh: 皇家山，落日尚高, en: "Mount Royal, before sunset", fr: "Mont Royal, avant le coucher du soleil" }
+    date: "2020.05"

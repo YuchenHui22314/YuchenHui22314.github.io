@@ -16,7 +16,7 @@ advisor:
     en: Prof. Jian-Yun Nie
     zh: 聂建云教授
     fr: Pr Jian-Yun Nie
-  url: https://recherche.umontreal.ca/english/our-researchers/professors-directory/researcher/is/in14444/
+  url: https://scholar.google.com/citations?user=W7uYg0UAAAAJ
 avatar: img/headshot.jpg
 # Written out by the page script so that the address is not in the HTML as plain text.
 email:
@@ -43,16 +43,17 @@ education:
     school: Université de Montréal
     current: true
   - degree:
-      en: M.Sc. in Computer Science
-      zh: 计算机科学硕士
-      fr: Maîtrise en informatique
+      en: M.Sc. in Computer Science (Artificial Intelligence)
+      zh: 计算机科学（人工智能）硕士
+      fr: Maîtrise en informatique (intelligence artificielle)
     school: Université de Montréal
     year: 2025
   - degree:
-      en: B.Sc. in Computer Science and Artificial Intelligence
-      zh: 计算机科学与人工智能学士
-      fr: Baccalauréat en informatique et intelligence artificielle
+      en: B.Sc. in Computer Science
+      zh: 计算机科学学士
+      fr: Baccalauréat en informatique
     school: Université de Montréal
+    year: 2023
 links:
   - name: Google Scholar
     url: https://scholar.google.ca/citations?user=_fiTdwUAAAAJ&hl=en

@@ -1,0 +1,38 @@
+{{- $p := .page -}}
+{{- $lang := site.Language.Lang -}}
+{{- $pr := site.Data.profile -}}
+{{- $name := index $pr.name $lang -}}
+{{ partial "band.html" (dict "page" $p "key" .key "glyph" "about" "title" $p.Title
+    "eyebrow" (T "other_about") "desc" $p.Description "meta" (T "meta_about")) }}
+<div class="sheet">
+  {{- with $p.Description }}<p class="sheet-desc">{{ . }}</p>{{ end }}
+  <div class="res">
+    <aside>
+      {{- with resources.Get $pr.avatar }}{{ with .Fill "480x600 webp q82" }}
+      <figure class="portrait" style="margin:0"><img src="{{ .RelPermalink }}" width="240" height="300" alt="{{ $name }}"><span class="corner" style="left:-8px;top:-8px"></span><figcaption>{{ $name }}</figcaption></figure>
+      {{- end }}{{ end }}
+      <dl class="facts">
+        <div><dt>{{ T "facts_position" }}</dt><dd>{{ index $pr.position $lang }}</dd></div>
+        <div><dt>{{ T "facts_lab" }}</dt><dd>{{ index $pr.affiliation $lang }}</dd></div>
+        <div><dt>{{ T "facts_advisor" }}</dt><dd><a href="{{ $pr.advisor.url }}" target="_blank" rel="noopener">{{ index $pr.advisor.name $lang }}</a></dd></div>
+        <div><dt>{{ T "facts_languages" }}</dt><dd>中文 · English · Français</dd></div>
+        <div><dt>{{ T "facts_email" }}</dt><dd>{{ $pr.email.user }} [at] {{ $pr.email.domain }}<button type="button" class="copy" data-act="copy-mail" data-user="{{ $pr.email.user }}" data-domain="{{ $pr.email.domain }}">{{ T "copy" }}</button></dd></div>
+      </dl>
+    </aside>
+    <div class="prose">
+      {{ $p.Content }}
+      <h2 class="sec-h">{{ T "edu_h" }}</h2>
+      <ul class="edu">
+        {{- range $pr.education }}
+        <li><time>{{ with .year }}{{ . }}{{ else }}{{ if .current }}{{ T "edu_now" }}{{ end }}{{ end }}</time><span><b>{{ index .degree $lang }}</b><br><span class="muted">{{ .school }}</span></span></li>
+        {{- end }}
+      </ul>
+      {{- with site.Data.news }}
+      <h2 class="sec-h">{{ T "news_h" }}</h2>
+      <ul class="news">
+        {{- range . }}<li><time>{{ .date }}</time><span>{{ index .text $lang | markdownify }}</span></li>{{ end }}
+      </ul>
+      {{- end }}
+    </div>
+  </div>
+</div>
