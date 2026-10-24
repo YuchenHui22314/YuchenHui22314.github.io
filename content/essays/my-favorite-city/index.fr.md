@@ -2,12 +2,15 @@
 title: "Quelle ville sur Terre est ma préférée ?"
 description: "Devinez laquelle ?"
 slug: "my-favorite-city"
-date: 2026-01-02
-weight: 3
+date: 2020-01-01
 image: "nanjing.png"
 dateline: "Texte achevé en 2020, en réponse à une question posée par CS dans ma boîte à questions"
 tags:
   - "émotions"
+written: "2020"
+feature: "torn"
+kicker: "Une question de la boîte à questions"
+excerpt: "« Quelle ville sur Terre est ma préférée ? » Je repose mon téléphone, ferme doucement les yeux et m’interroge. Puisqu’il s’agit d’aimer, il faut écouter sa première impression."
 ---
 « Quelle ville sur Terre est ma préférée ? » Je repose mon téléphone, ferme doucement les yeux et m’interroge. Puisqu’il s’agit d’aimer, il faut écouter sa première impression. J’essaie de me fondre dans l’obscurité de la chambre, pour mieux saisir les images qui remontent du fond de ma mémoire. Peu à peu, sur le rideau noir, apparaît une rue aux teintes surtout grises et vertes : le gris, c’est la chaussée d’asphalte à deux fois trois voies et la piste cyclable qui la longe ; le vert, ce sont les métaséquoias qui poussent sur le terre-plein. En cet instant, je me tiens sur le trottoir, au même niveau que la piste cyclable ; les dalles sous mes pieds font environ cinquante centimètres de côté, et leur texture comme leur couleur rappellent à s’y méprendre le granite poli de Minecraft. Ces dalles ne touchent pas directement l’asphalte de la piste cyclable : une bande de carreaux gris, polis et lisses, dessine le contour de leur frontière. Je lève les yeux du sol pour regarder droit devant moi, vers le bout de cette avenue ombragée — les métaséquoias serrés sur sa gauche et les immeubles bas sur sa droite semblent se prolonger jusqu’à l’horizon lointain, se rapprochant l’un de l’autre, et composent une parfaite leçon de perspective. Sous les rafales hurlantes du vent du nord, les métaséquoias ploient et se couchent comme des dominos, mais personne ne peut voir où est tombé le premier domino — le bout de la route semble être la source même de ce vent du nord, tout ce qui fait ma vie.
 

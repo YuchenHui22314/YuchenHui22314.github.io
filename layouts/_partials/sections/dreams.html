@@ -1,0 +1,40 @@
+{{- $dreams := sort .RegularPages "Date" "desc" -}}
+{{- /* One ring per year, from the first dream to this year; later years sit further in. */ -}}
+{{- $years := slice now.Year }}{{ range $dreams }}{{ $years = $years | append .Date.Year }}{{ end -}}
+{{- $years = sort (uniq $years) -}}
+{{- $step := 40.0 }}{{ if gt (len $years) 2 }}{{ $step = div 80.0 (sub (len $years) 1) }}{{ end -}}
+{{- $ring := dict }}{{ range $i, $y := $years }}{{ $ring = merge $ring (dict (string $y) (sub 120.0 (mul $i $step))) }}{{ end -}}
+<div class="dreams">
+  <figure style="margin:0">
+    <svg class="chart" viewBox="-220 -220 440 440" role="img" aria-label="{{ T "dream_cap" }}" style="color:var(--n-ink)">
+      {{ partial "deco/chart-frame.html" (split (T "months") " ") }}
+      {{- range $y, $r := $ring }}
+      <circle class="ring y" r="{{ $r }}"/><text x="4" y="{{ sub -2 $r }}" text-anchor="start">{{ $y }}</text>
+      {{- end }}
+      {{- range $dreams }}
+        {{- $r := index $ring (string .Date.Year) -}}
+        {{- $a := sub (div (mul (float .Date.YearDay) (mul 2 math.Pi)) 365.0) (div math.Pi 2) -}}
+      <a href="{{ .RelPermalink }}" class="dream-star" aria-label="{{ .Title }}">
+        <g transform="translate({{ printf "%.1f" (mul (math.Cos $a) $r) }} {{ printf "%.1f" (mul (math.Sin $a) $r) }})">
+          <circle r="16" fill="var(--gold)" opacity=".18"/>
+          <path d="M0-11C.7-3 3-.7 11 0 3 .7.7 3 0 11-.7 3-3 .7-11 0-3-.7-.7-3 0-11z"/>
+          <text x="16" y="-10" text-anchor="start" style="fill:var(--n-ink)">{{ .Date.Format "1.2" }}{{ with .Params.tags }} · {{ index . 0 }}{{ end }}</text>
+        </g>
+      </a>
+      {{- end }}
+    </svg>
+    <figcaption class="chart-cap">{{ T "dream_cap" }}</figcaption>
+  </figure>
+  <div>
+    <h2 class="sec-h">{{ T "dreams_h" }}</h2>
+    <div class="dlist">
+      {{- range $dreams }}
+      <a class="dentry" href="{{ .RelPermalink }}">
+        <span class="dd">{{ .Date.Format "02" }}<small>{{ .Date.Format "2006 · 01" }}</small></span>
+        <span><b>{{ .Title }}</b><p>{{ .Description }}</p>{{ range .Params.tags }}<span class="chip">{{ . }}</span>{{ end }}</span>
+      </a>
+      {{- end }}
+      <p class="dempty">{{ T "dreams_empty" }}</p>
+    </div>
+  </div>
+</div>

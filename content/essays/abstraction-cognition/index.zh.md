@@ -2,12 +2,12 @@
 title: "L'Abstraction, c'est la Cognition"
 description: "献给我即将开始的博士生活"
 slug: "abstraction-cognition"
-date: 2026-01-02
-weight: 2
+date: 2025-02-05
 image: "lighthouse.jpg"
 dateline: "本文完稿于2025年2月初"
 tags:
   - "哲思"
+written: "2025.02"
 ---
 一直想写写这几年学习中的一些感想，最近总算是有时间了 。从上大学后第一缕缥缈思绪的出现说起吧。大一的上学期，由于本校的数电老师讲的太烂，我在 b 站上找了一个清华王红老师讲的数字电路课程。直到今天，我仍然认为这是我看过的最有逻辑最能抓住主线的教学。这门课的主要逻辑在于，计算机的 CPU 是一个很复杂的系统，而理解这样的复杂系统就需要掌握“抽象”（abstraction）的能力。正如我之后基本通读过的另一本非常棒的教材所说，
 

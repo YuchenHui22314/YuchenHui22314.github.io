@@ -1,0 +1,52 @@
+{{ define "card" }}
+{{- $lang := site.Language.Lang -}}
+{{- $p := site.Data.profile -}}
+{{- $name := index $p.name $lang -}}
+{{- $alt := cond (eq $lang "zh") (index $p.name "en") (index $p.name "zh") -}}
+<article class="card home intro" id="card" data-sticker="on">
+  {{ partial "deco.html" "home" }}
+  {{ partial "nav.html" . }}
+  <div class="hero-name">
+    <p class="eyebrow">{{ T "hero_eyebrow" }}</p>
+    <h1><span class="nm">{{ $name }}</span><span class="seal" aria-hidden="true">语辰</span></h1>
+    <p class="alt">{{ $alt }}</p>
+    <div class="sub">
+      <b><i class="udem" aria-hidden="true"></i>{{ T "hero_sub1" }}</b>
+      <span>{{ partial "icon.html" "star" }}{{ T "hero_sub2" }}</span>
+    </div>
+    <p class="line">{{ T "hero_line" }}</p>
+    <div class="ctas">
+      {{- with site.GetPage "/research" }}<a class="pill" href="{{ .RelPermalink }}">{{ T "hero_cta" }} {{ partial "icon.html" "arrow" }}</a>{{ end }}
+      {{- with site.GetPage "/ask" }}<a class="textlink" href="{{ .RelPermalink }}">{{ T "hero_ask" }}</a>{{ end }}
+    </div>
+    <figure class="hero-map" id="hero-map">
+      <div class="map-ink"></div>
+      <svg class="map-arc" viewBox="0 0 874 474" preserveAspectRatio="none" aria-hidden="true"><path d="M410 168C520 20 690 0 795 98"/></svg>
+      <span class="pin" style="left:46.9%;top:35.4%"><span>{{ T "pin_nanjing" }}</span></span>
+      <span class="pin r" style="left:91%;top:20.7%"><span>{{ T "pin_montreal" }}</span></span>
+      <figcaption>{{ T "map_caption" }}</figcaption>
+    </figure>
+  </div>
+  {{ partial "figures.html" . }}
+  <aside class="hero-note">
+    <div class="lbl">{{ T "now_h" }}</div>
+    <p>{{ T "now_text" }}</p>
+    {{- with first 1 (sort (where site.RegularPages "Section" "essays") "Date" "desc") }}{{ range . }}
+    <a class="row" href="{{ .RelPermalink }}"><span class="k">{{ T "row_essay" }}</span><span class="t">{{ .Title }}</span><span class="d">{{ partial "written.html" . }}</span></a>
+    {{- end }}{{ end }}
+    {{- with first 1 (sort (where site.RegularPages "Section" "dreams") "Date" "desc") }}{{ range . }}
+    <a class="row" href="{{ .RelPermalink }}"><span class="k">{{ T "row_dream" }}</span><span class="t">{{ .Title }}</span><span class="d">{{ .Date.Format "2006.01" }}</span></a>
+    {{- end }}{{ end }}
+    {{- with site.GetPage "/ask" }}
+    <a class="row" href="{{ .RelPermalink }}"><span class="k">{{ T "row_ask" }}</span><span class="t">{{ T "row_ask_text" }}</span><span class="d"></span></a>
+    {{- end }}
+  </aside>
+  <div class="hero-foot">
+    {{ partial "social.html" . }}
+    <span class="coord">{{ T "coord" }}
+      {{- if resources.Match "img/figures/*" }}{{ with site.Params.figures.credit }}<br><a class="credit" href="{{ .url }}" target="_blank" rel="noopener">{{ T "illustrations" }} {{ .name }}</a>{{ end }}{{ end -}}
+      <br><span class="mc-credit">{{ T "mc_credit" }}</span>
+    </span>
+  </div>
+</article>
+{{ end }}

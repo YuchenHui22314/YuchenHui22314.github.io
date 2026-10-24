@@ -1,0 +1,8 @@
+<footer class="card-foot">
+  {{ partial "deco/scape.html" . }}
+  <div class="in">
+    {{ partial "social.html" . }}
+    <small>{{ T "foot" }}{{ with site.GetPage "/essays" }} · <a href="{{ .RelPermalink }}">{{ T "all_essays" }}</a>{{ end }}{{ with site.Home.OutputFormats.Get "rss" }} · <a href="{{ .RelPermalink }}">RSS</a>{{ end }}</small>
+    <small>{{ T "coord" }}<br>{{ T "mc_credit" }}</small>
+  </div>
+</footer>

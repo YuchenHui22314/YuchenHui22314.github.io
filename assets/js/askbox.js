@@ -1,231 +1,234 @@
-// 提问箱 / Q&A box widget. Talks to ask-api (see ask-api/README.md).
-// User-written text is only ever inserted with textContent.
+// 提问箱 / Q&A box, drawn as a postcard to write on and letters going back and forth.
+// Talks to ask-api (see ask-api/README.md). User-written text is only inserted with textContent.
 import { el, createApi, fmtDate } from './askbox-common.js';
 
 const STORE_KEY = 'askbox:mine';
 const PAGE_SIZE = 10;
+const BADMINTON = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 14.2 5 3.5h14l-3.6 10.7"/><path d="M10 3.5l.9 10.7M14 3.5l-.9 10.7M6.3 7.5h11.4M7.4 10.9h9.2"/><path d="M8.6 14.2h6.8v1.3a3.4 3.4 0 0 1-6.8 0z" fill="currentColor"/></svg>';
+const ARROW = '<svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M0 5h15M11 1l4 4-4 4"/></svg>';
 
 const root = document.querySelector('[data-askbox]');
 if (root) init(root);
+
+function svg(markup) {
+  const t = document.createElement('template');
+  t.innerHTML = markup;
+  return t.content.firstChild;
+}
+
+function postmark(top, date) {
+  return svg(`<svg class="pmark" viewBox="0 0 120 72" aria-hidden="true"><defs><path id="pm-ask" d="M18 36a24 24 0 1 1 48 0a24 24 0 1 1 -48 0"/></defs><g fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="42" cy="36" r="30"/><circle cx="42" cy="36" r="20"/><path d="M76 22c8-4 14 4 22 0s14 4 22 0M76 36c8-4 14 4 22 0s14 4 22 0M76 50c8-4 14 4 22 0s14 4 22 0"/></g><text fill="currentColor" font-family="Jost,sans-serif" font-size="7" letter-spacing="1.6"><textPath href="#pm-ask">${top}</textPath></text><text x="42" y="39" fill="currentColor" font-family="Jost,sans-serif" font-size="7.5" text-anchor="middle" letter-spacing=".5">${date}</text></svg>`);
+}
 
 function init(root) {
   const cfg = JSON.parse(root.dataset.config);
   const t = (key, n) => (cfg.strings[key] ?? key).replace('{n}', n ?? '');
 
   if (!cfg.api) {
-    root.replaceChildren(el('p', { class: 'askbox-notice' }, t('not_open')));
+    root.replaceChildren(el('p', { class: 'askbox-status' }, t('not_open')));
     return;
   }
 
   const api = createApi(cfg.api);
   importFromHash();
 
-  // ---------- layout ----------
+  // ---------- the postcard ----------
+  const textarea = el('textarea', { placeholder: t('placeholder'), 'aria-label': t('placeholder') });
+  const count = el('div', { class: 'cnt' });
+  const honeypot = el('input', { type: 'text', name: 'website', tabindex: '-1', autocomplete: 'off', class: 'askbox-hp', 'aria-hidden': 'true' });
+  const slot = cfg.turnstileSiteKey ? el('div', { class: 'askbox-captcha' }) : null;
+  const widget = slot ? turnstile(cfg.turnstileSiteKey, slot) : null;
+  const send = el('button', { type: 'submit', class: 'btn' }, t('send'), ' ', svg(ARROW));
+  const status = el('p', { class: 'askbox-status', role: 'status', 'aria-live': 'polite' });
   const notice = el('div', { class: 'askbox-notice', hidden: true });
-  const mineList = el('div', { class: 'askbox-list' });
-  const mineSection = el('section', { class: 'askbox-section askbox-mine', hidden: true },
-    el('h2', { class: 'askbox-heading' }, t('mine_title')),
-    el('p', { class: 'askbox-muted' }, t('mine_hint')),
-    mineList);
-  const publicList = el('div', { class: 'askbox-list' });
-  const count = el('span', { class: 'askbox-count' });
-  const loadMore = el('button', { type: 'button', class: 'askbox-button askbox-button--ghost', hidden: true, onclick: () => loadPublic(false) }, t('load_more'));
-  const publicSection = el('section', { class: 'askbox-section' },
-    el('h2', { class: 'askbox-heading' }, t('answered_title'), ' ', count),
-    publicList,
-    el('div', { class: 'askbox-more' }, loadMore));
+  const stamp = el('div', { class: 'pstamp' }, el('div', { class: 'ill', style: 'color:var(--card-red)' }, svg(BADMINTON)));
+  const pc = el('div', { class: 'pc' },
+    el('div', { class: 'l' }, textarea, count),
+    el('div', { class: 'r' }, stamp,
+      el('div', { class: 'addr' },
+        el('span', {}, t('to')), el('b', {}, t('to_name')), el('b', { style: 'font-size:19px' }, t('to_addr')),
+        el('span', { style: 'margin-top:10px' }, t('from')), el('b', {}, t('from_name')))),
+    postmark('MONTRÉAL · QC · CANADA · ', String(new Date().getFullYear())));
+  const form = el('form', { class: 'compose', novalidate: true },
+    pc, honeypot, slot,
+    el('div', { class: 'send-row' }, el('p', {}, t('note')), send),
+    status, notice);
 
-  const ask = composer({
-    placeholder: t('placeholder'),
-    rows: 4,
-    captcha: true,
-    onSubmit: async ({ text, website, captchaToken }) => {
+  const updateCount = () => {
+    const left = cfg.maxChars - [...textarea.value].length;
+    count.textContent = t('char_count', left);
+    count.style.color = left < 0 ? 'var(--card-red)' : '';
+    send.disabled = left < 0;
+  };
+  textarea.addEventListener('input', updateCount);
+  updateCount();
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = textarea.value.trim();
+    status.classList.remove('is-error');
+    if (!text) { status.textContent = t('error_empty'); status.classList.add('is-error'); textarea.focus(); return; }
+    send.disabled = true;
+    status.textContent = t('sending');
+    try {
       const data = await api('POST', '/api/threads', {
-        body: { body: text, lang: cfg.lang, website, turnstileToken: captchaToken },
+        body: { body: text, lang: cfg.lang, website: honeypot.value, turnstileToken: widget?.token() },
       });
       remember(data.thread.id, data.askerToken);
+      textarea.value = '';
+      status.textContent = '';
       showSent(data.thread.id, data.askerToken);
       await refreshMine();
-    },
+    } catch (err) {
+      status.textContent = errorText(err);
+      status.classList.add('is-error');
+    } finally {
+      widget?.reset();
+      updateCount();
+    }
   });
 
-  root.replaceChildren(
-    el('section', { class: 'askbox-section askbox-ask' }, ask.form, el('p', { class: 'askbox-muted' }, t('note'))),
-    notice,
-    mineSection,
-    publicSection,
-  );
+  // ---------- letters you sent ----------
+  const mineList = el('div', { class: 'mine' });
+  const mineAside = el('aside', { hidden: true },
+    el('h2', { class: 'sec-h' }, t('mine_title')),
+    mineList,
+    el('p', { class: 'muted', style: 'margin:14px 0 0;font-size:13.5px' }, t('mine_hint')));
+
+  // ---------- answered letters ----------
+  const total = el('span', { class: 'count' });
+  const list = el('div', { class: 'thread-list', style: 'display:grid;gap:44px' });
+  const more = el('button', { type: 'button', class: 'btn ghost', hidden: true }, t('load_more'));
+  more.addEventListener('click', () => loadPublic(false));
+  const threads = el('section', { class: 'threads' },
+    el('h2', { class: 'sec-h' }, t('answered_title'), ' ', total),
+    list,
+    el('div', { class: 'more-row' }, more));
+
+  root.replaceChildren(el('div', { class: 'ask-grid' }, form, mineAside), threads);
 
   let cursor = null;
   refreshMine();
   loadPublic(true);
 
-  // ---------- data ----------
   async function loadPublic(reset) {
     const qs = new URLSearchParams({ limit: String(PAGE_SIZE) });
     if (cursor && !reset) qs.set('cursor', cursor);
-    loadMore.disabled = true;
+    more.disabled = true;
     try {
       const data = await api('GET', `/api/threads?${qs}`);
-      if (reset) publicList.replaceChildren();
-      for (const thread of data.threads) publicList.append(renderThread(thread, false));
-      if (!publicList.children.length) publicList.append(el('p', { class: 'askbox-muted' }, t('empty')));
-      count.textContent = data.total ? t('total', data.total) : '';
+      if (reset) list.replaceChildren();
+      for (const thread of data.threads) list.append(letters(thread, true));
+      if (!list.children.length) list.append(el('p', { class: 'muted' }, t('empty')));
+      total.textContent = data.total ? t('total', data.total) : '';
       cursor = data.nextCursor;
-      loadMore.hidden = !cursor;
+      more.hidden = !cursor;
       scrollToHash();
     } catch (err) {
-      publicList.append(el('p', { class: 'askbox-status is-error' }, errorText(err)));
+      list.append(el('p', { class: 'askbox-status is-error' }, errorText(err)));
     } finally {
-      loadMore.disabled = false;
+      more.disabled = false;
     }
   }
 
   async function refreshMine() {
     const items = loadMine();
-    if (!items.length) {
-      mineSection.hidden = true;
-      return;
-    }
+    if (!items.length) { mineAside.hidden = true; return; }
     try {
-      const { threads } = await api('POST', '/api/threads/lookup', { body: { items } });
-      // Forget threads the owner deleted.
-      saveMine(items.filter((i) => threads.some((th) => th.id === i.id)));
-      mineList.replaceChildren(...threads.map((th) => renderThread(th, true)));
-      mineSection.hidden = !threads.length;
+      const { threads: mine } = await api('POST', '/api/threads/lookup', { body: { items } });
+      saveMine(items.filter((i) => mine.some((th) => th.id === i.id)));
+      mineList.replaceChildren(...mine.map(mineItem));
+      mineAside.hidden = !mine.length;
     } catch (err) {
       mineList.replaceChildren(el('p', { class: 'askbox-status is-error' }, errorText(err)));
-      mineSection.hidden = false;
+      mineAside.hidden = false;
     }
   }
 
-  // ---------- rendering ----------
-  function renderThread(thread, mine) {
-    const messages = thread.messages;
-    const firstReply = messages.findIndex((m) => m.author === 'owner');
-    const foldAt = firstReply === -1 ? messages.length : firstReply + 1;
-    const foldable = messages.length > foldAt;
-    let expanded = mine || !foldable;
+  // One letter per message: questions on plain paper, replies on ruled paper with the seal.
+  function letter(m) {
+    const owner = m.author === 'owner';
+    return el('div', { class: `lt ${owner ? 'a' : 'q'}` },
+      el('div', { class: 'who' },
+        el('span', {}, owner ? t('role_owner') : t('role_asker')),
+        el('span', {}, fmtDate(m.createdAt, cfg.locale) + (m.edited ? ` · ${t('edited')}` : ''))),
+      el('div', { class: 'txt' }, m.body),
+      owner ? el('div', { class: 'sig' }, el('span', { class: 'seal' }, '语辰')) : null);
+  }
 
-    const list = el('div', { class: 'askbox-messages' });
-    const toggle = el('button', {
-      type: 'button',
-      class: 'askbox-toggle',
-      onclick: () => {
-        expanded = !expanded;
-        draw();
-      },
+  // A public thread: the question and the first reply, the rest folded away.
+  function letters(thread, foldable) {
+    const msgs = thread.messages;
+    const firstReply = msgs.findIndex((m) => m.author === 'owner');
+    const foldAt = firstReply === -1 ? msgs.length : firstReply + 1;
+    const box = el('div', { class: 'thread', id: `q-${thread.id}` });
+    msgs.forEach((m, i) => {
+      const node = letter(m);
+      if (foldable && i >= foldAt) node.classList.add('f');
+      box.append(node);
     });
-    function draw() {
-      list.replaceChildren(...(expanded ? messages : messages.slice(0, foldAt)).map(renderMessage));
-      toggle.hidden = !foldable;
-      toggle.textContent = expanded ? t('fold') : t('unfold', messages.length);
-      toggle.setAttribute('aria-expanded', String(expanded));
+    if (foldable && msgs.length > foldAt) {
+      const btn = el('button', { type: 'button', class: 'unfold', 'aria-expanded': 'false' }, t('unfold_letters', msgs.length));
+      btn.addEventListener('click', () => {
+        const open = box.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.textContent = open ? t('fold') : t('unfold_letters', msgs.length);
+      });
+      box.append(btn);
     }
-    draw();
-
-    const meta = el('div', { class: 'askbox-thread-meta' },
-      el('time', { datetime: new Date(thread.createdAt).toISOString() }, fmtDate(thread.createdAt, cfg.locale)));
-    if (mine && thread.awaitingReply) meta.append(el('span', { class: 'askbox-badge' }, t('awaiting')));
-    if (mine) {
-      const token = tokenFor(thread.id);
-      const copyLink = el('button', { type: 'button', class: 'askbox-linkbtn' }, t('copy_link'));
-      copyLink.addEventListener('click', () => copyText(privateLink(thread.id, token), copyLink));
-      meta.append(copyLink);
-    }
-
-    const article = el('article', { class: 'askbox-thread', id: mine ? null : `q-${thread.id}` }, meta, list, toggle);
-    if (mine) {
-      if (thread.closed || thread.hidden) article.append(el('p', { class: 'askbox-muted' }, t('closed')));
-      else article.append(followUp(thread).form);
-    }
-    return article;
+    return box;
   }
 
-  function renderMessage(m) {
-    const who = m.author === 'owner' ? cfg.ownerName : t('role_asker');
-    return el('div', { class: `askbox-msg askbox-msg--${m.author}` },
-      el('div', { class: 'askbox-msg-head' },
-        el('span', { class: 'askbox-msg-who' }, who),
-        el('time', { datetime: new Date(m.createdAt).toISOString() }, fmtDate(m.createdAt, cfg.locale)),
-        m.edited ? el('span', { class: 'askbox-muted' }, t('edited')) : null),
-      el('div', { class: 'askbox-msg-body' }, m.body));
+  // Your own question: its status, the conversation so far, and a way to write back.
+  function mineItem(thread) {
+    const [first, ...rest] = thread.messages;
+    const st = el('div', { class: `st${thread.awaitingReply ? '' : ' done'}` }, el('i'), thread.awaitingReply ? t('awaiting') : t('answered_mark'));
+    const it = el('div', { class: 'it' }, st, el('p', { class: 'q txt' }, first.body));
+    if (rest.length) it.append(el('div', { class: 'conv' }, rest.map(letter)));
+    if (thread.closed || thread.hidden) {
+      it.append(el('p', { class: 'muted', style: 'margin:8px 0 0;font-size:13.5px' }, t('closed')));
+    } else if (!thread.awaitingReply) {
+      it.append(followUp(thread));
+    }
+    const copy = el('button', { type: 'button', class: 'copy' }, t('copy_link'));
+    copy.addEventListener('click', () => copyText(privateLink(thread.id, tokenFor(thread.id)), copy));
+    it.append(el('div', { style: 'margin-top:8px' }, copy));
+    return it;
   }
 
   function followUp(thread) {
-    return composer({
-      placeholder: t('followup_placeholder'),
-      rows: 2,
-      onSubmit: async ({ text, website }) => {
-        await api('POST', `/api/threads/${thread.id}/messages`, {
-          body: { body: text, website },
-          token: tokenFor(thread.id),
-        });
+    const box = el('textarea', { placeholder: t('followup_placeholder'), 'aria-label': t('followup_placeholder') });
+    const go = el('button', { type: 'submit', class: 'btn', style: 'height:34px;padding:0 16px' }, t('submit'));
+    const note = el('span', { role: 'status' });
+    const f = el('form', { class: 'followup', novalidate: true }, box, el('div', { class: 'row' }, note, go));
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = box.value.trim();
+      if (!text) { note.textContent = t('error_empty'); return; }
+      go.disabled = true;
+      note.textContent = t('sending');
+      try {
+        await api('POST', `/api/threads/${thread.id}/messages`, { body: { body: text }, token: tokenFor(thread.id) });
         await refreshMine();
-      },
+      } catch (err) {
+        note.textContent = errorText(err);
+        go.disabled = false;
+      }
     });
+    return f;
   }
 
   function showSent(id, token) {
     const link = privateLink(id, token);
-    const input = el('input', { class: 'askbox-link', readonly: true, value: link });
+    const input = el('input', { class: 'askbox-link', readonly: true, value: link, 'aria-label': t('copy_link') });
     input.addEventListener('focus', () => input.select());
-    const copy = el('button', { type: 'button', class: 'askbox-button askbox-button--ghost' }, t('copy'));
+    const copy = el('button', { type: 'button', class: 'btn ghost' }, t('copy'));
     copy.addEventListener('click', () => copyText(link, copy, input));
     notice.replaceChildren(
-      el('p', { class: 'askbox-notice-title' }, t('sent')),
-      el('p', { class: 'askbox-muted' }, t('private_link')),
+      el('p', {}, el('b', {}, t('sent'))),
+      el('p', { class: 'muted' }, t('private_link')),
       el('div', { class: 'askbox-link-row' }, input, copy));
     notice.hidden = false;
-  }
-
-  // A textarea + send button with a live character counter, honeypot and optional captcha.
-  function composer({ placeholder, rows, captcha, onSubmit }) {
-    const textarea = el('textarea', { class: 'askbox-input', rows, placeholder, 'aria-label': placeholder });
-    const honeypot = el('input', { type: 'text', name: 'website', tabindex: '-1', autocomplete: 'off', class: 'askbox-hp', 'aria-hidden': 'true' });
-    const counter = el('span', { class: 'askbox-counter' });
-    const button = el('button', { type: 'submit', class: 'askbox-button' }, t('submit'));
-    const status = el('p', { class: 'askbox-status', role: 'status', 'aria-live': 'polite' });
-    const slot = captcha && cfg.turnstileSiteKey ? el('div', { class: 'askbox-captcha' }) : null;
-    const widget = slot ? turnstile(cfg.turnstileSiteKey, slot) : null;
-
-    const update = () => {
-      const left = cfg.maxChars - [...textarea.value].length;
-      counter.textContent = t('char_count', left);
-      counter.classList.toggle('is-error', left < 0);
-      button.disabled = left < 0;
-    };
-    textarea.addEventListener('input', update);
-    update();
-
-    const form = el('form', { class: 'askbox-form', novalidate: true },
-      textarea, honeypot, slot,
-      el('div', { class: 'askbox-form-row' }, counter, button),
-      status);
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const text = textarea.value.trim();
-      status.classList.remove('is-error');
-      if (!text) {
-        status.textContent = t('error_empty');
-        status.classList.add('is-error');
-        return;
-      }
-      button.disabled = true;
-      status.textContent = t('sending');
-      try {
-        await onSubmit({ text, website: honeypot.value, captchaToken: widget?.token() });
-        textarea.value = '';
-        status.textContent = '';
-      } catch (err) {
-        status.textContent = errorText(err);
-        status.classList.add('is-error');
-      } finally {
-        widget?.reset();
-        update();
-      }
-    });
-    return { form };
   }
 
   function errorText(err) {
@@ -292,9 +295,9 @@ function importFromHash() {
 
 function scrollToHash() {
   const m = location.hash.match(/^#(q-[A-Za-z0-9]{6,32})$/);
-  const target = m && document.getElementById(m[1]);
+  const target = m ? document.getElementById(m[1]) : null;
   if (target) {
-    target.classList.add('is-highlighted');
+    target.classList.add('open');
     target.scrollIntoView({ block: 'center' });
   }
 }

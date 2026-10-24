@@ -41,6 +41,7 @@ education:
       zh: 计算机科学博士
       fr: Doctorat en informatique
     school: Université de Montréal
+    current: true
   - degree:
       en: M.Sc. in Computer Science
       zh: 计算机科学硕士

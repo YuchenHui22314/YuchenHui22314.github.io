@@ -2,13 +2,13 @@
 title: "La paix | 和解"
 description: "Peace is all you need"
 slug: "la-paix"
-date: 2026-01-02
-weight: 4
+date: 2023-11-01
 image: "walking.jpg"
 dateline: "写于2023年秋冬"
 tags:
   - "情感"
   - "芭蕾"
+written: "2023"
 ---
 有时
 

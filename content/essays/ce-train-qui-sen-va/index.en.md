@@ -2,14 +2,14 @@
 title: "Ce train qui s'en va"
 description: "Wait for the wind, then on to the next stop"
 slug: "ce-train-qui-sen-va"
-date: 2026-01-02
-weight: 10002
+date: 2023-02-01
 image: "ice.jpg"
 aliases:
   - "/p/ce-train-qui-sen-va/"
 dateline: "Written in early 2023"
 tags:
   - "emotion"
+written: "2023"
 ---
 On the metro, I like to prop my elbow on the window ledge, rest my head against my fist, and let my whole body lean sideways against the wall of the car. In this position my body goes completely loose, and all my senses are free to take in everything around me.
 

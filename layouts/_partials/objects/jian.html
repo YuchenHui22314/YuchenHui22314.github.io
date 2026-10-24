@@ -1,0 +1,20 @@
+{{- /* An essay on red-ruled letter paper (笺纸): set vertically in Chinese, with a vertical
+       Chinese title beside horizontal text in the other languages. */ -}}
+<a class="obj o-jian" href="{{ .RelPermalink }}">
+  <span class="obj-bg"></span>
+  {{- if eq site.Language.Lang "zh" }}
+  <div class="vt">
+    <h3>{{ .Params.jianTitle | default .Title }}</h3>
+    {{- range .Params.jianLines }}<p style="margin:0">{{ . }}</p>{{ end }}
+    {{- with .Params.jianBy }}<p class="by" style="margin:0">{{ . }}</p>{{ end }}
+  </div>
+  {{- else }}
+  <div class="vcol" aria-hidden="true">{{ .Params.jianTitle }}</div>
+  <div class="ht">
+    <p class="o-kicker">{{ partial "written.html" . }}</p>
+    <h3>{{ .Params.shortTitle | default .Title }}</h3>
+    <p style="margin:0">{{ partial "excerpt.html" . }}</p>
+  </div>
+  {{- end }}
+  <span class="seal">语辰</span>
+</a>

@@ -1,0 +1,4 @@
+{{- /* Embed a Bilibili video: {{< bilibili "BV1Uz4y1E7PN" >}} (optional second argument: part number). */ -}}
+{{- $id := .Get 0 -}}
+{{- $part := .Get 1 | default 1 -}}
+<div class="video"><iframe src="https://player.bilibili.com/player.html?bvid={{ $id }}&page={{ $part }}&high_quality=1&danmaku=0&autoplay=0" title="Bilibili video" loading="lazy" allowfullscreen referrerpolicy="no-referrer"></iframe></div>

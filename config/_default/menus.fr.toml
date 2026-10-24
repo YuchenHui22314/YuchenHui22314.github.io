@@ -1,106 +1,36 @@
 [[main]]
-identifier = "home"
-name = "Accueil"
-pageRef = "/"
-weight = 1
-[main.params]
-icon = "home"
-
-[[main]]
 identifier = "research"
 name = "Recherche"
 pageRef = "/research"
-weight = 2
-[main.params]
-icon = "question_mark"
+weight = 1
 
 [[main]]
 identifier = "publications"
 name = "Publications"
 pageRef = "/publications"
-weight = 3
-[main.params]
-icon = "Google_Scholar_logo"
+weight = 2
 
 [[main]]
 identifier = "essays"
 name = "Essais"
 pageRef = "/essays"
-weight = 4
-[main.params]
-icon = "categories"
+weight = 3
 
 [[main]]
 identifier = "dreams"
-name = "Carnet de rêves"
+name = "Rêves"
 pageRef = "/dreams"
-weight = 5
-[main.params]
-icon = "infinity"
+weight = 4
 
 [[main]]
 identifier = "recipes"
 name = "Recettes"
 pageRef = "/recipes"
-weight = 6
-[main.params]
-icon = "tag"
+weight = 5
 
 [[main]]
 identifier = "ask"
 name = "Questions"
 pageRef = "/ask"
-weight = 7
-[main.params]
-icon = "messages"
+weight = 6
 
-[[main]]
-identifier = "search"
-name = "Rechercher"
-pageRef = "/search"
-weight = 8
-[main.params]
-icon = "search"
-
-[[main]]
-identifier = "archives"
-name = "Archives"
-pageRef = "/archives"
-weight = 9
-[main.params]
-icon = "archives"
-
-[[social]]
-identifier = "github"
-name = "GitHub"
-url = "https://github.com/YuchenHui22314"
-[social.params]
-icon = "brand-github"
-
-[[social]]
-identifier = "twitter"
-name = "Twitter"
-url = "https://x.com/yuchen_xier"
-[social.params]
-icon = "brand-twitter"
-
-[[social]]
-identifier = "scholar"
-name = "Google Scholar"
-url = "https://scholar.google.ca/citations?user=_fiTdwUAAAAJ&hl=en"
-[social.params]
-icon = "Google_Scholar_logo"
-
-[[social]]
-identifier = "email"
-name = "Courriel"
-url = "mailto:yuchen.hui@umontreal.ca"
-[social.params]
-icon = "mail_icon"
-
-[[social]]
-identifier = "linkedin"
-name = "LinkedIn"
-url = "https://www.linkedin.com/in/yuchen-hui-179303251/"
-[social.params]
-icon = "linkedin"

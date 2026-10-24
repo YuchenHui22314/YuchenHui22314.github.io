@@ -1,3 +1,8 @@
 public
 resources
 .hugo_build.lock
+
+# Character art by bj1034 (pixiv). Kept local until the artist agrees to its use on the site;
+# delete this line to publish it.
+assets/img/figures/
+node_modules/

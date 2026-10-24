@@ -2,8 +2,7 @@
 title: "A Journey Through Hebei"
 description: "So close, so beautiful: holidays in Hebei."
 slug: "hebei-journey"
-date: 2026-01-02
-weight: 4
+date: 2026-01-15
 image: "hebei_assets/media/image7.png"
 aliases:
   - "/p/hebei-journey/"
@@ -11,6 +10,11 @@ dateline: "Written piecemeal, finished in January 2026"
 tags:
   - "travel"
   - "emotion"
+written: "2026.01"
+feature: "map"
+kicker: "Travel"
+excerpt: "Last summer I went back to China for a little over three months, and my mom and I drove back to our family’s hometown in Hebei. There were moments full of laughter, and swells of emotion that brought me to tears."
+slip: {"lines":["I would climb the Taihang,","but snow fills the mountains."],"by":"Li Bai, “Hard Is the Road”"}
 ---
 > Last summer I went back to China for a little over three months of vacation, and during that time my mom and I drove back to our family’s hometown in Hebei. Along the way there were moments full of laughter, and there were swells of emotion that brought me to tears. If my memory were a snow-white canvas, these moments would be the thick, bold strokes of ink and color splashed across it, some bright, others somber, and when I savor them again now, the aftertaste is still a tangle of sweet and bitter. Having stumbled on a bit of free time lately, I wanted to set all these feelings down in words, so that even if I go senile someday, I can still travel back through them and feel the faintly humid air of that summer.
 

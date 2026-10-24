@@ -2,13 +2,13 @@
 title: "La paix"
 description: "Peace is all you need"
 slug: "la-paix"
-date: 2026-01-02
-weight: 4
+date: 2023-11-01
 image: "walking.jpg"
 dateline: "Écrit à l'automne et à l'hiver 2023"
 tags:
   - "émotions"
   - "ballet"
+written: "2023"
 ---
 Parfois
 

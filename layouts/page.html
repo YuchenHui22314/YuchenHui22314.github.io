@@ -1,0 +1,12 @@
+{{ define "card" }}
+{{- /* Essays, dreams and recipes use their section name; the other pages set `type` in front matter. */ -}}
+{{- $kind := .Type -}}
+{{- $deco := dict "essays" "essays" "dreams" "dreams" "recipes" "recipes" "research" "research" "publications" "publications" "ask" "ask" "ask-admin" "ask" -}}
+{{- $key := index $deco $kind | default "research" -}}
+{{- $tpl := cond (templates.Exists (printf "_partials/pages/%s.html" $kind)) $kind "plain" -}}
+<article class="card page" id="card" data-page="{{ $kind }}"{{ if eq $kind "dreams" }} data-scene="night"{{ end }}>
+  {{- if eq $kind "essays" }}<div class="progress" id="progress"></div>{{ end }}
+  {{ partial (printf "pages/%s.html" $tpl) (dict "page" . "key" $key) }}
+  {{ partial "foot.html" . }}
+</article>
+{{ end }}

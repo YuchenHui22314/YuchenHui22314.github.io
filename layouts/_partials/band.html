@@ -1,0 +1,23 @@
+{{- /* Top of every inner page: the diagonal, the navigation, the page title and a short note.
+       Args: page, key (deco set and glyph), title, eyebrow, crumb, desc, meta, moon. */ -}}
+<section class="band">
+  {{ partial "deco.html" .key }}
+  {{- if .moon }}
+  <svg class="moon" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="26" fill="currentColor" opacity=".9"/><circle cx="46" cy="27" r="24" fill="var(--L-bg)"/></svg>
+  {{- end }}
+  {{ partial "nav.html" .page }}
+  {{- /* Rough width in em: CJK characters are about 1em wide, Latin letters about half. */}}
+  {{- $cjk := len (findRE `[\p{Han}\p{Hiragana}\p{Katakana}，。？！：；、（）《》]` .title) }}
+  {{- $em := add (float $cjk) (mul 0.5 (sub (countrunes .title) $cjk)) }}
+  <div class="band-title{{ if gt $em 12.0 }} is-long{{ else if gt $em 9.0 }} is-mid{{ end }}">
+    {{- with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    <h1>{{ .title }}</h1>
+    {{- with .crumb }}<p class="crumb">{{ . }}</p>{{ end }}
+  </div>
+  <div class="band-desc">
+    <div class="glyph">{{ partial "icon.html" .glyph }}</div>
+    {{- with .desc }}<p>{{ . }}</p>{{ end }}
+    {{- with .meta }}<div class="meta">{{ . }}</div>{{ end }}
+  </div>
+  {{ partial (printf "deco/ridges-%s.html" .key) . }}
+</section>

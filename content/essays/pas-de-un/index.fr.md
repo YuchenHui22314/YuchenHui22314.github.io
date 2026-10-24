@@ -2,12 +2,16 @@
 title: "Pas d'un | Le printemps hésite"
 description: "L'âme grandit, trempée par le froid"
 slug: "pas-de-un"
-date: 2026-01-02
-weight: 6
+date: 2020-05-20
 image: "cover_pas_de_deux.png"
 dateline: "Texte achevé en mai 2020, pendant le confinement"
 tags:
   - "émotions"
+written: "2020.05"
+feature: "jian"
+excerpt: "Mai, à Montréal : la douceur pointe, le froid s’attarde. Au moment où je franchis le seuil, un filet d’air froid se glissa dans mon col."
+jianTitle: "乍暖还寒"
+shortTitle: "Le printemps hésite"
 ---
 Mai, à Montréal : la douceur pointe, le froid s’attarde. Le printemps du continent nord-américain a un caractère bien à lui : il n’a ni ces jours de « retour du vent du sud » où tout suinte d’humidité dans le Guangdong et le Guangxi, ni le froid humide du Jiangnan, ni la chaleur sèche de la Chine du Nord ; ni ce réchauffement fulgurant de la Sibérie et de l’Asie centrale, à vous mettre en sueur ; ni ces brumes douces et fraîches qui enveloppent l’Europe de l’Ouest et l’Europe centrale, nées de l’air chaud et humide que l’Atlantique y pousse sans rencontrer d’obstacle. Au moment où je franchis le seuil, un filet d’air froid se glissa dans mon col. Il me sembla voir, à des centaines de kilomètres de là, l’immense étendue blanche et indistincte des glaces de la baie d’Hudson, et entendre le vent du nord hurler encore, refusant de rendre les armes. Doudoune, pantalon matelassé : comparée à celle des grands froids d’il y a quelques mois, ma tenue ne comptait qu’un caleçon long de moins.
 

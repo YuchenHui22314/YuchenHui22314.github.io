@@ -1,0 +1,7 @@
+{{- /* Pages with no layout of their own (the Q&A box, its admin page). */ -}}
+{{- $p := .page -}}
+{{ partial "band.html" (dict "page" $p "key" .key "glyph" .key "title" $p.Title
+    "eyebrow" (T (printf "other_%s" .key)) "desc" $p.Description "meta" (T (printf "meta_%s" .key))) }}
+<div class="sheet">
+  <div class="prose page-body">{{ $p.Content }}</div>
+</div>

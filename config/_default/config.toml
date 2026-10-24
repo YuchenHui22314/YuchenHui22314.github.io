@@ -7,13 +7,21 @@ defaultContentLanguageInSubdir = false
 # Makes .Summary and .WordCount behave correctly for Chinese text.
 hasCJKLanguage = true
 
-disqusShortname = "none"
 enableRobotsTXT = true
+# Tags are shown on posts but get no pages of their own.
+disableKinds = ["taxonomy", "term"]
 
 # Top-level keys must stay above this line: in TOML, everything after a [table] header belongs to that table.
 
-[pagination]
-pagerSize = 5
+[outputs]
+home = ["html", "rss", "searchindex"]
+section = ["html", "rss"]
+
+[outputFormats.searchindex]
+mediaType = "application/json"
+baseName = "search"
+isPlainText = true
+notAlternative = true
 
 [caches]
   [caches.images]
@@ -26,3 +34,7 @@ pagerSize = 5
 
 [taxonomies]
 tag = "tags"
+
+[imaging]
+quality = 82
+resampleFilter = "Lanczos"

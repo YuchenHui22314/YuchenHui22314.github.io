@@ -1,0 +1,8 @@
+{{- /* Minecraft friends on the dark desk around the card (hidden when the desk margin is too narrow).
+       creeper.png and wolf.png are the Minecraft Wiki renders (Creeper_JE3_BE1, Tamed_Wolf_with_Red_Collar_JE3_BE4);
+       diamond_sword.png is the game's item icon. */ -}}
+{{- range $name := slice "creeper" "diamond_sword" "wolf" }}
+  {{- with resources.Get (printf "img/mc/%s.png" $name) }}
+<div class="mc mc-{{ $name }}" aria-hidden="true"><img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt=""></div>
+  {{- end }}
+{{- end }}

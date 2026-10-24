@@ -1,14 +1,35 @@
-# Pages placed under these sections will be shown on homepage and archive page.
-mainSections = ["essays", "dreams", "recipes"]
-# Output page's full content in RSS.
-rssFullContent = true
-favicon = "water_king_without_background.png"
+# Three colourways, each with a day and a night version. A visitor gets the next one
+# on each new visit (browser tab); ?palette=green|brown|blue forces one.
+palettes = ["green", "brown", "blue"]
 
-[footer]
-since = 2026
-customText = ""
+# Montréal, shown in the corner of the home page.
+coordinates = { lat = "45°30′", lon = "73°34′" }
 
-# Date formats and the sidebar subtitle are set per language in languages.toml.
+# Character art on the home page, per colourway: files in assets/img/figures/.
+# slot "a" stands where the diagonal meets the top edge, "b" where it meets the bottom,
+# "center" in the middle of the diagonal. Missing files are simply skipped.
+[figures]
+credit = { name = "bj1034", url = "https://www.pixiv.net/en/users/5963996" }
+[[figures.green]]
+slot = "a"
+file = "green-conan.webp"
+who = "conan"
+[[figures.green]]
+slot = "b"
+file = "green-haibara.webp"
+who = "haibara"
+[[figures.brown]]
+slot = "a"
+file = "brown-conan.webp"
+who = "conan"
+[[figures.brown]]
+slot = "b"
+file = "brown-haibara.webp"
+who = "haibara"
+[[figures.blue]]
+slot = "center"
+file = "blue-kid-conan.webp"
+who = "kid_conan"
 
 # Q&A box (提问箱). The API lives in ask-api/; see ask-api/README.md for deployment.
 # Leave `api` empty until the Worker is deployed: the page then says the box is not open yet.
@@ -16,133 +37,3 @@ customText = ""
 [askbox]
 api = ""
 turnstileSiteKey = ""
-
-[sidebar]
-emoji = "♟"
-
-[sidebar.avatar]
-enabled = true
-local = true
-src = "img/headshot.jpg"
-
-[article]
-headingAnchor = true
-math = true
-readingTime = true
-
-[article.license]
-enabled = true
-default = "Licensed under CC BY-NC-SA 4.0"
-
-## Widgets
-[[widgets.homepage]]
-type = "search"
-
-[[widgets.homepage]]
-type = "archives"
-
-[widgets.homepage.params]
-limit = 5
-
-[[widgets.homepage]]
-type = "tag-cloud"
-
-[widgets.homepage.params]
-limit = 10
-
-[[widgets.page]]
-type = "toc"
-
-[opengraph.twitter]
-site = ""
-card = "summary_large_image"
-
-[defaultImage.opengraph]
-enabled = false
-local = false
-src = ""
-
-[colorScheme]
-toggle = true
-default = "dark"
-
-[imageProcessing.cover]
-enabled = true
-
-[imageProcessing.content]
-enabled = true
-
-## Comments
-[comments]
-enabled = true
-provider = "disqus"
-
-[comments.disqusjs]
-shortname = ""
-apiUrl = ""
-apiKey = ""
-admin = ""
-adminLabel = ""
-
-[comments.utterances]
-repo = ""
-issueTerm = "pathname"
-label = ""
-
-[comments.remark42]
-host = ""
-site = ""
-locale = ""
-
-[comments.vssue]
-platform = ""
-owner = ""
-repo = ""
-clientId = ""
-clientSecret = ""
-autoCreateIssue = false
-
-[comments.waline]
-serverURL = ""
-lang = ""
-visitor = ""
-avatar = ""
-emoji = ["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"]
-requiredMeta = ["name", "email", "url"]
-placeholder = ""
-
-[comments.waline.locale]
-admin = "Admin"
-
-[comments.twikoo]
-envId = ""
-region = ""
-path = ""
-lang = ""
-
-[comments.cactus]
-defaultHomeserverUrl = "https://matrix.cactus.chat:8448"
-serverName = "cactus.chat"
-siteName = ""
-
-[comments.giscus]
-repo = ""
-repoID = ""
-category = ""
-categoryID = ""
-mapping = ""
-lightTheme = ""
-darkTheme = ""
-reactionsEnabled = 1
-emitMetadata = 0
-
-[comments.gitalk]
-owner = ""
-admin = ""
-repo = ""
-clientID = ""
-clientSecret = ""
-
-[comments.cusdis]
-host = ""
-id = ""

@@ -2,12 +2,12 @@
 title: "Ce train qui s'en va"
 description: "Attendre le vent, puis filer vers la prochaine station"
 slug: "ce-train-qui-sen-va"
-date: 2026-01-02
-weight: 10002
+date: 2023-02-01
 image: "ice.jpg"
 dateline: "Texte achevé début 2023"
 tags:
   - "émotions"
+written: "2023"
 ---
 Dans le métro, j’aime appuyer mon coude sur le rebord de la fenêtre, caler ma tête contre mon poing, puis laisser tout mon corps s’adosser de côté contre la paroi de la voiture. Dans cette posture, mon corps se détend complètement, et tous mes sens peuvent alors s’ouvrir à ce qui m’entoure.
 

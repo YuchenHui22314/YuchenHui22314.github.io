@@ -1,0 +1,40 @@
+{{- $p := .page -}}
+{{- $sec := $p.CurrentSection -}}
+{{- $meta := T "reading_time" $p.ReadingTime -}}
+{{- with $p.Params.tags }}{{ $meta = printf "%s · %s" $meta (delimit . " · ") }}{{ end -}}
+{{ partial "band.html" (dict "page" $p "key" .key "glyph" "essays" "title" $p.Title "crumb" $p.Description
+    "eyebrow" (printf "%s · %s" $sec.Title (partial "written.html" $p)) "desc" $p.Params.dateline "meta" $meta) }}
+<div class="sheet">
+  <div class="read-ctl">
+    <a class="textlink" href="{{ $sec.RelPermalink }}">← {{ T "back_essays" }}</a>
+    <div class="seg" role="group" aria-label="{{ T "paper" }}">
+      <button type="button" data-paper="plain" aria-pressed="true">{{ T "paper_plain" }}</button>
+      <button type="button" data-paper="parch" aria-pressed="false">{{ T "paper_parch" }}</button>
+      {{- if eq site.Language.Lang "zh" }}<button type="button" data-paper="vert" aria-pressed="false">{{ T "paper_vert" }}</button>{{ end }}
+    </div>
+  </div>
+  <div class="read">
+    <div class="read-main">
+      <article class="article" id="article" data-paper="plain">
+        <span class="obj-bg"></span>
+        {{ partial "deco/compass.html" (dict "class" "cmp") }}
+        <div class="body">{{ $p.Content }}</div>
+        {{- with $p.Params.dateline }}<div class="dateline">{{ partial "icon.html" "clock" }}{{ . }}</div>{{ end }}
+      </article>
+      <p class="vnote" hidden>{{ T "vert_note" }}</p>
+    </div>
+    <aside class="aside">
+      {{- $toc := $p.Fragments.ToHTML 2 2 false }}
+      {{- if gt (len $p.Fragments.Identifiers) 1 }}
+      <div><h2 class="sec-h">{{ T "route_h" }}</h2><div class="route">{{ $toc }}</div></div>
+      {{- end }}
+      {{- with $p.Params.slip }}
+        {{- if eq site.Language.Lang "zh" }}
+      <div class="vslip">{{ range .lines }}<div class="vl">{{ . }}</div>{{ end }}<div class="vb">{{ .by }}</div></div>
+        {{- else }}
+      <div class="hslip">{{ delimit .lines "<br>" | safeHTML }}<small>{{ .by }}</small></div>
+        {{- end }}
+      {{- end }}
+    </aside>
+  </div>
+</div>

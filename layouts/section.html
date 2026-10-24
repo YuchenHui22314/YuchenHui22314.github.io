@@ -1,0 +1,14 @@
+{{ define "card" }}
+{{- $key := .Section -}}
+<article class="card page" id="card" data-page="{{ $key }}"{{ if eq $key "dreams" }} data-scene="night"{{ end }}>
+  {{ partial "band.html" (dict
+      "page" . "key" $key "glyph" $key "title" .Title "moon" (eq $key "dreams")
+      "eyebrow" (T (printf "other_%s" $key)) "desc" .Description
+      "meta" (T (printf "meta_%s" $key) (len .RegularPages))) }}
+  <div class="sheet">
+    {{- with .Description }}<p class="sheet-desc">{{ . }}</p>{{ end }}
+    {{ partial (printf "sections/%s.html" $key) . }}
+  </div>
+  {{ partial "foot.html" . }}
+</article>
+{{ end }}

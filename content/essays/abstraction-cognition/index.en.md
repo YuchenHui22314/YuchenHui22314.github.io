@@ -2,14 +2,14 @@
 title: "L'Abstraction, c'est la Cognition"
 description: "To my upcoming Ph.D. journey"
 slug: "abstraction-cognition"
-date: 2026-01-02
-weight: 2
+date: 2025-02-05
 image: "lighthouse.jpg"
 aliases:
   - "/p/abstraction-congnition/"
 dateline: "Written in early February 2025"
 tags:
   - "philosophy"
+written: "2025.02"
 ---
 I’ve long wanted to write down some of the thoughts that have come to me over these years of study, and I’ve finally found the time. Let me begin with the first wisps of thought that drifted into my head after I started university. In the first semester of my freshman year, because the digital logic professor at my own university taught so terribly, I went on Bilibili and found a digital circuits course taught by Prof. Wang Hong of Tsinghua University. To this day, I still consider it the most logically structured teaching I’ve ever come across, and the best at keeping hold of the main thread. The course’s central logic is this: a computer’s CPU is an extremely complex system, and understanding a complex system like that requires mastering the skill of “abstraction.” As another excellent textbook, which I later read nearly cover to cover, puts it:
 

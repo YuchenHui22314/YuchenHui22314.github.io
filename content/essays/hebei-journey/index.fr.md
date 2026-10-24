@@ -2,13 +2,17 @@
 title: "Voyage au Hebei"
 description: "Si proche, si beau : des vacances au Hebei."
 slug: "hebei-journey"
-date: 2026-01-02
-weight: 4
+date: 2026-01-15
 image: "hebei_assets/media/image7.png"
 dateline: "Texte écrit par bribes, achevé en janvier 2026"
 tags:
   - "voyage"
   - "émotions"
+written: "2026.01"
+feature: "map"
+kicker: "Voyage"
+excerpt: "L’été dernier, je suis rentré en Chine pour un peu plus de trois mois, et ma mère et moi sommes retournés en voiture au berceau de la famille, au Hebei. Il y a eu des rires, et des remous d’émotion qui m’ont arraché des larmes."
+slip: {"lines":["Je voudrais gravir le Taihang,","mais la neige couvre les monts."],"by":"Li Bai, « Le chemin est difficile »"}
 ---
 > L’été dernier, je suis rentré en Chine pour un peu plus de trois mois de vacances, et j’en ai profité pour retourner en voiture avec ma mère au berceau de la famille, au Hebei. En chemin, il y a eu des moments pleins de rires, mais aussi des remous d’émotion qui m’ont arraché des larmes. Si ma mémoire était une toile d’un blanc immaculé, ces instants seraient les larges touches d’encre et de couleur qu’on y aurait jetées, certaines éclatantes, d’autres plus sombres ; et quand je les savoure de nouveau aujourd’hui, l’arrière-goût reste un mélange de doux et d’amer. Ayant trouvé par hasard un peu de temps libre ces jours-ci, j’ai voulu coucher toutes ces impressions par écrit, pour que, même si un jour je deviens gâteux, ces mots me permettent encore de revenir en arrière et de sentir l’air légèrement humide de cet été-là.
 

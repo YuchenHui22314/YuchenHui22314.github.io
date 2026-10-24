@@ -1,2 +1,57 @@
-[[imports]]
-path = "github.com/CaiJimmy/hugo-theme-stack/v3"
+# No theme: the site's own layouts live in layouts/.
+# Fonts come from npm packages (package.json) and are mounted here, so nothing large is committed.
+# Declaring any mount replaces Hugo's defaults for that folder, hence the first entries.
+[[mounts]]
+source = "assets"
+target = "assets"
+[[mounts]]
+source = "static"
+target = "static"
+
+# Each package's CSS (read by layouts/_partials/fonts.html) ...
+[[mounts]]
+source = "node_modules/@fontsource"
+target = "assets/fontsrc/fontsource"
+includeFiles = ["*/[0-9]*.css"]
+[[mounts]]
+source = "node_modules/lxgw-wenkai-webfont"
+target = "assets/fontsrc/lxgw-wenkai"
+includeFiles = ["lxgwwenkai-regular.css"]
+
+# ... and only the woff2 files for the weights the site uses.
+[[mounts]]
+source = "node_modules/@fontsource/noto-serif-sc/files"
+target = "static/fonts/noto-serif-sc"
+includeFiles = ["*-300-normal.woff2", "*-400-normal.woff2", "*-600-normal.woff2"]
+[[mounts]]
+source = "node_modules/lxgw-wenkai-webfont/files"
+target = "static/fonts/lxgw-wenkai"
+includeFiles = ["lxgwwenkai-regular-subset-*.woff2"]
+[[mounts]]
+source = "node_modules/@fontsource/ma-shan-zheng/files"
+target = "static/fonts/ma-shan-zheng"
+includeFiles = ["*-400-normal.woff2"]
+[[mounts]]
+source = "node_modules/@fontsource/cormorant/files"
+target = "static/fonts/cormorant"
+includeFiles = ["*-300-normal.woff2", "*-400-normal.woff2", "*-500-normal.woff2", "*-600-normal.woff2"]
+[[mounts]]
+source = "node_modules/@fontsource/crimson-pro/files"
+target = "static/fonts/crimson-pro"
+includeFiles = ["*-400-normal.woff2", "*-600-normal.woff2", "*-400-italic.woff2"]
+[[mounts]]
+source = "node_modules/@fontsource/jost/files"
+target = "static/fonts/jost"
+includeFiles = ["*-400-normal.woff2", "*-500-normal.woff2"]
+[[mounts]]
+source = "node_modules/@fontsource/im-fell-english/files"
+target = "static/fonts/im-fell-english"
+includeFiles = ["*-400-normal.woff2"]
+[[mounts]]
+source = "node_modules/@fontsource/courier-prime/files"
+target = "static/fonts/courier-prime"
+includeFiles = ["*-400-normal.woff2"]
+[[mounts]]
+source = "node_modules/@fontsource/caveat/files"
+target = "static/fonts/caveat"
+includeFiles = ["*-500-normal.woff2"]

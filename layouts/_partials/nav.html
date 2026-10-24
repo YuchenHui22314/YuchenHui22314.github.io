@@ -1,0 +1,26 @@
+{{- $page := . -}}
+<header class="nav" id="nav">
+  <a class="seal-mark" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">惠</a>
+  <nav class="links" aria-label="{{ T "menu" }}">
+    {{- range site.Menus.main }}
+    <a href="{{ .URL }}"{{ if or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+  </nav>
+  <div class="tools">
+    <div class="search" role="search">{{ partial "icon.html" "search" }}<input id="q" type="search" autocomplete="off" placeholder="{{ T "search" }}" aria-label="{{ T "search" }}"><kbd>/</kbd><div class="results" id="results" hidden></div></div>
+    <button type="button" class="icon-btn search-btn" data-act="search-open" aria-label="{{ T "search" }}">{{ partial "icon.html" "search" }}</button>
+    <div class="lang" role="group" aria-label="Language">
+      {{- $labels := dict "zh" "中" "en" "EN" "fr" "FR" }}
+      {{- range $lang := slice "zh" "en" "fr" }}
+        {{- range site.Sites }}{{ if eq .Language.Lang $lang }}
+          {{- $code := .Language.LanguageCode }}
+          {{- $href := .Home.RelPermalink }}
+          {{- range $page.AllTranslations }}{{ if eq .Language.Lang $lang }}{{ $href = .RelPermalink }}{{ end }}{{ end }}
+      <a href="{{ $href }}" hreflang="{{ $code }}" lang="{{ $code }}"{{ if eq $lang site.Language.Lang }} aria-current="true"{{ end }}>{{ index $labels $lang }}</a>
+        {{- end }}{{ end }}
+      {{- end }}
+    </div>
+    <button type="button" class="icon-btn" data-act="night" aria-label="{{ T "night" }}">{{ partial "icon.html" "moon" }}</button>
+    <button type="button" class="menu-btn" data-act="menu" aria-label="{{ T "menu" }}">{{ partial "icon.html" "menu" }}<span>{{ T "menu" }}</span></button>
+  </div>
+</header>

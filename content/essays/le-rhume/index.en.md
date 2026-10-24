@@ -2,14 +2,14 @@
 title: "Le rhume"
 description: "Chinese high school really is a rat race"
 slug: "le-rhume"
-date: 2026-01-02
-weight: 10001
+date: 2021-11-04
 image: "xusong.jpg"
 aliases:
   - "/p/感冒/"
 dateline: "Written on November 4, 2021"
 tags:
   - "emotion"
+written: "2021.11"
 ---
 The first time I came down with a bad cold alone abroad, it just had to be during midterm week (month).
 

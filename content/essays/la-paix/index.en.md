@@ -2,8 +2,7 @@
 title: "La paix | Reconciliation"
 description: "Peace is all you need"
 slug: "la-paix"
-date: 2026-01-02
-weight: 4
+date: 2023-11-01
 image: "walking.jpg"
 aliases:
   - "/p/la-paix/"
@@ -11,6 +10,7 @@ dateline: "Written in the fall and winter of 2023"
 tags:
   - "emotion"
   - "ballet"
+written: "2023"
 ---
 Sometimes
 

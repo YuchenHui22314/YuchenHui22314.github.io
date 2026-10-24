@@ -1,0 +1,28 @@
+{{- /* Markdown images: a picture on its own line becomes a numbered figure whose caption is the
+       alt text; pictures sharing a line sit side by side. Page images are resized to webp. */ -}}
+{{- $alt := .PlainText -}}
+{{- $src := .Destination -}}
+{{- $w := 0 }}{{ $h := 0 }}{{ $srcset := "" -}}
+{{- $u := urls.Parse .Destination -}}
+{{- if not $u.IsAbs -}}
+  {{- with .Page.Resources.Get $u.Path -}}
+    {{- if in (slice "jpeg" "png" "webp") .MediaType.SubType -}}
+      {{- $big := . -}}
+      {{- if gt .Width 1400 }}{{ $big = .Resize "1400x webp q80" }}{{ else }}{{ $big = .Process "webp q82" }}{{ end -}}
+      {{- $src = $big.RelPermalink }}{{ $w = $big.Width }}{{ $h = $big.Height -}}
+      {{- if gt .Width 800 }}{{ $small := .Resize "760x webp q78" }}{{ $srcset = printf "%s 760w, %s %dw" $small.RelPermalink $big.RelPermalink $big.Width }}{{ end -}}
+    {{- else -}}
+      {{- $src = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $img := printf `<img src="%s"%s%s alt="%s" loading="lazy" decoding="async">`
+    $src
+    (cond (ne $srcset "") (printf ` srcset="%s" sizes="(max-width: 760px) 100vw, 680px"` $srcset) "")
+    (cond (gt $w 0) (printf ` width="%d" height="%d"` $w $h) "")
+    ($alt | htmlEscape) -}}
+{{- if .IsBlock -}}
+<figure{{ with .Attributes.class }} class="{{ . }}"{{ end }}>{{ $img | safeHTML }}{{ with $alt }}<figcaption><b>{{ T "fig" }} {{ add $.Ordinal 1 }}</b><span>{{ . }}</span></figcaption>{{ end }}</figure>
+{{- else -}}
+<span class="fig-inline">{{ $img | safeHTML }}{{ with $alt }}<span class="cap">{{ . }}</span>{{ end }}</span>
+{{- end -}}

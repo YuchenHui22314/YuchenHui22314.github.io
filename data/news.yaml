@@ -1,0 +1,21 @@
+# "News" on the Research page, newest first. Text may use Markdown.
+- date: "2026.10"
+  text:
+    en: "The site is getting a redesign: Chinese, English and French versions, plus a new Q&A box."
+    zh: "网站改版：中 / EN / FR 三语版本和提问箱即将上线。"
+    fr: "Le site fait peau neuve : versions chinoise, anglaise et française, et une nouvelle boîte à questions."
+- date: "2026.01"
+  text:
+    en: "New essay, “A Journey Through Hebei”: the summer my mom and I drove back to our hometown."
+    zh: "新随笔《河北之旅》：和妈妈自驾回河北老家的那个夏天。"
+    fr: "Nouvel essai, « Voyage au Hebei » : l’été où ma mère et moi sommes rentrés au pays en voiture."
+- date: "2025.12"
+  text:
+    en: "My Master’s thesis, *Towards Adaptive Personalization in Conversational Search*, is now in the UdeM repository."
+    zh: "硕士论文 *Towards Adaptive Personalization in Conversational Search* 收录于蒙特利尔大学论文库。"
+    fr: "Mon mémoire de maîtrise, *Towards Adaptive Personalization in Conversational Search*, est en ligne dans le dépôt de l’UdeM."
+- date: "2025.02"
+  text:
+    en: "Essay: “L’Abstraction, c’est la Cognition”, written for the Ph.D. ahead."
+    zh: "随笔《L’Abstraction, c’est la Cognition》，写给即将开始的博士生活。"
+    fr: "Essai : « L’Abstraction, c’est la Cognition », écrit pour le doctorat qui commence."

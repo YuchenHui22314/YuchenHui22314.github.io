@@ -1,0 +1,42 @@
+{{- $p := .page -}}
+{{- $sec := $p.CurrentSection -}}
+{{ partial "band.html" (dict "page" $p "key" .key "glyph" "recipes" "title" $p.Title "crumb" $p.Description
+    "eyebrow" (printf "%s · %s" $sec.Title ($p.Date.Format "2006.01"))) }}
+<div class="sheet">
+  <div class="read-ctl"><a class="textlink" href="{{ $sec.RelPermalink }}">← {{ T "back_recipes" }}</a></div>
+  <article class="letter" data-recipe="{{ $p.File.UniqueID }}">
+    <div class="head">
+      <div>
+        <h2>{{ $p.Title }}</h2>
+        <p>{{ $p.Description }}</p>
+        <div class="meta">{{ T "first_written" }} {{ $p.Date.Format "2006.01.02" }}{{ if ne ($p.Lastmod.Format "20060102") ($p.Date.Format "20060102") }} · {{ T "revised" }} {{ $p.Lastmod.Format "2006.01.02" }}{{ end }}</div>
+      </div>
+      <div class="stamps"><div class="pstamp">{{ partial "stamp.html" $p }}</div>{{ partial "postmark.html" (dict "top" "MONTRÉAL · CUISINE · " "date" ($p.Date.Format "2006.01") "id" "letter") }}</div>
+    </div>
+    <div class="rgrid">
+      <div class="ing">
+        <h3>{{ T "ingredients" }}</h3>
+        {{- range $gi, $g := $p.Params.ingredients }}
+        <h4>{{ $g.group | markdownify }}</h4>
+        <ul>
+          {{- range $xi, $x := $g.items }}
+          <li><label><input type="checkbox" data-ing="{{ $gi }}-{{ $xi }}"><span>{{ $x | markdownify }}</span></label></li>
+          {{- end }}
+        </ul>
+        {{- end }}
+      </div>
+      <div>
+        <h3>{{ T "steps" }}</h3>
+        <ol class="steps">
+          {{- range $p.Params.steps }}
+          <li><h4>{{ .title | markdownify }}</h4>
+            <ol>{{ range .items }}<li>{{ . | markdownify }}</li>{{ end }}</ol>
+            {{- with .note }}<p class="note">{{ . | markdownify }}</p>{{ end }}
+          </li>
+          {{- end }}
+        </ol>
+      </div>
+    </div>
+    {{- with $p.Content }}<div class="notes-body">{{ . }}</div>{{ end }}
+  </article>
+</div>

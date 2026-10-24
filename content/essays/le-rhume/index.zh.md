@@ -2,12 +2,12 @@
 title: "Le rhume"
 description: "中国的高中真是太卷了"
 slug: "le-rhume"
-date: 2026-01-02
-weight: 10001
+date: 2021-11-04
 image: "xusong.jpg"
 dateline: "本文完稿于2021年11月4日"
 tags:
   - "情感"
+written: "2021.11"
 ---
 第一次一个人在国外得重感冒，竟然是在期中考试周（月）。
 

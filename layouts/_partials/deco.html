@@ -1,0 +1,6 @@
+{{- /* The two colour fields split by the diagonal: contour lines on the deep side; stars (night)
+       and a compass rose (day) on the light side. Expects a key with generated SVGs in deco/. */ -}}
+<div class="r-region">{{ partial (printf "deco/contours-%s.html" .) . }}</div>
+<div class="l-deco">{{ partial (printf "deco/stars-%s.html" .) . }}{{ partial "deco/compass.html" (dict "class" "compass" "style" "left:-12%;top:-24%;width:50%;max-width:460px") }}</div>
+<div class="seam"></div>
+<div class="grain"></div>

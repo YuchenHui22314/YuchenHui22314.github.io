@@ -1,0 +1,16 @@
+{
+  "name": "xiyuchen-site",
+  "private": true,
+  "description": "Self-hosted web fonts for the Hugo site (mounted into static/fonts by config/_default/module.toml).",
+  "devDependencies": {
+    "@fontsource/caveat": "5.3.0",
+    "@fontsource/cormorant": "5.3.0",
+    "@fontsource/courier-prime": "5.3.0",
+    "@fontsource/crimson-pro": "5.3.0",
+    "@fontsource/im-fell-english": "5.3.0",
+    "@fontsource/jost": "5.3.0",
+    "@fontsource/ma-shan-zheng": "5.3.1",
+    "@fontsource/noto-serif-sc": "5.3.1",
+    "lxgw-wenkai-webfont": "1.7.0"
+  }
+}

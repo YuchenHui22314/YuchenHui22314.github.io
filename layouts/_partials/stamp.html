@@ -1,0 +1,6 @@
+{{- /* The picture inside a postage stamp: the page's cover image, or a chili. */ -}}
+{{- with and .Params.image (.Resources.Get .Params.image) -}}
+  {{- with .Fill "184x224 webp q78" }}<img src="{{ .RelPermalink }}" width="92" height="112" alt="" loading="lazy">{{ end -}}
+{{- else -}}
+  <div class="ill">{{ partial "icon.html" "chili" }}</div>
+{{- end -}}

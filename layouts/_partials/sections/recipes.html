@@ -1,0 +1,15 @@
+{{- with .Content }}<div class="sec-intro">{{ . }}</div>{{ end }}
+<div class="posts">
+  {{- range sort .RegularPages "Weight" }}
+  <a class="postcard" href="{{ .RelPermalink }}">
+    <div class="l">
+      <p class="o-kicker" style="color:var(--card-red)">{{ .Date.Format "2006.01" }}</p>
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Description }}</p>
+      <div class="to">{{ T "recipe_to" }}</div>
+    </div>
+    <div class="r"><div class="pstamp">{{ partial "stamp.html" . }}</div></div>
+    {{ partial "postmark.html" (dict "top" "MONTRÉAL · CUISINE · " "date" (.Date.Format "2006.01") "id" .File.UniqueID) }}
+  </a>
+  {{- end }}
+</div>

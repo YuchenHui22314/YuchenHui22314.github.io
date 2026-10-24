@@ -1,0 +1,13 @@
+{{- /* Index for the search box in the nav: sections, then every page, in this language. */ -}}
+{{- $out := slice -}}
+{{- range site.Menus.main -}}
+  {{- with .Page -}}
+    {{- $out = $out | append (dict "t" .Title "d" .Description "k" (T "kind_section") "u" .RelPermalink "x" "") -}}
+  {{- end -}}
+{{- end -}}
+{{- range site.RegularPages -}}
+  {{- $k := T "kind_page" -}}
+  {{- if in (slice "essays" "dreams" "recipes") .Section }}{{ $k = T (printf "kind_%s" .Section) }}{{ end -}}
+  {{- $out = $out | append (dict "t" .Title "d" .Description "k" $k "u" .RelPermalink "x" (.Plain | truncate 6000 "")) -}}
+{{- end -}}
+{{- $out | jsonify -}}

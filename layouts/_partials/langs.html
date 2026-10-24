@@ -1,0 +1,4 @@
+{{- /* "中 · EN · FR": the languages this page exists in. */ -}}
+{{- $have := slice }}{{ range .AllTranslations }}{{ $have = $have | append .Language.Lang }}{{ end -}}
+{{- $out := slice }}{{ range $l := slice "zh" "en" "fr" }}{{ if in $have $l }}{{ $out = $out | append (index (dict "zh" "中" "en" "EN" "fr" "FR") $l) }}{{ end }}{{ end -}}
+{{- delimit $out " · " -}}

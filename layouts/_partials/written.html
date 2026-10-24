@@ -1,0 +1,2 @@
+{{- /* When a piece was written: front matter `written` ("2023", "2025.02") or the date. */ -}}
+{{- with .Params.written }}{{ . }}{{ else }}{{ .Date.Format "2006.01" }}{{ end -}}

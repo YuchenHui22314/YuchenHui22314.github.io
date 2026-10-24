@@ -1,0 +1,36 @@
+{{- /* One stylesheet with every @font-face the site uses. The font packages ship their own
+       CSS (one block per unicode-range slice); paths are rewritten to /fonts/<family>/ and
+       the woff fallbacks dropped, since only woff2 files are mounted (config/_default/module.toml). */ -}}
+{{- $sources := slice
+  (slice "fontsource/noto-serif-sc/300.css" "noto-serif-sc")
+  (slice "fontsource/noto-serif-sc/400.css" "noto-serif-sc")
+  (slice "fontsource/noto-serif-sc/600.css" "noto-serif-sc")
+  (slice "lxgw-wenkai/lxgwwenkai-regular.css" "lxgw-wenkai")
+  (slice "fontsource/ma-shan-zheng/400.css" "ma-shan-zheng")
+  (slice "fontsource/cormorant/300.css" "cormorant")
+  (slice "fontsource/cormorant/400.css" "cormorant")
+  (slice "fontsource/cormorant/500.css" "cormorant")
+  (slice "fontsource/cormorant/600.css" "cormorant")
+  (slice "fontsource/crimson-pro/400.css" "crimson-pro")
+  (slice "fontsource/crimson-pro/600.css" "crimson-pro")
+  (slice "fontsource/jost/400.css" "jost")
+  (slice "fontsource/jost/500.css" "jost")
+  (slice "fontsource/im-fell-english/400.css" "im-fell-english")
+  (slice "fontsource/courier-prime/400.css" "courier-prime")
+  (slice "fontsource/caveat/500.css" "caveat")
+-}}
+{{- $out := "" -}}
+{{- range $sources -}}
+  {{- $dir := index . 1 -}}
+  {{- with resources.Get (printf "fontsrc/%s" (index . 0)) -}}
+    {{- $c := replaceRE `,\s*url\([^)]*\.woff['"]?\)\s*format\(['"]woff['"]\)` "" .Content -}}
+    {{- $c = replaceRE `url\(['"]?\./files/([^)'"]+)['"]?\)` (printf `url("%s$1")` (printf "fonts/%s/" $dir | relURL)) $c -}}
+    {{- $out = print $out "\n" $c -}}
+  {{- else -}}
+    {{- warnf "font CSS missing: %s (run npm install)" (index . 0) -}}
+  {{- end -}}
+{{- end -}}
+{{- with resources.FromString "css/fonts.css" $out | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ .RelPermalink }}"></noscript>
+{{- end }}

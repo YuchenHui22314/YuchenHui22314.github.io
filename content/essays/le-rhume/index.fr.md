@@ -2,12 +2,12 @@
 title: "Le rhume"
 description: "Le lycée en Chine, quelle course effrénée"
 slug: "le-rhume"
-date: 2026-01-02
-weight: 10001
+date: 2021-11-04
 image: "xusong.jpg"
 dateline: "Texte achevé le 4 novembre 2021"
 tags:
   - "émotions"
+written: "2021.11"
 ---
 La première fois que j’ai attrapé un gros rhume, seul à l’étranger, il a fallu que ce soit pendant la semaine (le mois) des examens de mi-semestre.
 

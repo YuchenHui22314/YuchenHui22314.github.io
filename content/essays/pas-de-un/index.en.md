@@ -2,14 +2,18 @@
 title: "Pas d'un | A Spring Still Cold"
 description: "A mind grows by being tempered in the cold"
 slug: "pas-de-un"
-date: 2026-01-02
-weight: 6
+date: 2020-05-20
 image: "cover_pas_de_deux.png"
 aliases:
   - "/p/pas-de-un/"
 dateline: "Written in May 2020, during the pandemic lockdown"
 tags:
   - "emotion"
+written: "2020.05"
+feature: "jian"
+excerpt: "May in Montreal: warm one moment, cold the next. The moment I stepped out the door, a chill slipped in under my collar."
+jianTitle: "乍暖还寒"
+shortTitle: "A Spring Still Cold"
 ---
 May in Montreal: warm one moment, cold the next. Spring on the North American continent has a character all its own. It has none of the muggy “south-wind days” of Guangdong and Guangxi, the clammy chill of Jiangnan, or the dry heat of northern China; none of the breakneck warming of Siberia and Central Asia that leaves you in a sweat; and none of the cool, mild mists that shroud Western and Central Europe, born of the warm, moist air that sweeps in unimpeded from the Atlantic. The moment I stepped out the door, a chill slipped in under my collar. I seemed to see, hundreds of kilometers away, the vast, hazy white ice of Hudson Bay, and to hear the north wind still howling, refusing to give up. Down jacket, padded pants—compared with what I wore in the dead of winter a few months ago, my outfit was short just one pair of long johns.
 

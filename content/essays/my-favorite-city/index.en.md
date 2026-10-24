@@ -2,14 +2,17 @@
 title: "Which City on Earth Do I Love Most?"
 description: "Can you guess which one?"
 slug: "my-favorite-city"
-date: 2026-01-02
-weight: 3
+date: 2020-01-01
 image: "nanjing.png"
 aliases:
   - "/p/my-favorate-city/"
 dateline: "Written in 2020, in answer to a question CS asked in my Q&A box"
 tags:
   - "emotion"
+written: "2020"
+feature: "torn"
+kicker: "A question from the ask box"
+excerpt: "“Which city on Earth do I love most?” I put down my phone, gently close my eyes, and ask myself. If it’s a question of love, I have to go with my first instinct."
 ---
 “Which city on Earth do I love most?” I put down my phone, gently close my eyes, and ask myself. If it’s a question of love, I have to go with my first instinct. I try to melt into the darkness of the room, the better to catch the images rising from deep in my memory. Little by little, a street scene, mostly gray and green, appears on the black curtain: the gray is a six-lane, two-way asphalt road and the bike lane running alongside it, and the green is the dawn redwoods growing in the median strip. At this moment I am standing on the sidewalk, level with the bike lane; the paving stones under my feet are about fifty centimeters square, their texture and color exactly like polished granite in Minecraft. These stones don’t meet the asphalt of the bike lane directly; instead, a band of smooth, polished gray tiles traces the outline of the border between them. I lift my gaze from the ground to eye level and look toward the far end of this tree-lined avenue—the densely planted dawn redwoods on its left and the low buildings on its right seem to stretch all the way to the distant horizon, drawing ever closer to each other, forming a perfect perspective drawing. In the gusts of the howling north wind, the dawn redwoods bend and bow like dominoes, yet no one can see where the first domino fell—the end of the road seems to be the very source of this north wind, the whole of my life.
 

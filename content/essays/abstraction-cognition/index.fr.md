@@ -2,12 +2,12 @@
 title: "L'Abstraction, c'est la Cognition"
 description: "À mon doctorat qui commence"
 slug: "abstraction-cognition"
-date: 2026-01-02
-weight: 2
+date: 2025-02-05
 image: "lighthouse.jpg"
 dateline: "Texte achevé début février 2025"
 tags:
   - "philosophie"
+written: "2025.02"
 ---
 Cela fait longtemps que je voulais coucher sur le papier quelques réflexions nées de ces années d’études ; j’en ai enfin trouvé le temps. Commençons par les premières pensées, encore vaporeuses, qui me sont venues après mon entrée à l’université. Au premier semestre de ma première année, comme le prof d’électronique numérique de mon université était franchement nul, je suis allé chercher sur Bilibili un cours de circuits numériques donné par la professeure Wang Hong, de l’université Tsinghua. Aujourd’hui encore, je le tiens pour l’enseignement le plus logique que j’aie jamais suivi, celui qui sait le mieux tenir son fil conducteur. L’idée maîtresse du cours est la suivante : le processeur d’un ordinateur est un système extrêmement complexe, et pour comprendre un système aussi complexe, il faut maîtriser l’art de l’« abstraction ». Comme le dit un autre excellent manuel, que j’ai ensuite lu à peu près d’un bout à l’autre :
 

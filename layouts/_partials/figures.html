@@ -1,0 +1,15 @@
+{{- /* Character art for the home card, one set per colourway; CSS shows the active set.
+       Files live in assets/img/figures/ (see config/_default/params.toml). */ -}}
+<div class="figs" id="figs">
+  {{- range $pal := site.Params.palettes }}
+    {{- with index site.Params.figures $pal }}
+  <div class="fig-set" data-for="{{ $pal }}">
+      {{- range $f := . }}
+        {{- with resources.Get (printf "img/figures/%s" $f.file) }}
+    <div class="fig {{ $f.slot }}" style="--ar:{{ div (float .Width) .Height }}"><img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ T (printf "fig_%s" $f.who) }}" loading="lazy" decoding="async"></div>
+        {{- end }}
+      {{- end }}
+  </div>
+    {{- end }}
+  {{- end }}
+</div>

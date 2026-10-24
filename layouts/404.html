@@ -1,0 +1,8 @@
+{{ define "card" }}
+<article class="card page" id="card" data-page="404">
+  {{ partial "band.html" (dict "page" . "key" "research" "glyph" "research" "title" "404" "eyebrow" "Not found · 未找到 · Introuvable") }}
+  <div class="sheet"><p class="lead">This page does not exist. · 这个页面不存在。 · Cette page n’existe pas.</p>
+    <p><a class="pill" href="{{ site.Home.RelPermalink }}">{{ T "home" }} {{ partial "icon.html" "arrow" }}</a></p></div>
+  {{ partial "foot.html" . }}
+</article>
+{{ end }}

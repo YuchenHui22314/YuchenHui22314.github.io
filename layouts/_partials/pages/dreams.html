@@ -1,0 +1,23 @@
+{{- $p := .page -}}
+{{- $sec := $p.CurrentSection -}}
+{{ partial "band.html" (dict "page" $p "key" .key "glyph" "dreams" "title" $p.Title "crumb" $p.Description "moon" true
+    "eyebrow" (printf "%s · %s" $sec.Title ($p.Date.Format "2006.01.02"))) }}
+<div class="sheet">
+  <div class="read-ctl">
+    <a class="textlink" href="{{ $sec.RelPermalink }}">← {{ T "back_dreams" }}</a>
+    <span>{{ range $p.Params.tags }}<span class="chip">{{ . }}</span> {{ end }}</span>
+  </div>
+  <div class="dream-read">
+    <div class="body">{{ $p.Content }}</div>
+    {{- with $p.Params.score }}
+    <aside class="aside"><div class="score">
+      <h4>{{ .title }}</h4>
+      <table>
+        <thead><tr><th></th>{{ range .games }}<th>{{ . }}</th>{{ end }}</tr></thead>
+        <tbody>{{ range .rows }}<tr><td>{{ index . 0 }}</td>{{ range after 1 . }}<td class="n">{{ . }}</td>{{ end }}</tr>{{ end }}</tbody>
+      </table>
+      {{- with .note }}<p>{{ . }}</p>{{ end }}
+    </div></aside>
+    {{- end }}
+  </div>
+</div>

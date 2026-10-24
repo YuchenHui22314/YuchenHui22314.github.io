@@ -1,0 +1,23 @@
+{{- /* Q&A box (提问箱). Usage in content: {{< askbox >}}. Strings come from i18n/askbox_*. */ -}}
+{{- $lang := site.Language.Lang -}}
+{{- $keys := slice "placeholder" "note" "submit" "sending" "sent" "private_link" "copy" "copied" "copy_link"
+  "mine_title" "mine_hint" "awaiting" "answered_title" "answered_mark" "total" "empty" "load_more" "unfold_letters" "fold"
+  "followup_placeholder" "closed" "role_asker" "role_owner" "edited" "not_open" "char_count"
+  "to" "to_name" "to_addr" "from" "from_name" "send"
+  "error_generic" "error_network" "error_rate_limited" "error_too_many_pending" "error_too_long"
+  "error_empty" "error_captcha" "error_closed" -}}
+{{- $strings := dict -}}
+{{- range $keys }}{{ $strings = merge $strings (dict . (T (printf "askbox_%s" .))) }}{{ end -}}
+{{- $config := dict
+  "api" (site.Params.askbox.api | default "")
+  "turnstileSiteKey" (site.Params.askbox.turnstileSiteKey | default "")
+  "lang" $lang
+  "locale" site.Language.LanguageCode
+  "maxChars" 2000
+  "strings" $strings -}}
+<div class="askbox" data-askbox data-config="{{ $config | jsonify }}">
+  <noscript><p>{{ T "askbox_noscript" }}</p></noscript>
+</div>
+{{- with resources.Get "js/askbox.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+{{- end }}

@@ -2,13 +2,13 @@
 title: "Casse-Noisette"
 description: "Quelques pensées sur le ballet Casse-Noisette"
 slug: "nutcracker"
-date: 2026-01-02
-weight: 5
+date: 2024-12-21
 image: "nutcracker.jpg"
 dateline: "Texte achevé le 21 décembre 2024, vers 2 h du matin"
 tags:
   - "émotions"
   - "ballet"
+written: "2024.12"
 ---
 Aujourd’hui, après la réunion de groupe, je suis allé à la Place des Arts avec des amis voir *Casse-Noisette*, un ballet dont je rêvais depuis longtemps. *Casse-Noisette* est ma musique préférée entre toutes. D’abord, bien sûr, parce que Tchaïkovski est un génie ; ensuite, parce que c’est la musique qui m’a éveillé à la musique, en classe, à l’école primaire — merci, professeur Wang. Chaque fois que j’écoute *Casse-Noisette*, je mets longtemps à retrouver mon calme, comme si j’avais voyagé à travers le temps et l’espace. Quand je fais un travail un peu fastidieux, j’aime écouter de la musique de ballet — *Coppélia*, *Don Quichotte*, *La Bayadère*, *Le Lac des cygnes* —, mais *Casse-Noisette*, je ne l’écoute presque jamais, car il fait toujours vibrer à l’unisson mon corps et mon âme, et je n’arrive plus à me concentrer.
 

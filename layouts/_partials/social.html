@@ -1,0 +1,7 @@
+{{- $p := site.Data.profile -}}
+<div class="social">
+  {{- range $p.links }}
+  <a href="{{ .url }}" target="_blank" rel="noopener" title="{{ .name }}" aria-label="{{ .name }}">{{ partial "icon.html" .icon }}</a>
+  {{- end }}
+  <a href="#" data-act="copy-mail" data-user="{{ $p.email.user }}" data-domain="{{ $p.email.domain }}" title="{{ $p.email.user }} [at] {{ $p.email.domain }}" aria-label="Email">{{ partial "icon.html" "mail" }}</a>
+</div>

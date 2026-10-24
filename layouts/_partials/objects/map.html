@@ -1,0 +1,10 @@
+{{- /* An essay laid out on a parchment map. */ -}}
+<a class="obj o-map" href="{{ .RelPermalink }}">
+  <span class="obj-bg"></span>
+  {{ partial "deco/compass.html" (dict "class" "cmp") }}
+  <svg class="route" viewBox="0 0 300 90" preserveAspectRatio="none" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 80C70 70 60 40 120 46S200 70 240 34" stroke-width="1.6" stroke-dasharray="5 5"/><path d="M238 26l12 12M250 26l-12 12" stroke-width="2"/><circle cx="20" cy="80" r="3.5" fill="currentColor"/></svg>
+  <p class="o-kicker">{{ with .Params.kicker }}{{ . }} · {{ end }}{{ partial "written.html" . }}</p>
+  <h3>{{ .Title }}</h3>
+  <p class="dek">{{ .Description }}</p>
+  <p class="ex">{{ partial "excerpt.html" . }}</p>
+</a>

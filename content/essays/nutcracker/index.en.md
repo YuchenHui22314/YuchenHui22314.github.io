@@ -2,8 +2,7 @@
 title: "The Nutcracker"
 description: "Some thoughts on The Nutcracker ballet"
 slug: "nutcracker"
-date: 2026-01-02
-weight: 5
+date: 2024-12-21
 image: "nutcracker.jpg"
 aliases:
   - "/p/nutcracker/"
@@ -11,6 +10,7 @@ dateline: "Written around 2 a.m. on December 21, 2024"
 tags:
   - "emotion"
   - "ballet"
+written: "2024.12"
 ---
 Today, after our group meeting, I went to Place des Arts with friends to see *The Nutcracker*, a ballet I had been longing to see for ages. *The Nutcracker* is my favorite music, bar none. The first reason, of course, is that Tchaikovsky is simply phenomenal; the second is that it was the music that first awakened me to music, back in my elementary-school music class—thank you, Teacher Wang. Every time I listen to *The Nutcracker*, it takes me a long while to calm down again, as if I had traveled through time and space. When I’m doing some fairly tedious work, I like to listen to ballet music—*Coppélia*, *Don Quixote*, *La Bayadère*, *Swan Lake*—but *The Nutcracker* is the one I almost never put on, because it always sets my body and soul resonating, and then I can’t concentrate.
 

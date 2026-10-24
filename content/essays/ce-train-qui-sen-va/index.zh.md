@@ -2,12 +2,12 @@
 title: "Ce train qui s'en va"
 description: "等风来，去下一站"
 slug: "ce-train-qui-sen-va"
-date: 2026-01-02
-weight: 10002
+date: 2023-02-01
 image: "ice.jpg"
 dateline: "本文完稿于2023年初"
 tags:
   - "情感"
+written: "2023"
 ---
 在地铁上,我会把手肘撑在地铁的窗沿，然后用拳头顶住脑袋，再把整个身子侧靠在地铁的车厢内壁上。这种姿势使我的身体极度放松，因此能调动感官去感受周围的一切。 
 
