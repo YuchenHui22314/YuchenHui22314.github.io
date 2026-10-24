@@ -24,9 +24,13 @@ function layout() {
     if (home) {
       const map = document.getElementById('hero-map');
       if (map) { map.hidden = false; map.style.width = ''; }
+      // The diagonal runs behind the drawings, or just under the map when there are none.
       const figs = document.getElementById('figs');
-      card.style.setProperty('--p1', (figs.offsetTop + 40) + 'px');
-      card.style.setProperty('--p2', (figs.offsetTop + figs.offsetHeight + 30) + 'px');
+      const name = card.querySelector('.hero-name');
+      const top = figs ? figs.offsetTop + 40 : name.offsetTop + name.offsetHeight - 10;
+      const bottom = figs ? figs.offsetTop + figs.offsetHeight + 30 : top + 110;
+      card.style.setProperty('--p1', top + 'px');
+      card.style.setProperty('--p2', bottom + 'px');
     }
     return;
   }

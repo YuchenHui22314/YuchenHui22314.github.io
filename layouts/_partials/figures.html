@@ -1,5 +1,6 @@
 {{- /* Character art for the home card, one set per colourway; CSS shows the active set.
-       Files live in assets/img/figures/ (see config/_default/params.toml). */ -}}
+       Files live in assets/img/figures/ (see config/_default/params.toml); without them nothing is rendered. */ -}}
+{{- if resources.Match "img/figures/*" }}
 <div class="figs" id="figs">
   {{- range $pal := site.Params.palettes }}
     {{- with index site.Params.figures $pal }}
@@ -13,3 +14,4 @@
     {{- end }}
   {{- end }}
 </div>
+{{- end }}

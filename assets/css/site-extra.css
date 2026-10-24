@@ -216,4 +216,7 @@
   .map-note svg{display:none}
   .map-note span{transform:rotate(-4deg)}
   .album{columns:1}
+  /* No drawings yet: leave room under the diagonal instead of an empty stage. */
+  .card.home.no-figs .hero-name{padding-bottom:24px}
+  .card.home.no-figs .hero-note{padding-top:110px}
 }

@@ -3,7 +3,7 @@
 {{- $p := site.Data.profile -}}
 {{- $name := index $p.name $lang -}}
 {{- $alt := cond (eq $lang "zh") (index $p.name "en") (index $p.name "zh") -}}
-<article class="card home intro" id="card" data-sticker="on">
+<article class="card home intro{{ if not (resources.Match "img/figures/*") }} no-figs{{ end }}" id="card" data-sticker="on">
   {{ partial "deco.html" "home" }}
   {{ partial "nav.html" . }}
   <div class="hero-name">
