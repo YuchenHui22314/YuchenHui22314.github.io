@@ -155,9 +155,9 @@
 
 /* ---------- Colourway switch: a little card cut by the same diagonal, in the next colourway ---------- */
 .pal-btn i{width:17px;height:17px;border-radius:50%;background:linear-gradient(to bottom right,var(--sw-l) 50%,var(--sw-r) 50%);box-shadow:0 0 0 1.5px color-mix(in srgb,currentColor 70%,transparent)}
-:root[data-palette="brown"] .pal-btn i{--sw-l:#ecdcb6;--sw-r:#3c584f}
-:root[data-palette="green"] .pal-btn i{--sw-l:#2e4f78;--sw-r:#eceee7}
-:root[data-palette="blue"] .pal-btn i{--sw-l:#6a4a35;--sw-r:#f0e3c4}
+:root[data-palette="green"] .pal-btn i{--sw-l:#6a4a35;--sw-r:#f0e3c4}
+:root[data-palette="brown"] .pal-btn i{--sw-l:#2e4f78;--sw-r:#eceee7}
+:root[data-palette="blue"] .pal-btn i{--sw-l:#ecdcb6;--sw-r:#3c584f}
 
 /* External links in the navigation (Publications → Google Scholar) */
 .links a .ext{margin-left:4px;vertical-align:1px;opacity:.6}
