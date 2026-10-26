@@ -8,27 +8,6 @@
 </div>
 {{- end }}
 
-{{- with .Params.scroll }}
-<div class="scroll-wrap">
-  <h2 class="sec-h">{{ T "scroll_h" }}</h2>
-  <div class="hscroll" id="hscroll">
-    <div class="roller"></div>
-    <div class="sbody"><div class="sheetp{{ if .lines }} vertical{{ end }}">
-      {{- if .lines }}
-        {{- range .lines }}<div class="q-v">{{ . }}</div>{{ end }}
-        <div class="q-src">{{ .source }}</div>
-        <span class="seal">语辰</span>
-      {{- else }}
-        <div class="q-h">{{ .text }}<small>{{ .source }}</small></div>
-      {{- end }}
-    </div></div>
-    <div class="roller"></div>
-    <div class="slip">{{ .slip }}</div>
-  </div>
-  <div class="scroll-cap"><button type="button" class="pill" data-act="scroll" aria-expanded="false">{{ T "scroll_open" }}</button></div>
-</div>
-{{- end }}
-
 <h2 class="sec-h">{{ T "list_h" }}</h2>
 {{- range $pages.GroupByDate "2006" }}
 <div class="toc-year">

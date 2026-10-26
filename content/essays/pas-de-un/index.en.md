@@ -14,6 +14,7 @@ feature: "jian"
 excerpt: "May in Montreal: warm one moment, cold the next. The moment I stepped out the door, a chill slipped in under my collar."
 jianTitle: "乍暖还寒"
 shortTitle: "A Spring Still Cold"
+scroll: {"slip":"乍暖还寒 · 摘句","text":"Early spring at high latitudes is a symphony scored for winter and summer alone.","source":"from “A Spring Still Cold”"}
 ---
 May in Montreal: warm one moment, cold the next. Spring on the North American continent has a character all its own. It has none of the muggy “south-wind days” of Guangdong and Guangxi, the clammy chill of Jiangnan, or the dry heat of northern China; none of the breakneck warming of Siberia and Central Asia that leaves you in a sweat; and none of the cool, mild mists that shroud Western and Central Europe, born of the warm, moist air that sweeps in unimpeded from the Atlantic. The moment I stepped out the door, a chill slipped in under my collar. I seemed to see, hundreds of kilometers away, the vast, hazy white ice of Hudson Bay, and to hear the north wind still howling, refusing to give up. Down jacket, padded pants—compared with what I wore in the dead of winter a few months ago, my outfit was short just one pair of long johns.
 

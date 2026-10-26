@@ -127,7 +127,6 @@ pub_scholar = "Voir Google Scholar"
 # Essais
 feat_h = "Sur l’étagère"
 list_h = "Tous les essais"
-scroll_h = "Rouleau"
 scroll_open = "Dérouler"
 scroll_close = "Enrouler"
 paper = "Papier"

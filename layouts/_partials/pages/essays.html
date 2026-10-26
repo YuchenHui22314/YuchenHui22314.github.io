@@ -20,6 +20,7 @@
         <div class="body">{{ $p.Content }}</div>
         {{- with $p.Params.dateline }}<div class="dateline">{{ partial "icon.html" "clock" }}{{ . }}</div>{{ end }}
       </article>
+      {{- with $p.Params.scroll }}{{ partial "scroll.html" . }}{{ end }}
     </div>
     <aside class="aside">
       {{- $toc := $p.Fragments.ToHTML 2 2 false }}

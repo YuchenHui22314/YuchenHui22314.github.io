@@ -1,0 +1,20 @@
+{{- /* A hanging scroll with one line from the essay, rolled up until the button opens it.
+       Front matter `scroll`: Chinese gives `lines` (written top to bottom), the other
+       languages `text`; both give `source` and `slip`, the label on the rolled-up scroll. */ -}}
+<div class="scroll-wrap">
+  <div class="hscroll" id="hscroll">
+    <div class="roller"></div>
+    <div class="sbody"><div class="sheetp{{ if .lines }} vertical{{ end }}">
+      {{- if .lines }}
+        {{- range .lines }}<div class="q-v">{{ . }}</div>{{ end }}
+        <div class="q-src">{{ .source }}</div>
+        <span class="seal">语辰</span>
+      {{- else }}
+        <div class="q-h">{{ .text }}<small>{{ .source }}</small></div>
+      {{- end }}
+    </div></div>
+    <div class="roller"></div>
+    <div class="slip">{{ .slip }}</div>
+  </div>
+  <div class="scroll-cap"><button type="button" class="pill" data-act="scroll" aria-expanded="false">{{ T "scroll_open" }}</button></div>
+</div>

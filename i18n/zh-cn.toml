@@ -131,7 +131,6 @@ pub_scholar = "在 Google Scholar 上查看"
 # 随笔
 feat_h = "藏卷"
 list_h = "全部随笔"
-scroll_h = "卷轴"
 scroll_open = "展开卷轴"
 scroll_close = "卷起"
 paper = "纸张"

@@ -1,4 +1,5 @@
-# "Publications" goes straight to Google Scholar, which stays up to date on its own.
+# No "Publications" entry: Google Scholar is already linked from Research and from the
+# icons on the home page.
 [[main]]
 identifier = "about"
 name = "关于我"
@@ -10,14 +11,6 @@ identifier = "research"
 name = "研究"
 pageRef = "/research"
 weight = 2
-
-[[main]]
-identifier = "publications"
-name = "论文"
-url = "https://scholar.google.ca/citations?user=_fiTdwUAAAAJ&hl=zh-CN"
-weight = 3
-[main.params]
-external = true
 
 [[main]]
 identifier = "essays"

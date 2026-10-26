@@ -127,7 +127,6 @@ pub_scholar = "See Google Scholar"
 # Essays
 feat_h = "From the shelf"
 list_h = "All essays"
-scroll_h = "Scroll"
 scroll_open = "Unroll the scroll"
 scroll_close = "Roll it up"
 paper = "Paper"

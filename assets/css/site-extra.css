@@ -95,6 +95,8 @@
 
 /* Essays: the hand scroll in Chinese reads right to left */
 .sbody .sheetp.vertical{flex-direction:row-reverse}
+/* The scroll hangs below the essay it quotes */
+.read-main .scroll-wrap{margin:72px 0 0}
 
 /* Dream chart stars are links */
 .chart a.dream-star path{fill:var(--gold)}
@@ -159,7 +161,7 @@
 :root[data-palette="brown"] .pal-btn i{--sw-l:#2e4f78;--sw-r:#eceee7}
 :root[data-palette="blue"] .pal-btn i{--sw-l:#ecdcb6;--sw-r:#3c584f}
 
-/* External links in the navigation (Publications → Google Scholar) */
+/* External links in the navigation (menu entries with params.external) */
 .links a .ext{margin-left:4px;vertical-align:1px;opacity:.6}
 .drawer .ext{opacity:.6}
 
