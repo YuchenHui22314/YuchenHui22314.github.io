@@ -36,5 +36,5 @@ who = "kid_conan"
 # With `api` empty the page says the box is not open yet.
 # config/development/params.toml points it at the local Worker for `hugo server`.
 [askbox]
-api = "https://ask-api.xiyuchen.workers.dev"
+api = "https://ask.xiyuchen.com"
 turnstileSiteKey = "0x4AAAAAAF6bO8n1mkM13eKn"  # widget "xiyuchen askbox"; the secret lives only on Cloudflare

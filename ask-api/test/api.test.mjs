@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { networkOf } from '../src/network.js';
+import { rawEmail } from '../src/mail.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const WRANGLER = join(ROOT, 'node_modules', 'wrangler', 'bin', 'wrangler.js');
@@ -20,6 +21,7 @@ const MAX_PENDING = 3;
 
 let server;
 let persistDir;
+let log = '';
 
 before(async () => {
   persistDir = mkdtempSync(join(tmpdir(), 'askbox-test-'));
@@ -46,7 +48,6 @@ before(async () => {
     ],
     { cwd: ROOT, env: { ...process.env, CI: '1' }, stdio: ['ignore', 'pipe', 'pipe'] },
   );
-  let log = '';
   server.stdout.on('data', (d) => (log += d));
   server.stderr.on('data', (d) => (log += d));
 
@@ -91,6 +92,21 @@ test('networkOf groups an IPv6 /64 and leaves IPv4 alone', () => {
   assert.equal(networkOf('2001:db8:0:0:1::'), '2001:db8:0:0::/64');
   assert.notEqual(networkOf('2001:db8:1:2::1'), networkOf('2001:db8:1:3::1'));
   assert.equal(networkOf(null), 'unknown');
+});
+
+test('rawEmail encodes a Chinese subject and body as UTF-8', () => {
+  const raw = rawEmail({
+    from: 'askbox@xiyuchen.com', fromName: '提问箱', to: 'me@example.com',
+    subject: '提问箱有新问题', text: '你好\n'.repeat(40), now: new Date(0), id: 'x',
+  });
+  const [head, body] = raw.split('\r\n\r\n');
+  assert.match(head, /^From: =\?UTF-8\?B\?[^?]+\?= <askbox@xiyuchen\.com>\r\n/);
+  assert.match(head, /\r\nTo: <me@example\.com>\r\n/);
+  assert.match(head, /\r\nMessage-ID: <x@xiyuchen\.com>\r\n/);
+  const subject = head.match(/Subject: =\?UTF-8\?B\?([^?]+)\?=/)[1];
+  assert.equal(Buffer.from(subject, 'base64').toString('utf8'), '提问箱有新问题');
+  assert.ok(body.split('\r\n').every((line) => line.length <= 76));
+  assert.equal(Buffer.from(body.replace(/\r\n/g, ''), 'base64').toString('utf8'), '你好\n'.repeat(40));
 });
 
 test('health', async () => {
@@ -148,6 +164,15 @@ test('question lifecycle: private until answered, follow-ups public only after t
   const list = await api('GET', '/api/threads');
   assert.ok(list.data.threads.some((t) => t.id === id));
   assert.ok(list.data.total >= 1);
+});
+
+test('a new question is emailed to the owner', async () => {
+  const before = (log.match(/send_email binding called/g) || []).length;
+  assert.equal((await ask('email me')).status, 201);
+  for (let i = 0; i < 20 && (log.match(/send_email binding called/g) || []).length === before; i++) {
+    await new Promise((r) => setTimeout(r, 250));
+  }
+  assert.ok((log.match(/send_email binding called/g) || []).length > before, log.slice(-800));
 });
 
 test('only the asker can follow up, and only the owner can reply as owner', async () => {

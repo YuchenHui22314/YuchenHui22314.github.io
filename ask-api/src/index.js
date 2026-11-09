@@ -5,7 +5,9 @@
 // follow-ups only become public once the owner answers them. The asker proves
 // ownership of a thread with a random token that is only ever stored hashed.
 
+import { EmailMessage } from 'cloudflare:email';
 import { networkOf } from './network.js';
+import { rawEmail } from './mail.js';
 
 const DEFAULTS = {
   MAX_BODY_CHARS: 2000,
@@ -494,15 +496,35 @@ async function hashIp(request, env) {
 
 // ---------- notifications ----------
 
-// Plain-text POST in the format ntfy.sh expects (https://ntfy.sh/<your-secret-topic>).
+const MAIL_SUBJECTS = { 'New question': '提问箱有新问题', 'New follow-up': '提问箱有新追问' };
+
+// Tell the owner about a new question or follow-up: by email when the MAILER binding is
+// set up (see wrangler.toml), and as a push notice when NOTIFY_URL is set.
 async function notifyOwner(env, title, body, threadId) {
+  const link = env.ADMIN_PAGE_URL ? `${env.ADMIN_PAGE_URL}#${threadId}` : '';
+  await Promise.all([pushNotice(env, title, body, link), emailNotice(env, title, body, link)]);
+}
+
+// Plain-text POST in the format ntfy.sh expects (https://ntfy.sh/<your-secret-topic>).
+async function pushNotice(env, title, body, link) {
   if (!env.NOTIFY_URL) return;
   const headers = { 'Content-Type': 'text/plain; charset=utf-8', Title: title };
-  if (env.ADMIN_PAGE_URL) headers.Click = `${env.ADMIN_PAGE_URL}#${threadId}`;
+  if (link) headers.Click = link;
   try {
     await fetch(env.NOTIFY_URL, { method: 'POST', headers, body: body.slice(0, 500) });
   } catch (err) {
     console.error('notify failed', err);
+  }
+}
+
+async function emailNotice(env, title, body, link) {
+  if (!env.MAILER || !env.MAIL_FROM || !env.MAIL_TO) return;
+  const text = `${body}\n\n——\n${link ? `去管理页回复：${link}\n` : ''}问题在你回复之前不会公开。\n`;
+  const raw = rawEmail({ from: env.MAIL_FROM, fromName: '提问箱', to: env.MAIL_TO, subject: MAIL_SUBJECTS[title] || title, text });
+  try {
+    await env.MAILER.send(new EmailMessage(env.MAIL_FROM, env.MAIL_TO, raw));
+  } catch (err) {
+    console.error('email failed', err);
   }
 }
 
