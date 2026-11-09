@@ -7,6 +7,7 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { networkOf } from '../src/network.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const WRANGLER = join(ROOT, 'node_modules', 'wrangler', 'bin', 'wrangler.js');
@@ -14,6 +15,7 @@ const PORT = 8799;
 const BASE = `http://127.0.0.1:${PORT}`;
 const ADMIN = 'test-admin-token';
 const NEW_THREAD_LIMIT = 20; // the tests before the rate-limit test create ~11 threads
+const ALL_NEW_THREADS_PER_HOUR = 60; // above the ~41 threads the other tests create
 const MAX_PENDING = 3;
 
 let server;
@@ -36,6 +38,9 @@ before(async () => {
       '--var', 'IP_SALT:test-salt',
       '--var', `RATE_NEW_THREADS_PER_HOUR:${NEW_THREAD_LIMIT}`,
       '--var', 'RATE_MESSAGES_PER_HOUR:1000',
+      '--var', `RATE_ALL_NEW_THREADS_PER_HOUR:${ALL_NEW_THREADS_PER_HOUR}`,
+      '--var', 'RATE_ALL_NEW_THREADS_PER_DAY:1000',
+      '--var', 'RATE_ALL_MESSAGES_PER_DAY:1000',
       '--var', `MAX_PENDING_PER_THREAD:${MAX_PENDING}`,
       '--var', 'MAX_BODY_CHARS:200',
     ],
@@ -74,6 +79,19 @@ async function api(method, path, { body, admin, asker, headers = {} } = {}) {
 const ask = (text, extra = {}) => api('POST', '/api/threads', { body: { body: text, lang: 'zh', ...extra } });
 const reply = (id, text) => api('POST', `/api/threads/${id}/messages`, { body: { body: text }, admin: true });
 const followUp = (id, token, text) => api('POST', `/api/threads/${id}/messages`, { body: { body: text }, asker: token });
+// Locally the visitor's address can be set by hand; on Cloudflare the edge always overwrites it.
+const askFrom = (ip, text) => api('POST', '/api/threads', { body: { body: text, lang: 'zh' }, headers: { 'CF-Connecting-IP': ip } });
+
+test('networkOf groups an IPv6 /64 and leaves IPv4 alone', () => {
+  assert.equal(networkOf('203.0.113.7'), '203.0.113.7');
+  assert.equal(networkOf('::ffff:203.0.113.7'), '203.0.113.7');
+  assert.equal(networkOf('2001:db8:1:2:aaaa::1'), '2001:db8:1:2::/64');
+  assert.equal(networkOf('2001:0DB8:0001:0002:ffff:ffff:ffff:ffff'), '2001:db8:1:2::/64');
+  assert.equal(networkOf('2001:db8::1'), '2001:db8:0:0::/64');
+  assert.equal(networkOf('2001:db8:0:0:1::'), '2001:db8:0:0::/64');
+  assert.notEqual(networkOf('2001:db8:1:2::1'), networkOf('2001:db8:1:3::1'));
+  assert.equal(networkOf(null), 'unknown');
+});
 
 test('health', async () => {
   const r = await api('GET', '/api/health');
@@ -251,12 +269,37 @@ test('CORS allows the site origins only', async () => {
   assert.equal(bad.headers.get('Access-Control-Allow-Origin'), null);
 });
 
-// Keep last: it uses up this IP's new-question allowance.
+// The tests from here on use up allowances, so they stay at the end, in this order.
 test('rate limit on new questions per network', async () => {
-  let status;
+  let r;
   for (let i = 0; i < NEW_THREAD_LIMIT + 1; i++) {
-    status = (await ask(`rate ${i}`)).status;
-    if (status === 429) break;
+    r = await ask(`rate ${i}`);
+    if (r.status === 429) break;
   }
-  assert.equal(status, 429);
+  assert.equal(r.status, 429);
+  assert.equal(r.data.error, 'rate_limited');
+});
+
+test('addresses in one IPv6 /64 share a single allowance', async () => {
+  let r;
+  for (let i = 1; i <= NEW_THREAD_LIMIT + 1; i++) {
+    r = await askFrom(`2001:db8:1:2::${i.toString(16)}`, `v6 ${i}`);
+    if (r.status === 429) break;
+  }
+  assert.equal(r.status, 429);
+  assert.equal(r.data.error, 'rate_limited');
+  assert.equal((await askFrom('2001:db8:1:3::1', 'next block')).status, 201);
+});
+
+test('site-wide cap stops new questions from many networks', async () => {
+  let r;
+  let created = 0;
+  for (let i = 1; i <= ALL_NEW_THREADS_PER_HOUR + 1; i++) {
+    r = await askFrom(`10.1.0.${i}`, `flood ${i}`);
+    if (r.status !== 201) break;
+    created++;
+  }
+  assert.equal(r.status, 429);
+  assert.equal(r.data.error, 'busy');
+  assert.ok(created < ALL_NEW_THREADS_PER_HOUR, 'the earlier tests count towards the cap too');
 });

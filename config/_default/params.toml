@@ -33,8 +33,8 @@ file = "blue-kid-conan.webp"
 who = "kid_conan"
 
 # Q&A box (提问箱). The API lives in ask-api/; see ask-api/README.md for deployment.
-# Leave `api` empty until the Worker is deployed: the page then says the box is not open yet.
+# With `api` empty the page says the box is not open yet.
 # config/development/params.toml points it at the local Worker for `hugo server`.
 [askbox]
-api = ""
+api = "https://ask-api.xiyuchen.workers.dev"
 turnstileSiteKey = ""

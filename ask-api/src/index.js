@@ -5,16 +5,23 @@
 // follow-ups only become public once the owner answers them. The asker proves
 // ownership of a thread with a random token that is only ever stored hashed.
 
+import { networkOf } from './network.js';
+
 const DEFAULTS = {
   MAX_BODY_CHARS: 2000,
   MAX_PENDING_PER_THREAD: 5,
   RATE_NEW_THREADS_PER_HOUR: 5,
   RATE_MESSAGES_PER_HOUR: 20,
+  // Caps over all networks together, for floods that come from many networks at once.
+  RATE_ALL_NEW_THREADS_PER_HOUR: 30,
+  RATE_ALL_NEW_THREADS_PER_DAY: 100,
+  RATE_ALL_MESSAGES_PER_DAY: 300,
 };
 const PAGE_SIZE = 20;
 const MAX_PAGE_SIZE = 50;
 const MAX_REQUEST_BYTES = 16 * 1024;
 const HOUR = 60 * 60 * 1000;
+const DAY = 24 * HOUR;
 const LANGS = ['zh', 'en', 'fr'];
 
 class HttpError extends Error {
@@ -407,18 +414,36 @@ function rejectHoneypot(input) {
   if (input.website) throw new HttpError(400, 'rejected', 'Rejected');
 }
 
+// Per network first, so one noisy network hears about its own limit; then the
+// site-wide caps, which stop new questions for everyone until the flood has passed.
 async function enforceRateLimits(env, ipHash, { newThread }) {
-  const since = Date.now() - HOUR;
+  const hourAgo = Date.now() - HOUR;
+  const dayAgo = Date.now() - DAY;
+  const busy = () => new HttpError(429, 'busy', 'The Q&A box is getting too many questions right now, please try again later');
+
   if (newThread) {
-    const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM threads WHERE ip_hash = ? AND created_at > ?').bind(ipHash, since).first('n');
+    const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM threads WHERE ip_hash = ? AND created_at > ?').bind(ipHash, hourAgo).first('n');
     if (n >= limitOf(env, 'RATE_NEW_THREADS_PER_HOUR')) {
       throw new HttpError(429, 'rate_limited', 'Too many questions from your network, please try again later');
     }
   }
-  const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM messages WHERE ip_hash = ? AND created_at > ?').bind(ipHash, since).first('n');
+  const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM messages WHERE ip_hash = ? AND created_at > ?').bind(ipHash, hourAgo).first('n');
   if (n >= limitOf(env, 'RATE_MESSAGES_PER_HOUR')) {
     throw new HttpError(429, 'rate_limited', 'Too many messages from your network, please try again later');
   }
+
+  if (newThread) {
+    const all = await env.DB.prepare(
+      'SELECT COUNT(*) AS day, COALESCE(SUM(created_at > ?), 0) AS hour FROM threads WHERE created_at > ?',
+    ).bind(hourAgo, dayAgo).first();
+    if (all.hour >= limitOf(env, 'RATE_ALL_NEW_THREADS_PER_HOUR') || all.day >= limitOf(env, 'RATE_ALL_NEW_THREADS_PER_DAY')) {
+      throw busy();
+    }
+  }
+  const allMessages = await env.DB.prepare(
+    "SELECT COUNT(*) AS n FROM messages WHERE created_at > ? AND author = 'asker'",
+  ).bind(dayAgo).first('n');
+  if (allMessages >= limitOf(env, 'RATE_ALL_MESSAGES_PER_DAY')) throw busy();
 }
 
 async function verifyTurnstile(env, token, request) {
@@ -461,10 +486,10 @@ function timingSafeEqualStr(a, b) {
   return crypto.subtle.timingSafeEqual(ea, eb);
 }
 
-// Raw IPs are never stored; a salted hash is enough for rate limiting.
+// Raw IPs are never stored; a salted hash of the visitor's network is enough for rate limiting.
 async function hashIp(request, env) {
-  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-  return (await sha256Hex(`${env.IP_SALT || ''}|${ip}`)).slice(0, 32);
+  const network = networkOf(request.headers.get('CF-Connecting-IP'));
+  return (await sha256Hex(`${env.IP_SALT || ''}|${network}`)).slice(0, 32);
 }
 
 // ---------- notifications ----------

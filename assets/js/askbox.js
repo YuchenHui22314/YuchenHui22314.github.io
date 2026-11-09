@@ -235,6 +235,7 @@ function init(root) {
     switch (err.code) {
       case 'network': return t('error_network');
       case 'rate_limited': return t('error_rate_limited');
+      case 'busy': return t('error_busy');
       case 'too_many_pending': return t('error_too_many_pending');
       case 'too_long': return t('error_too_long', cfg.maxChars);
       case 'empty': return t('error_empty');
