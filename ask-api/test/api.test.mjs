@@ -175,6 +175,13 @@ test('a new question is emailed to the owner', async () => {
   assert.ok((log.match(/send_email binding called/g) || []).length > before, log.slice(-800));
 });
 
+test('the owner can send a test email; nobody else can', async () => {
+  assert.equal((await api('POST', '/api/admin/test-email')).status, 401);
+  const r = await api('POST', '/api/admin/test-email', { admin: true });
+  assert.equal(r.status, 200);
+  assert.equal(r.data.sent, true);
+});
+
 test('only the asker can follow up, and only the owner can reply as owner', async () => {
   const { thread } = (await ask('谁可以回复？')).data;
   const id = thread.id;

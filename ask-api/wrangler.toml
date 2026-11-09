@@ -1,8 +1,9 @@
 name = "ask-api"
 main = "src/index.js"
 compatibility_date = "2026-04-01"
-# Served at https://ask-api.xiyuchen.workers.dev only; no per-version preview addresses.
-workers_dev = true
+# Served at ask.xiyuchen.com only (see routes): no workers.dev address, which would also
+# bypass the zone's firewall rules, and no per-version preview addresses.
+workers_dev = false
 preview_urls = false
 
 # The site's own address for the API: *.workers.dev is blocked in mainland China.

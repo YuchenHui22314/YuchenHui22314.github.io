@@ -45,13 +45,15 @@ npm test                         # 端到端测试（会自己起一个临时数
 6. 把这个地址填进 `config/_default/params.toml` 的 `[askbox] api`，推送网站。
 7. 打开 `https://xiyuchen.com/ask/admin/`，输入 ADMIN_TOKEN 登录。
 
-### 让中国大陆的访客也能用（推荐）
+### 现在的部署（2026-11-09）
 
-`*.workers.dev` 在大陆访问不了。把 xiyuchen.com 的 DNS（现在在 Cosmotown）迁到 Cloudflare（免费；GitHub Pages 照常工作），然后在 `wrangler.toml` 里取消注释 `routes = [{ pattern = "ask.xiyuchen.com", custom_domain = true }]`，重新部署，再把 `api` 改成 `https://ask.xiyuchen.com`。
+- xiyuchen.com 的 DNS 在 Cloudflare（域名仍在 Cosmotown 注册、续费）。网站的记录都是 DNS only，GitHub Pages 照常提供网站。
+- API 只在 `https://ask.xiyuchen.com`（`wrangler.toml` 的 `routes`）。`*.workers.dev` 在大陆打不开，也会绕过防火墙规则，所以关掉了。
+- 防机器人：Turnstile 小组件 "xiyuchen askbox"，site key 在 `params.toml`，secret 用 `npx wrangler secret put TURNSTILE_SECRET` 设置。
+- 新问题和追问发邮件到 `MAIL_TO`：xiyuchen.com 开了 Email Routing，收件地址在 Cloudflare 后台验证过。换收件地址时，要在后台重新添加并验证，再改 `wrangler.toml` 里的两处地址。管理员可以 `POST /api/admin/test-email` 发一封测试信。
 
 ### 可选
 
-- **防机器人**：在 Cloudflare 后台创建一个 Turnstile 小组件，把 site key 填进 `params.toml` 的 `turnstileSiteKey`，再 `npx wrangler secret put TURNSTILE_SECRET`。
 - **新问题推送到手机**：装 [ntfy](https://ntfy.sh) App 订阅一个只有你知道的主题名，然后 `npx wrangler secret put NOTIFY_URL`，值填 `https://ntfy.sh/<主题名>`。
 
 ## API 一览
@@ -66,6 +68,7 @@ npm test                         # 端到端测试（会自己起一个临时数
 | GET | `/api/admin/threads?filter=pending\|answered\|hidden\|all` | 你 | 管理列表 |
 | PATCH | `/api/admin/threads/:id` | 你 | `{ status: "open"\|"hidden", closed: bool }` |
 | DELETE | `/api/admin/threads/:id` | 你 | 删除整个问题 |
+| POST | `/api/admin/test-email` | 你 | 给 `MAIL_TO` 发一封测试邮件 |
 | PATCH / DELETE | `/api/admin/messages/:id` | 你 | 编辑自己的回复 / 删除一条消息 |
 
 管理员请求带 `Authorization: Bearer <ADMIN_TOKEN>`。

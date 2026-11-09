@@ -78,6 +78,7 @@ async function route(request, env, ctx) {
   if (path.startsWith('/api/admin/')) {
     if (!(await isAdmin(request, env))) throw new HttpError(401, 'unauthorized', 'Admin token required');
     if (path === '/api/admin/threads' && method === 'GET') return adminList(env, url);
+    if (path === '/api/admin/test-email' && method === 'POST') return adminTestEmail(env);
     if ((m = path.match(/^\/api\/admin\/threads\/([A-Za-z0-9]{6,32})$/))) {
       if (method === 'PATCH') return adminUpdateThread(request, env, m[1]);
       if (method === 'DELETE') return adminDeleteThread(env, m[1]);
@@ -515,6 +516,19 @@ async function pushNotice(env, title, body, link) {
   } catch (err) {
     console.error('notify failed', err);
   }
+}
+
+// One notice email on demand, to check the email setup; unlike emailNotice it reports failures.
+async function adminTestEmail(env) {
+  if (!env.MAILER || !env.MAIL_FROM || !env.MAIL_TO) throw new HttpError(400, 'no_mailer', 'Email is not set up');
+  const text = '这是一封测试邮件。以后有人在提问箱提问或追问，你都会收到这样一封信。\n';
+  const raw = rawEmail({ from: env.MAIL_FROM, fromName: '提问箱', to: env.MAIL_TO, subject: '提问箱：测试邮件', text });
+  try {
+    await env.MAILER.send(new EmailMessage(env.MAIL_FROM, env.MAIL_TO, raw));
+  } catch (err) {
+    throw new HttpError(502, 'email_failed', String(err.message || err));
+  }
+  return json({ sent: true, to: env.MAIL_TO });
 }
 
 async function emailNotice(env, title, body, link) {
