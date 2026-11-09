@@ -37,4 +37,4 @@ who = "kid_conan"
 # config/development/params.toml points it at the local Worker for `hugo server`.
 [askbox]
 api = "https://ask-api.xiyuchen.workers.dev"
-turnstileSiteKey = ""
+turnstileSiteKey = "0x4AAAAAAF6bO8n1mkM13eKn"  # widget "xiyuchen askbox"; the secret lives only on Cloudflare

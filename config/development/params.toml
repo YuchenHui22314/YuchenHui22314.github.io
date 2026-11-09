@@ -1,3 +1,5 @@
 # Only used by `hugo server` (the "development" environment).
 [askbox]
 api = "http://127.0.0.1:8787"
+# Cloudflare's test key: the widget always passes, and the local Worker has no secret to check it.
+turnstileSiteKey = "1x00000000000000000000AA"
