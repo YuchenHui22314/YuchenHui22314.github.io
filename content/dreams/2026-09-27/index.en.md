@@ -1,0 +1,9 @@
+---
+title: "Dream, September 27, 2026"
+description: "On an island in the moat of the Forbidden City: the red walls change color on my phone, and a magpie steals fluff from my fleece."
+slug: 2026-09-27
+date: 2026-09-27
+tags:
+  - "Forbidden City"
+---
+Today I dreamed I was on an island in the moat around the Forbidden City in Beijing. It was almost dinner time, so I called my mom to see if she wanted to eat together. When she picked up, it was very noisy on her end. She was talking with other people, and it sounded like she was at a dinner party. So I let it go (*laisser tomber*). After I hung up, I suddenly noticed how bright and lovely the spring sunshine was. I had to take a photo of the Forbidden City! But something very strange happened. On my phone’s camera screen, the red walls of the Forbidden City had turned into greenish-yellow clay brick walls! What is going on? I rubbed my eyes and looked again. Same texture. I moved the phone away and looked with my own eyes. The walls were red again! What? What is going on, does this phone have a filter on it… I played with it for a long time and still couldn’t figure it out… After that I gave up and started watching the birds on the moat. A magpie flew over. I lunged at it. It dodged a little, and then it actually flew right back at me! Before I could work out why it was so bold, it had already pulled a big beakful of fluff off my fleece and flown away… I was speechless. So the crow family really loves fleecing people this much… Later I went to the canteen alone and started ordering. There was a pork rib set meal with two side dishes for just a little over 11 yuan. I thought, this is so much better than what I eat in Canada. I told the canteen lady I’d take that set, and to add a fish for me too, I’d pay for it separately… Watching her scoop up the fish with onions and green peppers, I was quietly drooling. I was about to have a feast! But right then, I let myself down and woke up.

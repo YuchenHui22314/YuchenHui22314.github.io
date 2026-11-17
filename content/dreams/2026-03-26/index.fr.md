@@ -1,0 +1,9 @@
+---
+title: "Rêve du 26 mars 2026"
+description: "De retour en CE2 en voyageur dans le temps : K disparaît soudain du monde, et le numéro de notre classe et les unités de mesure changent en silence."
+slug: 2026-03-26
+date: 2026-03-26
+tags:
+  - "voyage dans le temps"
+---
+Aujourd’hui, j’ai rêvé que j’étais de nouveau un voyageur dans le temps, revenu dans ma classe de primaire, à peu près en CE2. Tous les enfants étaient des visages familiers. XN avait fait le voyage avec moi. Ah oui, au début, il y avait aussi K. Mais après un cours, K, qui était assis devant XN et moi, a soudain disparu. Sa silhouette et toutes ses affaires ont été effacées de ce monde en un instant. Ce n’était pas seulement un effacement physique : son existence avait disparu de la logique de ce monde. Les enfants ne se souvenaient plus qu’il y avait un certain K dans la classe, et ses effets sur ce monde avaient disparu eux aussi… Seuls XN et moi savions que K, en tant que voyageur dans le temps, avait choisi de sauter vers un autre moment. Peut-être qu’il trouvait ce cours trop ennuyeux. Chose étonnante, après ce cours, ma classe, la 3-2, est devenue la 3-4 ! Tout le monde pensait avoir toujours été en 3-4 et non en 3-2. C’était sans doute un autre signe que les effets de K sur ce monde avaient été effacés. Seuls XN et moi nous souvenions que nous étions en 3-2 avant. À ce moment-là, un enfant a montré une feuille à C, notre titulaire, en demandant : « Pourquoi c’est écrit classe 3-2 sur la feuille ? Notre classe, ce n’est pas la 3-4 ? » J’ai eu un choc : le monde n’aurait-il changé qu’en partie ?… Ça… ne semblait pas très logique. C avait l’air perplexe aussi et a dit que c’était peut-être une erreur d’impression. Plus tard, nous avons découvert que les unités de mesure du monde avaient elles aussi un peu changé… Seule la règle que XN avait toujours sur soi gardait les unités d’origine… Un segment de 3,5 cm mesuré avec elle faisait bien 3,5 cm.

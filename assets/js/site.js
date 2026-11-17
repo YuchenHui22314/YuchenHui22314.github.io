@@ -282,3 +282,52 @@ if (progress && read) {
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
+
+/* ---------- Dreams: keep the star labels on the chart from overlapping ----------
+   Stars a few days apart sit side by side, and their date labels can land on each other
+   or on a neighbouring star. Labels are placed newest first; one that hits a star or a
+   label already placed takes the nearest free spot a few pixels away, trying its
+   data-push direction first and sideways moves last. The boxes follow the digits (about
+   10px tall), not the font's full line height. Without the script the labels only
+   overlap; the list next to the chart has the dates. */
+const LABEL_MOVES = [];
+for (const dy of [0, 6, -6, 12, -12, 18, -18, 24, -24, 30, -30]) for (const dx of [0, 6, -6, 12, -12, 18, -18]) LABEL_MOVES.push([dx, dy]);
+LABEL_MOVES.sort((p, q) => (Math.abs(p[0]) * 1.5 + Math.abs(p[1])) - (Math.abs(q[0]) * 1.5 + Math.abs(q[1])));
+function unclutterStars() {
+  document.querySelectorAll('svg.chart').forEach((svg) => {
+    const boxes = [];
+    // The chart's own text (year on each ring, month names) is in the way too.
+    const inv = svg.getScreenCTM()?.inverse();
+    if (inv) svg.querySelectorAll('text').forEach((t) => {
+      if (t.closest('.dream-star')) return;
+      const r = t.getBoundingClientRect();
+      const p = new DOMPoint(r.left, r.top).matrixTransform(inv), q = new DOMPoint(r.right, r.bottom).matrixTransform(inv);
+      boxes.push({ x: p.x, y: p.y + (q.y - p.y) * 0.2, w: q.x - p.x, h: (q.y - p.y) * 0.6 });
+    });
+    const labels = [...svg.querySelectorAll('.dream-star')].map((a) => {
+      const t = a.querySelector('text');
+      const m = /translate\(([-\d.]+)[ ,]+([-\d.]+)\)/.exec(a.querySelector('g').getAttribute('transform') || '');
+      if (!t || !m) return null;
+      const sx = +m[1], sy = +m[2];
+      boxes.push({ x: sx - 9, y: sy - 9, w: 18, h: 18 });
+      if (t.dataset.x0 == null) { t.dataset.x0 = t.getAttribute('x'); t.dataset.y0 = t.getAttribute('y'); }
+      t.setAttribute('x', t.dataset.x0);
+      t.setAttribute('y', t.dataset.y0);
+      const b = t.getBBox();
+      return { t, dir: t.dataset.push === 'up' ? -1 : 1, x0: b.x + sx, y0: +t.dataset.y0 + sy - 10, w: b.width, h: 11 };
+    }).filter(Boolean);
+    const free = (x, y, l) => !boxes.some((o) => x < o.x + o.w + 3 && x + l.w + 3 > o.x && y < o.y + o.h + 1 && y + l.h + 1 > o.y);
+    for (const l of labels) {
+      const [dx, dy] = LABEL_MOVES.find(([dx, dy]) => free(l.x0 + dx, l.y0 + dy * l.dir, l)) || [0, 0];
+      l.x = l.x0 + dx; l.y = l.y0 + dy * l.dir;
+      if (dx) l.t.setAttribute('x', +l.t.dataset.x0 + dx);
+      if (dy) l.t.setAttribute('y', +l.t.dataset.y0 + dy * l.dir);
+      boxes.push(l);
+    }
+  });
+}
+if (document.querySelector('.dream-star')) {
+  unclutterStars();
+  document.fonts?.ready.then(unclutterStars);
+  addEventListener('load', unclutterStars);
+}

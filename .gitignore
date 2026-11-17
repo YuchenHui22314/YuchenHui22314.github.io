@@ -3,3 +3,6 @@ resources
 .hugo_build.lock
 
 node_modules/
+
+# Private notes that must never reach the public repository (e.g. the dream name table)
+private/

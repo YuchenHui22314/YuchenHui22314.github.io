@@ -4,27 +4,80 @@
 {{- $years = sort (uniq $years) -}}
 {{- $step := 40.0 }}{{ if gt (len $years) 2 }}{{ $step = div 80.0 (sub (len $years) 1) }}{{ end -}}
 {{- $ring := dict }}{{ range $i, $y := $years }}{{ $ring = merge $ring (dict (string $y) (sub 120.0 (mul $i $step))) }}{{ end -}}
+{{- /* Each star sits at its date on its year's ring. Dreams a few days apart would pile up,
+       so stars closer than $minArc px are spread along the ring: one pass pushes later stars
+       forward, one pushes earlier stars back, and each star takes the average of the two.
+       Both passes keep the gap, so the average does too, and nobody moves further than needed. */ -}}
+{{- $minArc := 24.0 -}}
+{{- $angle := dict -}}
+{{- range $y := $years -}}
+  {{- $r := index $ring (string $y) -}}
+  {{- $gap := div $minArc $r -}}
+  {{- $ks := slice }}{{ $as := slice -}}
+  {{- range sort $dreams "Date" "asc" }}{{ if eq .Date.Year $y -}}
+    {{- $ks = $ks | append .RelPermalink -}}
+    {{- $as = $as | append (sub (div (mul (float .Date.YearDay) (mul 2 math.Pi)) 365.0) (div math.Pi 2)) -}}
+  {{- end }}{{ end -}}
+  {{- $n := len $as -}}
+  {{- $fw := slice }}{{ $prev := -1000.0 -}}
+  {{- range $as }}{{ $prev = math.Max . (add $prev $gap) }}{{ $fw = $fw | append $prev }}{{ end -}}
+  {{- $bw := dict }}{{ $next := 1000.0 -}}
+  {{- range $j := seq $n }}{{ $i := sub $n $j -}}
+    {{- $next = math.Min (index $as $i) (sub $next $gap) }}{{ $bw = merge $bw (dict (string $i) $next) -}}
+  {{- end -}}
+  {{- range $i, $k := $ks }}{{ $angle = merge $angle (dict $k (div (add (index $fw $i) (index $bw (string $i))) 2.0)) }}{{ end -}}
+{{- end -}}
 <div class="dreams">
+  <div class="dreams-l">
   <figure style="margin:0">
     <svg class="chart" viewBox="-220 -220 440 440" role="img" aria-label="{{ T "dream_cap" }}" style="color:var(--n-ink)">
       {{ partial "deco/chart-frame.html" (split (T "months") " ") }}
       {{- range $y, $r := $ring }}
       <circle class="ring y" r="{{ $r }}"/><text x="4" y="{{ sub -2 $r }}" text-anchor="start">{{ $y }}</text>
       {{- end }}
+      {{- /* Labels show the date only (the tag is in the tooltip) and point into empty
+             space: stars on the left and right of the innermost ring label toward the
+             empty centre; every other star labels outward, beside it on the sides and
+             above or below it near the top and bottom. data-push tells site.js which way
+             to move a label that still overlaps something. */ -}}
+      {{- $rmin := index $ring (string (index $years (sub (len $years) 1))) -}}
       {{- range $dreams }}
         {{- $r := index $ring (string .Date.Year) -}}
-        {{- $a := sub (div (mul (float .Date.YearDay) (mul 2 math.Pi)) 365.0) (div math.Pi 2) -}}
+        {{- $a := index $angle .RelPermalink -}}
+        {{- $c := math.Cos $a }}{{ $s := math.Sin $a }}{{ $in := eq $r $rmin -}}
+        {{- $lx := 0 }}{{ $ly := 0 }}{{ $anchor := "middle" -}}
+        {{- if le $c -0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = 17 }}{{ $anchor = "start" }}{{ else }}{{ $lx = -17 }}{{ $anchor = "end" }}{{ end -}}
+        {{- else if ge $c 0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = -17 }}{{ $anchor = "end" }}{{ else }}{{ $lx = 17 }}{{ $anchor = "start" }}{{ end -}}
+        {{- else if gt $s 0.0 }}{{ $ly = 28 -}}
+        {{- else }}{{ $ly = -19 }}{{ end -}}
       <a href="{{ .RelPermalink }}" class="dream-star" aria-label="{{ .Title }}">
-        <g transform="translate({{ printf "%.1f" (mul (math.Cos $a) $r) }} {{ printf "%.1f" (mul (math.Sin $a) $r) }})">
+        <title>{{ .Title }}{{ with .Params.tags }} · {{ index . 0 }}{{ end }}</title>
+        <g transform="translate({{ printf "%.1f" (mul $c $r) }} {{ printf "%.1f" (mul $s $r) }})">
           <circle r="16" fill="var(--gold)" opacity=".18"/>
           <path d="M0-11C.7-3 3-.7 11 0 3 .7.7 3 0 11-.7 3-3 .7-11 0-3-.7-.7-3 0-11z"/>
-          <text x="16" y="-10" text-anchor="start" style="fill:var(--n-ink)">{{ .Date.Format "1.2" }}{{ with .Params.tags }} · {{ index . 0 }}{{ end }}</text>
+          <text x="{{ $lx }}" y="{{ $ly }}" text-anchor="{{ $anchor }}" data-push="{{ cond (gt $s 0.0) "down" "up" }}" style="fill:var(--n-ink)">{{ .Date.Format "1.2" }}</text>
         </g>
       </a>
       {{- end }}
     </svg>
     <figcaption class="chart-cap">{{ T "dream_cap" }}</figcaption>
   </figure>
+  {{- /* A poem on red-ruled letter paper (笺纸), set vertically and read right to left:
+         front matter `poem` gives `title` and `lines`; English and French add a plain
+         translation (`transTitle`, `trans`) below the paper. */ -}}
+  {{- with .Params.poem }}
+  <figure class="shijian">
+    <div class="sj-paper" lang="zh-Hans">
+      <div class="sj-t">{{ .title }}</div>
+      {{- range .lines }}<div class="sj-l">{{ . }}</div>{{ end }}
+      <div class="sj-seal"><span class="seal">语辰</span></div>
+    </div>
+    {{- with .trans }}
+    <figcaption class="sj-tr">{{ with $.Params.poem.transTitle }}<b>{{ . }}</b>{{ end }}{{ range $i, $l := . }}{{ if $i }}<br>{{ end }}{{ $l }}{{ end }}</figcaption>
+    {{- end }}
+  </figure>
+  {{- end }}
+  </div>
   <div>
     <h2 class="sec-h">{{ T "dreams_h" }}</h2>
     <div class="dlist">

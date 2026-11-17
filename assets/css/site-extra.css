@@ -222,3 +222,18 @@
   .card.home.no-figs .hero-name{padding-bottom:24px}
   .card.home.no-figs .hero-note{padding-top:110px}
 }
+
+/* Dreams: the poem 《桐》 on red-ruled letter paper (笺纸) under the star chart. Columns are
+   42px wide and the red rules sit on their left edges; the text reads right to left. */
+.shijian{margin:48px auto 0;width:fit-content;max-width:100%}
+.sj-paper{position:relative;display:flex;flex-direction:row-reverse;padding:26px 22px;color:var(--jian-ink);
+  transform:rotate(-1deg);filter:brightness(calc(var(--obj-dim) * .94));
+  background:repeating-linear-gradient(to left,transparent 0 41px,var(--jian-rule) 41px 42px) 22px 26px/calc(100% - 44px) calc(100% - 52px) no-repeat,var(--jian);
+  box-shadow:inset 0 0 0 10px var(--jian),inset 0 0 0 11.5px var(--jian-rule),inset 0 0 0 14px var(--jian),inset 0 0 0 15px var(--jian-rule),0 20px 34px -16px rgba(0,0,0,.6)}
+.sj-t,.sj-l{writing-mode:vertical-rl;width:42px;font:400 25px/42px var(--f-brush);letter-spacing:.22em}
+.sj-t{font-size:32px;padding-top:4px}
+.sj-l{padding-top:34px}
+.sj-seal{width:42px;display:flex;align-items:flex-end;justify-content:center}
+.sj-seal .seal{font-size:13px;transform:rotate(-4deg)}
+.sj-tr{margin:26px 0 0;text-align:center;font:400 16px/1.65 var(--f-body);color:var(--muted)}
+.sj-tr b{display:block;margin-bottom:6px;font-weight:600;color:var(--n-ink)}
