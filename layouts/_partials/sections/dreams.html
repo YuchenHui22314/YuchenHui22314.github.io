@@ -1,9 +1,11 @@
 {{- $dreams := sort .RegularPages "Date" "desc" -}}
-{{- /* One ring per year, from the first dream to this year; later years sit further in. */ -}}
+{{- /* One ring per year, from the first dream to this year; later years sit further in.
+       The outer ring stays inside the month band (r 160); rings sit 55px apart while there
+       are two, and share 135 → 65 once there are more. */ -}}
 {{- $years := slice now.Year }}{{ range $dreams }}{{ $years = $years | append .Date.Year }}{{ end -}}
 {{- $years = sort (uniq $years) -}}
-{{- $step := 40.0 }}{{ if gt (len $years) 2 }}{{ $step = div 80.0 (sub (len $years) 1) }}{{ end -}}
-{{- $ring := dict }}{{ range $i, $y := $years }}{{ $ring = merge $ring (dict (string $y) (sub 120.0 (mul $i $step))) }}{{ end -}}
+{{- $step := 55.0 }}{{ if gt (len $years) 2 }}{{ $step = div 70.0 (sub (len $years) 1) }}{{ end -}}
+{{- $ring := dict }}{{ range $i, $y := $years }}{{ $ring = merge $ring (dict (string $y) (sub 135.0 (mul $i $step))) }}{{ end -}}
 {{- /* Each star sits at its date on its year's ring. Dreams a few days apart would pile up,
        so stars closer than $minArc px are spread along the ring: one pass pushes later stars
        forward, one pushes earlier stars back, and each star takes the average of the two.
@@ -33,7 +35,7 @@
     <svg class="chart" viewBox="-220 -220 440 440" role="img" aria-label="{{ T "dream_cap" }}" style="color:var(--n-ink)">
       {{ partial "deco/chart-frame.html" (split (T "months") " ") }}
       {{- range $y, $r := $ring }}
-      <circle class="ring y" r="{{ $r }}"/><text x="4" y="{{ sub -2 $r }}" text-anchor="start">{{ $y }}</text>
+      <circle class="ring y" r="{{ $r }}"/><text class="yr" x="4" y="{{ sub -2 $r }}" text-anchor="start">{{ $y }}</text>
       {{- end }}
       {{- /* Labels show the date only (the tag is in the tooltip) and point into empty
              space: stars on the left and right of the innermost ring label toward the
@@ -46,15 +48,15 @@
         {{- $a := index $angle .RelPermalink -}}
         {{- $c := math.Cos $a }}{{ $s := math.Sin $a }}{{ $in := eq $r $rmin -}}
         {{- $lx := 0 }}{{ $ly := 0 }}{{ $anchor := "middle" -}}
-        {{- if le $c -0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = 17 }}{{ $anchor = "start" }}{{ else }}{{ $lx = -17 }}{{ $anchor = "end" }}{{ end -}}
-        {{- else if ge $c 0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = -17 }}{{ $anchor = "end" }}{{ else }}{{ $lx = 17 }}{{ $anchor = "start" }}{{ end -}}
-        {{- else if gt $s 0.0 }}{{ $ly = 28 -}}
-        {{- else }}{{ $ly = -19 }}{{ end -}}
+        {{- if le $c -0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = 15 }}{{ $anchor = "start" }}{{ else }}{{ $lx = -15 }}{{ $anchor = "end" }}{{ end -}}
+        {{- else if ge $c 0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = -15 }}{{ $anchor = "end" }}{{ else }}{{ $lx = 15 }}{{ $anchor = "start" }}{{ end -}}
+        {{- else if gt $s 0.0 }}{{ $ly = 25 -}}
+        {{- else }}{{ $ly = -16 }}{{ end -}}
       <a href="{{ .RelPermalink }}" class="dream-star" aria-label="{{ .Title }}">
         <title>{{ .Title }}{{ with .Params.tags }} · {{ index . 0 }}{{ end }}</title>
         <g transform="translate({{ printf "%.1f" (mul $c $r) }} {{ printf "%.1f" (mul $s $r) }})">
-          <circle r="16" fill="var(--gold)" opacity=".18"/>
-          <path d="M0-11C.7-3 3-.7 11 0 3 .7.7 3 0 11-.7 3-3 .7-11 0-3-.7-.7-3 0-11z"/>
+          <circle r="13" fill="var(--gold)" opacity=".18"/>
+          <path transform="scale(.82)" d="M0-11C.7-3 3-.7 11 0 3 .7.7 3 0 11-.7 3-3 .7-11 0-3-.7-.7-3 0-11z"/>
           <text x="{{ $lx }}" y="{{ $ly }}" text-anchor="{{ $anchor }}" data-push="{{ cond (gt $s 0.0) "down" "up" }}" style="fill:var(--n-ink)">{{ .Date.Format "1.2" }}</text>
         </g>
       </a>

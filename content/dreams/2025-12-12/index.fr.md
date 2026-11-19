@@ -1,0 +1,15 @@
+---
+title: "Rêve du 12 décembre 2025"
+description: "De retour dans ma ville natale : un barbecue, une expérience de chimie qui forme un tourbillon, une nage à contre-courant dans une gorge avec papa, et la nouvelle qu’une actrice ressemblant à maman m’a élevé."
+slug: 2025-12-12
+date: 2025-12-12
+tags:
+  - "ville natale"
+---
+Aujourd’hui, j’ai rêvé que je retournais dans ma ville natale. Avec ma famille et une jeune femme, nous mangions des grillades sous le grand auvent d’un restaurant de barbecue en plein air. En plus de toutes sortes de brochettes, nous avions commandé des beignets de lotus farcis. Plus tard, j’ai rêvé que je faisais une expérience de chimie avec cette jeune femme et une autre. Nous versions lentement un acide dans un bécher contenant du nitrate de sodium. Au fil de l’expérience, un phénomène étrange s’est produit : la solution s’est mise peu à peu à tourner et a formé un long tourbillon très fin ! Mon cerveau tournait à toute vitesse : le tourbillon venait peut-être d’une convection du liquide dans le bécher, déviée par la force de Coriolis, un peu comme quand un typhon se forme. La jeune femme a alors suggéré qu’il se formait du NaHNO3, et que la grande quantité de chaleur dégagée expliquait tout ça. Puis elle a dit qu’une molécule de NaNO3 donnait une molécule de NaHNO3. J’ai répondu que non, la formule de l’hydrogénonitrate de sodium devait être NaHNO2, donc l’équation devait encore être équilibrée.
+
+Plus tard, j’ai rêvé que papa et moi allions nager dans une gorge, dans les collines à l’extérieur de ma ville natale. La rivière y était assez calme, si bien que les habitants l’avaient clôturée pour en faire un lieu de baignade. Beaucoup de gens s’y amusaient. Papa et moi sommes allés dans la partie basse de la gorge, avec l’idée d’entrer dans l’eau puis de remonter le courant, ce qui semblait être la façon habituelle de nager ici. Une fois dans l’eau, papa a plongé d’un coup et a remonté le courant en nageant près du fond. J’ai un peu paniqué, parce que je ne sais pas bien nager sous l’eau. Qu’est-ce que je fais ? Pourquoi tout le monde nage sous l’eau, c’est aussi une convention ? Ça ne va pas. Je ne peux pas nager en surface ? Là-dessus, j’ai remonté le courant en surface, à la brasse, la tête hors de l’eau. Je me suis vite rendu compte que le courant était très fort, et plusieurs fois j’ai reculé au lieu d’avancer. J’avais un peu peur, mais avec tout ce monde autour, je me suis dit que je n’allais pas mourir, alors j’ai continué et j’ai fini par arriver au bout.
+
+Dans ma ville natale, j’ai aussi croisé des camarades du collège, et QZX. J’ai aussi rencontré une actrice qui ressemblait beaucoup à ma mère. Ma famille m’a expliqué que ce n’était pas vraiment ma mère qui m’avait tenu compagnie quand j’étais petit, mais cette actrice. J’étais très perplexe et je ne voyais pas à quoi ça servait.
+
+Ensuite, j’ai aussi rêvé que ma grand-mère était diplômée de mon lycée, et que tout le monde disait que moi aussi j’en étais diplômé, etc.

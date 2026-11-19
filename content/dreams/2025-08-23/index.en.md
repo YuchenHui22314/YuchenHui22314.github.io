@@ -1,0 +1,9 @@
+---
+title: "Dream, August 23, 2025"
+description: "N, P and I use the lab’s time machine to go back to the past; I walk into the compound where I grew up, on my way to see my young parents and my child self."
+slug: 2025-08-23
+date: 2025-08-23
+tags:
+  - "time travel"
+---
+N, P and I decided to use the lab’s time machine to travel to the past. The three of us put on machines that looked like headbands and pressed the button. When we came to again, we were on a school sports team. The coach was lecturing everyone, and N talked right back. Everyone stared at the three of us in surprise. I thought she might just be too excited that the time travel had worked. I wanted to go home and take a look. As I walked into my home’s residential compound, I grew uneasy. Had I really gone back to the past? Looking at the row of dawn redwoods in front of the building in the distance, I thought: I just need to go over and check whether they are as tall as they used to be, and I’ll know. When I got to my building, my heart skipped a beat. A row of small dawn redwoods grew down the middle of the concrete path. Yes, this was… how it used to look. Further on, I noticed some plum trees on the left side of the path. Their trunks were very thick, as thick as the rim of a cup. I thought, the trees here used to be sturdier than now; now they are all thin twigs and young leaves. Even as I walked into the elevator hall, I was still hesitating. If I really went back home and met my past self, what would happen? Would I vanish into thin air? If I changed history, I should disappear, shouldn’t I? Before I could think it through, the elevator doors opened, and I walked in numbly. Thinking that I was about to see my parents when they were young, and myself as a child, my eyes stung. I had to tell them: at the hardest time in high school, don’t give up, things will get better. Then I woke up.
