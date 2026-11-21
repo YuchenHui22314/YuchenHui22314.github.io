@@ -1,0 +1,9 @@
+---
+title: "Rêve du 11 octobre 2024"
+description: "Un jeu du chat pendant une sortie de classe : LTC nous attrape, puis nous apprend une stratégie « gagnante à coup sûr » : frapper tous ceux qu’on croise."
+slug: 2024-10-11
+date: 2024-10-11
+tags:
+  - "jeu"
+---
+Le premier rêve : ma classe était en sortie de printemps. L’une des activités était un jeu du chat : au début, il y avait un seul chat, et tous les autres devaient fuir. Au fil du jeu, toute personne attrapée devenait chat à son tour. On devine que le jeu finit quand tout le monde a été attrapé et est devenu complice du chat. À mi-partie, le jeu a soudain été interrompu pour une pause. Quand il a repris, LTC s’est approché de moi avec son sourire caractéristique. Je me suis dit : si je me souviens bien, ce type n’avait pas été attrapé au premier tour… J’avais alors en main une épée en fer enchantée : un coup sur lui lui ferait 10 points de dégâts. QK restait avec moi et tenait aussi une arme qui faisait 10 points de dégâts. Chacun, chat ou non, n’avait que 20 points de vie, donc à nous deux, nous pouvions éliminer n’importe quel chat. Mais LTC se contentait de plisser les yeux et de bavarder avec nous, et nous avons cru qu’il était de notre côté. Puis, tout à coup, il a dit : vous êtes attrapés. C’est seulement là que nous avons compris qu’on s’était fait avoir. Mais voyant qu’il n’y avait personne autour, il nous a pris à part et nous a dit : je vous donne une autre chance. Votre meilleure stratégie, en fait, c’est de ne croire personne et de frapper deux coups d’épée dès que vous croisez quelqu’un. Comme ça, quel que soit son camp, il sera éliminé. Peu importe s’il n’est pas chat : si vous éliminez tout le monde, le jeu se termine par votre victoire. C’est une stratégie gagnante à coup sûr ! QK et moi avons trouvé que c’était logique. J’ai oublié la suite du jeu, haha.
