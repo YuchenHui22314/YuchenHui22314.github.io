@@ -292,8 +292,8 @@ if (progress && read) {
    follow the digits (about 10px tall), not the font's full line height. Without the
    script the labels only overlap; the list next to the chart has the dates. */
 const LABEL_MOVES = [];
-for (const dy of [0, 6, -6, 12, -12, 18, -18, 24, -24, 30, -30]) for (const dx of [0, 6, -6, 12, -12, 18, -18]) LABEL_MOVES.push([dx, dy]);
-LABEL_MOVES.sort((p, q) => (Math.abs(p[0]) * 1.5 + Math.abs(p[1])) - (Math.abs(q[0]) * 1.5 + Math.abs(q[1])));
+for (let dy = -42; dy <= 42; dy += 6) for (let dx = -24; dx <= 24; dx += 6) LABEL_MOVES.push([dx, dy]);
+LABEL_MOVES.sort((p, q) => (Math.abs(p[0]) * 1.5 + Math.abs(p[1])) - (Math.abs(q[0]) * 1.5 + Math.abs(q[1])) || q[1] - p[1]);
 const YEAR_MOVES = [0];
 for (let d = 8; d <= 96; d += 8) YEAR_MOVES.push(-d, d);
 function unclutterStars() {

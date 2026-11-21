@@ -1,11 +1,12 @@
 {{- $dreams := sort .RegularPages "Date" "desc" -}}
-{{- /* One ring per year, from the first dream to this year; later years sit further in.
-       The outer ring stays inside the month band (r 160); rings sit 55px apart while there
-       are two, and share 135 → 65 once there are more. */ -}}
+{{- /* One ring per year, from the first dream to this year, like tree rings: later years
+       sit further out, so the year being written now gets the longest ring. The outer ring
+       (r 140) stays inside the month band (r 160); rings sit 55px apart while there are
+       two, and share 140 → 50 once there are more, so labels still fit between rings. */ -}}
 {{- $years := slice now.Year }}{{ range $dreams }}{{ $years = $years | append .Date.Year }}{{ end -}}
 {{- $years = sort (uniq $years) -}}
-{{- $step := 55.0 }}{{ if gt (len $years) 2 }}{{ $step = div 70.0 (sub (len $years) 1) }}{{ end -}}
-{{- $ring := dict }}{{ range $i, $y := $years }}{{ $ring = merge $ring (dict (string $y) (sub 135.0 (mul $i $step))) }}{{ end -}}
+{{- $step := 55.0 }}{{ if gt (len $years) 2 }}{{ $step = div 90.0 (sub (len $years) 1) }}{{ end -}}
+{{- $ring := dict }}{{ range $i, $y := $years }}{{ $ring = merge $ring (dict (string $y) (sub 140.0 (mul (sub (sub (len $years) 1) $i) $step))) }}{{ end -}}
 {{- /* Each star sits at its date on its year's ring. Dreams a few days apart would pile up,
        so stars closer than $minArc px are spread along the ring: one pass pushes later stars
        forward, one pushes earlier stars back, and each star takes the average of the two.
@@ -37,27 +38,27 @@
       {{- range $y, $r := $ring }}
       <circle class="ring y" r="{{ $r }}"/><text class="yr" x="4" y="{{ sub -2 $r }}" text-anchor="start">{{ $y }}</text>
       {{- end }}
-      {{- /* Labels show the date only (the tag is in the tooltip) and point into empty
-             space: stars on the left and right of the innermost ring label toward the
-             empty centre; every other star labels outward, beside it on the sides and
-             above or below it near the top and bottom. data-push tells site.js which way
-             to move a label that still overlaps something. */ -}}
-      {{- $rmin := index $ring (string (index $years (sub (len $years) 1))) -}}
+      {{- /* Labels show the date only (the tag is in the tooltip). Stars on the outermost
+             ring label outward, into the band before the month names; stars on every inner
+             ring label inward, so they never land on the next ring out. Stars on the sides
+             get the label beside them, stars near the top or bottom get it above or below.
+             data-push tells site.js which way to move a label that still overlaps. */ -}}
+      {{- $rmax := index $ring (string (index $years (sub (len $years) 1))) -}}
       {{- range $dreams }}
         {{- $r := index $ring (string .Date.Year) -}}
         {{- $a := index $angle .RelPermalink -}}
-        {{- $c := math.Cos $a }}{{ $s := math.Sin $a }}{{ $in := eq $r $rmin -}}
+        {{- $c := math.Cos $a }}{{ $s := math.Sin $a }}{{ $out := eq $r $rmax -}}
         {{- $lx := 0 }}{{ $ly := 0 }}{{ $anchor := "middle" -}}
-        {{- if le $c -0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = 15 }}{{ $anchor = "start" }}{{ else }}{{ $lx = -15 }}{{ $anchor = "end" }}{{ end -}}
-        {{- else if ge $c 0.5 }}{{ $ly = 4.5 }}{{ if $in }}{{ $lx = -15 }}{{ $anchor = "end" }}{{ else }}{{ $lx = 15 }}{{ $anchor = "start" }}{{ end -}}
-        {{- else if gt $s 0.0 }}{{ $ly = 25 -}}
+        {{- if le $c -0.5 }}{{ $ly = 4.5 }}{{ if $out }}{{ $lx = -15 }}{{ $anchor = "end" }}{{ else }}{{ $lx = 15 }}{{ $anchor = "start" }}{{ end -}}
+        {{- else if ge $c 0.5 }}{{ $ly = 4.5 }}{{ if $out }}{{ $lx = 15 }}{{ $anchor = "start" }}{{ else }}{{ $lx = -15 }}{{ $anchor = "end" }}{{ end -}}
+        {{- else if eq (gt $s 0.0) $out }}{{ $ly = 25 -}}
         {{- else }}{{ $ly = -16 }}{{ end -}}
       <a href="{{ .RelPermalink }}" class="dream-star" aria-label="{{ .Title }}">
         <title>{{ .Title }}{{ with .Params.tags }} · {{ index . 0 }}{{ end }}</title>
         <g transform="translate({{ printf "%.1f" (mul $c $r) }} {{ printf "%.1f" (mul $s $r) }})">
           <circle r="13" fill="var(--gold)" opacity=".18"/>
           <path transform="scale(.82)" d="M0-11C.7-3 3-.7 11 0 3 .7.7 3 0 11-.7 3-3 .7-11 0-3-.7-.7-3 0-11z"/>
-          <text x="{{ $lx }}" y="{{ $ly }}" text-anchor="{{ $anchor }}" data-push="{{ cond (gt $s 0.0) "down" "up" }}" style="fill:var(--n-ink)">{{ .Date.Format "1.2" }}</text>
+          <text x="{{ $lx }}" y="{{ $ly }}" text-anchor="{{ $anchor }}" data-push="{{ cond (gt $ly 0) "down" "up" }}" style="fill:var(--n-ink)">{{ .Date.Format "1.2" }}</text>
         </g>
       </a>
       {{- end }}
